@@ -1,4 +1,5 @@
 package edu.pacific.comp55.starter;
+import acm.program.*;
 
 public enum item {
 	TORCH, LANTERN, OIL, MONEY, COFFEE, BANDAGE, ANTIDOTE, FIRST_AID_KIT,
@@ -9,6 +10,9 @@ public enum item {
 	COBWEB, EYE_OF_NEWT, SENTIMENTAL_PEN, FEMUR, BRIMSTONE, CLOVE_OF_GARLIC,
 	OLD_PICTURE, CRUSTY_TOADSTOOL, FROG, ROACH, GOAT_HEAD, URN, SPIDER,
 	FRAGRANT_PLANT, MEDICINAL_PLANT, NOXIOUS_PLANT, SCREWDRIVER, WRENCH, HAMMER;
+	
+	public static final String IMG_FILENAME_PATH = "images/";
+	public static final String IMG_EXTENSION = ".jpg";
 	
 	public String toString() {
 		switch(this) {

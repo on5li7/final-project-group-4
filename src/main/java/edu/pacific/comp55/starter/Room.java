@@ -25,8 +25,6 @@ HashSet<Room> adjacentRooms;
 //Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
 int BusStop;
 
-item[] looseStuff;
-
 HashSet<Partygoer> occupants;
 public int getBusStop() {
 	return BusStop;

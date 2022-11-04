@@ -10,6 +10,9 @@ public class house {
 		//the number of dead people
 		private int deadpeople;
 		
+		//The partygoer whose turn it currently is.
+		Partygoer currPlayer;
+		
 		public int getTime() {
 			return time;
 		}

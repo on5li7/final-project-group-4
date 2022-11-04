@@ -17,6 +17,7 @@ public static void main(String[] args) {
 	Rooms.add("Dungeon");
 	Rooms.add("Outdoors");
 	Rooms.add("The Cliff");	
+	System.out.println(Rooms);
 }
 
 

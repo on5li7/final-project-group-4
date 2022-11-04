@@ -4,11 +4,20 @@ import acm.graphics.GImage;
 import java.util.ArrayList;
 
 public class Room {
-//Instance variables
-	//Rooms include items, NPCs, and exits
-	private String roomName; //RoomName
-	private ArrayList<item> items; //initialized ArrayList for items to add
-	private ArrayList<Partygoer> partygoer;
+public static void main(String[] args) {
+	ArrayList<String> Rooms = new ArrayList<String>();
+	Rooms.add("Dining Hall");
+	Rooms.add("Apothecary");
+	Rooms.add("Kitchen");
+	Rooms.add("Wine Cellar");
+	Rooms.add("GreenHouse");
+	Rooms.add("The Study");
+	Rooms.add("Armory");
+	Rooms.add("Workshop");
+	Rooms.add("Dungeon");
+	Rooms.add("Outdoors");
+	Rooms.add("The Cliff");	
+}
 
 
 HashSet<Room> adjacentRooms;

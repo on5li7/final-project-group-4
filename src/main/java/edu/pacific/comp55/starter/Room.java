@@ -8,6 +8,7 @@ public class Room {
 	//Rooms include items, NPCs, and exits
 	private String roomName; //RoomName
 	private ArrayList<item> items; //initialized ArrayList for items to add
+	private ArrayList<Partygoer> partygoer;
 
 
 HashSet<Room> adjacentRooms;

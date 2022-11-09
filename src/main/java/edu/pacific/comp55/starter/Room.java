@@ -20,6 +20,9 @@ public static void main(String[] args) {
 	System.out.println(Rooms);
 }
 
+item[] looseStuff;
+
+Boolean inDoors;
 
 HashSet<Room> adjacentRooms;
 //The bus stops are 1-5. If the room is not a bus stop, this is 0.

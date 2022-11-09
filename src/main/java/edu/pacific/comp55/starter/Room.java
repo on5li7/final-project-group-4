@@ -25,13 +25,14 @@ public int getBusStop() {
 	return BusStop;
 }
 
-public Room(item[] looseStuff, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, HashSet<Room> adjacentRooms, HashSet<Partygoer> occupants) {
+public Room(item[] looseStuff, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, HashSet<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.inDoors = inDoors;
 	this.Interactables = Interactables;
 	this.Ritual = Ritual;
 	this.adjacentRooms = adjacentRooms;
 	this.occupants = occupants;
+	this.BusStop = BusStop;
 }
 }
 

@@ -4,6 +4,14 @@ import acm.graphics.GImage;
 import java.util.ArrayList;
 
 public class Room {
+	
+item[] looseStuff;
+
+private Boolean inDoors;
+
+ArrayList<Convos> Interactables;
+
+Convos Ritual;
 
 HashSet<Room> adjacentRooms;
 //The bus stops are 1-5. If the room is not a bus stop, this is 0.

@@ -6,6 +6,9 @@ public class Convos {
 	Random rando;
 	house House;
 	
+	public Convos(house House) {
+		this.House = House;
+	}
 	
 	public void demonConvo(Partygoer Player) {
 		int checknum = rando.nextInt(6);
@@ -97,9 +100,10 @@ public class Convos {
 		System.out.print("3) Goodbye.");
 		System.out.print("Enter Response: ");
 		Scanner scanner = new Scanner(System.in);
+		int response = scanner.nextInt();
 		
 		while (response != 3) {
-			int response = scanner.nextInt();
+			response = scanner.nextInt();
 		while (response > 3 || response < 1) {
 			System.out.print("Try again:");
 			response = scanner.nextInt();

@@ -22,4 +22,19 @@ Partygoer.add("Jake of the West"); //Bounty Hunter (Can see through any lies, ca
 Partygoer.add("Gertrude Biblio"); //An occultist librarian (Starts with knowledge of all books in the game, which can be coaxed out of her.)
 System.out.println(Partygoer);
 }
+
+	public boolean isDetective() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isKiller() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getIdentity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

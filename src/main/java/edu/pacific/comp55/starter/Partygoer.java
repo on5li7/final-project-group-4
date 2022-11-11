@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 
 public class Partygoer {
+	
+	
+	
+	
 	public static void main(String[] args) {
 ArrayList<String> Partygoer = new ArrayList<String>();
 Partygoer.add("Maximillian"); //Politician (reduces slight fear and gains slight attitude in partygoers in every conversation)

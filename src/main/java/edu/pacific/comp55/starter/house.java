@@ -57,6 +57,8 @@ public class house {
 		public void setDeadpeople(int deadpeople) {
 			this.deadpeople = deadpeople;
 		}
+		//For each arraylist in each room. .add the room
+		
 		public static void main(String[] args) {
 			ArrayList<String> House = new ArrayList<String>();
 			DiningHall = new Room();

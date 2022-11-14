@@ -9,10 +9,10 @@ public class house {
 	public static Room Kitchen;
 	public static Room WineCellar;
 	public static Room GreenHouse;
-	public static Room Study;
+	public static Room TheStudy;
 	public static Room Armory;
 	public static Room Workshop;
-	public static Room Cliff;
+	public static Room TheCliff;
 	public static Room Dungeon;
 	public static Room Balcony;
 	public static Room Outdoors_1;
@@ -30,7 +30,7 @@ public class house {
 	public static Room Bedroom_8;
 	public static Room Bedroom_9;
 	public static Room Bedroom_10;
-	int currentPG;
+	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
 	//sets the time of the house
 		private int time;
@@ -168,7 +168,7 @@ public class house {
 		}
 		
 		//checks when it's night or day 
-		private Boolean isDark;
+		private static Boolean isDark;
 		
 		public void nextPlayer() {
 			if(currentPG == 9) {
@@ -205,30 +205,30 @@ public class house {
 		
 		public static void main(String[] args) {
 			ArrayList<String> House = new ArrayList<String>();
-			DiningHall = new Room();
-			Apothecary = new Room();
-			Kitchen = new Room();
-			WineCellar = new Room();
-			GreenHouse = new Room();
-			TheStudy = new Room();
-			Armory = new Room();
-			Workshop = new Room();
-			Dungeon = new Room();
-			Outdoors_1 = new Room();
-			Outdoors_2 = new Room();
-			Outdoors_3 = new Room();
-			Outdoors_4 = new Room();
-		    Bedroom_1 = new Room();
-			Bedroom_2 = new Room();
-			Bedroom_3 = new Room();
-			Bedroom_4 = new Room();
-			Bedroom_5 = new Room();
-			Bedroom_6 = new Room();
-			Bedroom_7 = new Room();
-			Bedroom_8 = new Room();
-			Bedroom_9 = new Room();
-			Bedroom_10 = new Room();
-			TheCliff = new Room();	
+			DiningHall = new Room(null, isDark, null, null, null, null, currentPG);
+			Apothecary = new Room(null, isDark, null, null, null, null, currentPG);
+			Kitchen = new Room(null, isDark, null, null, null, null, currentPG);
+			WineCellar = new Room(null, isDark, null, null, null, null, currentPG);
+			GreenHouse = new Room(null, isDark, null, null, null, null, currentPG);
+			TheStudy = new Room(null, isDark, null, null, null, null, currentPG);
+			Armory = new Room(null, isDark, null, null, null, null, currentPG);
+			Workshop = new Room(null, isDark, null, null, null, null, currentPG);
+			Dungeon = new Room(null, isDark, null, null, null, null, currentPG);
+			Outdoors_1 = new Room(null, isDark, null, null, null, null, currentPG);
+			Outdoors_2 = new Room(null, isDark, null, null, null, null, currentPG);
+			Outdoors_3 = new Room(null, isDark, null, null, null, null, currentPG);
+			Outdoors_4 = new Room(null, isDark, null, null, null, null, currentPG);
+		    Bedroom_1 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_2 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_3 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_4 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_5 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_6 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_7 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_8 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_9 = new Room(null, isDark, null, null, null, null, currentPG);
+			Bedroom_10 = new Room(null, isDark, null, null, null, null, currentPG);
+			TheCliff = new Room(null, isDark, null, null, null, null, currentPG);	
 			System.out.println(House);
 		}
 }

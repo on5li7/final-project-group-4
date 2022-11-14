@@ -1,7 +1,7 @@
 package edu.pacific.comp55.starter;
 import java.util.*;
 import acm.graphics.GImage;
-
+import java.util.HashMap;
 public class Room {
 	
 item[] looseStuff;
@@ -31,7 +31,20 @@ public int getBusStop() {
 }
 
 public void interactables() {
-	HashMap<item, Room> map = new HashMap<item, Room>();
+	HashMap<String, String> Interactable = new HashMap<>(); //Room, Interactable
+Interactable.put("Outdoors_1", "Brewing");
+Interactable.put("WineCellar", "Brewing");
+Interactable.put("Apothecary", "Brewing");
+Interactable.put("Kitchen", "Knife");
+Interactable.put("Torch", "Balcony");
+Interactable.put("Torch", "Cliff");
+Interactable.put("Lantern", "Dungeon");
+Interactable.put("Oil", "Morgue");
+Interactable.put("Money", "Study");
+Interactable.put("Coffee", "Kitchen");
+Interactable.put("Bandage", "Armory");
+Interactable.put("Antidote", "GreenHouse");
+//TODO:Finish adding interactables
 }
 
 public Room(item[] looseStuff, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {

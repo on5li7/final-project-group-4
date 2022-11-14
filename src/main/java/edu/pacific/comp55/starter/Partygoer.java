@@ -67,7 +67,6 @@ public ArrayList<Room> Route(Room destination) {
 	//Checks to see if they are standing in the room
 	if (currroom == destination) {
 		return returnedset;
-		this.setMoving(false);
 	}
 	else if (currroom.adjacentRooms.contains(destination)){
 		returnedset.add(destination);

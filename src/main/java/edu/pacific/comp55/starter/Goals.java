@@ -1,7 +1,7 @@
 package edu.pacific.comp55.starter;
 import java.util.*;
 
-
+//This is a comment
 public class Goals {
 	public enum AllGoals {
 		BREWINGWITCH, BREWINGCELLAR, BREWINGAPOTHECARY, DRINKINGCELLAR, 

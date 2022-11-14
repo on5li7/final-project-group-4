@@ -1,4 +1,5 @@
 package edu.pacific.comp55.starter;
+import java.util.ArrayList;
 
 public class Fact {
 	public class fact {
@@ -8,17 +9,17 @@ public class Fact {
 
 		//Who
 		Partygoer instigator;
-		HashSet<Partygoer> victims;
-		HashSet<Partygoer> bystanders;
+		ArrayList<Partygoer> victims;
+		ArrayList<Partygoer> bystanders;
 
 		//What or how
-		event theevent;
+		Convos theevent;
 
 		//When
 		int thetime;
 
 		//Where
-		Rooms Room;
+		Room Room;
 
 		//Checks to see if any of the above factoids are lies
 		Boolean eventislie;
@@ -68,19 +69,19 @@ public class Fact {
 			this.instigator = theguy;
 		}
 
-		public Partygoer[] getVictim() {
+		public ArrayList<Partygoer> getVictim() {
 			return victims;
 		}
 
-		public Partygoer[] getBystanders() {
+		public ArrayList<Partygoer> getBystanders() {
 			return bystanders;
 		}
 
-		public void setBystanders(Partygoer[] bystanders) {
+		public void setBystanders(ArrayList<Partygoer> bystanders) {
 			this.bystanders = bystanders;
 		}
 
-		public void setVictims(Partygoer[] victims) {
+		public void setVictims(ArrayList<Partygoer> victims) {
 			this.victims = victims;
 		}
 
@@ -92,19 +93,19 @@ public class Fact {
 			this.thetime = time;
 		}
 
-		public event getTheEvent() {
+		public Convos getTheEvent() {
 			return theevent;
 		}
 
-		public room getRoom() {
+		public Room getRoom() {
 			return Room;
 		}
 
-		public void setRoom(room newroom) {
+		public void setRoom(Room newroom) {
 			this.Room = newroom;
 		}
 
-		public void setTheEvent(event newevent) {
+		public void setTheEvent(Convos newevent) {
 			this.theevent = newevent;
 		}
 

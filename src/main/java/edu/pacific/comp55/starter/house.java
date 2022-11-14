@@ -40,7 +40,7 @@ public class house {
 			//Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
 			if (beginning == 1 && end == 2) {
 				
-				route.add(Study);
+				route.add(TheStudy);
 				route.add(DiningHall);
 				route.add(Hallway);
 			}
@@ -51,13 +51,13 @@ public class house {
 			}
 			if (beginning == 1 && end == 4) {
 				
-				route.add(Study);
+				route.add(TheStudy);
 				route.add(DiningHall);
 				route.add(Kitchen);
 			}
 			if (beginning == 1 && end == 5) {
 				
-				route.add(Study);
+				route.add(TheStudy);
 				route.add(DiningHall);
 				route.add(GreenHouse);
 				route.add(Outdoors_4);
@@ -66,7 +66,7 @@ public class house {
 			if (beginning == 2 && end == 1) {
 				
 				route.add(DiningHall);
-				route.add(Study);
+				route.add(TheStudy);
 				route.add(Apothecary);
 			}
 			if (beginning == 2 && end == 3) {
@@ -115,7 +115,7 @@ public class house {
 			if (beginning == 4 && end == 1) {
 				
 				route.add(DiningHall);
-				route.add(Study);
+				route.add(TheStudy);
 				route.add(Apothecary);
 			}
 			if (beginning == 4 && end == 2) {
@@ -140,7 +140,7 @@ public class house {
 				route.add(Outdoors_4);
 				route.add(GreenHouse);
 				route.add(DiningHall);
-				route.add(Study);
+				route.add(TheStudy);
 				route.add(Apothecary);
 			}
 			if (beginning == 5 && end == 2) {

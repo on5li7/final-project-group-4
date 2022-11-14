@@ -30,6 +30,7 @@ public class house {
 	public static Room Bedroom_8;
 	public static Room Bedroom_9;
 	public static Room Bedroom_10;
+	public static Room Morgue;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
 	//sets the time of the house
@@ -202,6 +203,109 @@ public class house {
 			this.deadpeople = deadpeople;
 		}
 		//For each arraylist in each room. .add the room
+		public ArrayList<Room> adjacentRooms(Room room) {
+			ArrayList<Room> adjRooms = new ArrayList<Room>();
+			if (room==DiningHall) {
+				adjRooms.add(Kitchen);
+				adjRooms.add(GreenHouse);
+				adjRooms.add(Hallway);
+				adjRooms.add(Apothecary);
+			}
+			else if (room==Apothecary) {
+				adjRooms.add(DiningHall);
+			}
+			else if (room==Kitchen) {
+				adjRooms.add(DiningHall);
+				adjRooms.add(GreenHouse);
+				adjRooms.add(Outdoors_2);
+			}
+			else if (room==WineCellar) {
+				adjRooms.add(Kitchen);
+				adjRooms.add(Outdoors_2);
+			}
+			else if (room==GreenHouse) {
+				adjRooms.add(Kitchen);
+				adjRooms.add(Outdoors_4);
+				adjRooms.add(DiningHall);
+			}
+			else if (room==TheStudy) {
+				adjRooms.add(DiningHall);
+				adjRooms.add(Apothecary);
+				adjRooms.add(Morgue);
+			}
+			else if (room==Armory) {
+				adjRooms.add(Workshop);
+				adjRooms.add(Balcony);
+				adjRooms.add(Dungeon);
+			}
+			else if (room==Workshop) {
+				adjRooms.add(Armory);
+				adjRooms.add(DiningHall);
+			}
+			else if (room==Dungeon) {
+				adjRooms.add(Armory);
+			}
+			else if (room==Outdoors_1) {
+				adjRooms.add(Outdoors_2);
+				adjRooms.add(Outdoors_3);
+				adjRooms.add(TheCliff);
+			}
+			else if (room==Outdoors_2) {
+				adjRooms.add(Outdoors_1);
+				adjRooms.add(Outdoors_4);
+				adjRooms.add(Kitchen);
+				adjRooms.add(WineCellar);
+			}
+			else if (room==Outdoors_3) {
+				adjRooms.add(TheCliff);
+				adjRooms.add(Outdoors_1);
+				adjRooms.add(Outdoors_4);
+			}
+			else if (room==Outdoors_4) {
+				adjRooms.add(Outdoors_3);
+				adjRooms.add(Outdoors_2);
+				adjRooms.add(GreenHouse);
+			}
+			else if (room==Bedroom_1) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_2) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_3) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_4) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_5) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_6) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_7) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_8) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_9) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_10) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==TheCliff) {
+				adjRooms.add(Outdoors_1);
+				adjRooms.add(Outdoors_3);
+			}
+			else if (room==Hallway) {
+				adjRooms.add(Bedroom_1);
+				adjRooms.add(Bedroom_2);
+			}
+			return adjRooms;
+		}
 		
 		public static void main(String[] args) {
 			ArrayList<String> House = new ArrayList<String>();

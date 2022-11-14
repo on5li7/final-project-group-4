@@ -30,7 +30,8 @@ public class house {
 	public static Room Bedroom_8;
 	public static Room Bedroom_9;
 	public static Room Bedroom_10;
-	Partygoer currentPG;
+	int currentPG;
+	ArrayList<Partygoer> allPartygoers;
 	//sets the time of the house
 		private int time;
 		
@@ -168,6 +169,13 @@ public class house {
 		
 		//checks when it's night or day 
 		private Boolean isDark;
+		
+		public void nextPlayer() {
+			if(currentPG == 9) {
+				currentPG = 0;
+				allPartygoers.get(currentPG).takeTurn();
+			}
+		}
 		
 		//the number of dead people
 		private int deadpeople;

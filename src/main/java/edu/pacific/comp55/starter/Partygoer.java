@@ -6,14 +6,34 @@ import java.util.HashSet;
 public class Partygoer {
 	
 	ArrayList<Room> currentRoute;
+	Goals currGoal;
 	Room currroom;
-	Boolean moving;
 	house thehouse;
 	String identity;
+	Boolean isPlayer;
+	Boolean isDetective;
+	Boolean isKiller;
+	
+	public void takeTurn() {
+		if (isPlayer == true) {
+			this.playerTurn();
+		}
+		else {
+			if (!moveOnRoute(currentRoute)) {
+				
+			}
+		}
+	}
+	
+	//This is the function that waits for the player to click on something to do something
+	//This will instead just take an integer to choose an action in the text version.
+	public void playerTurn() {
+		
+	}
 	
 	//This function will tell the house to move on to the next character.
 	public void endTurn() {
-		house.nextPlayer();
+		thehouse.nextPlayer();
 	}
 	
 	public static void main(String[] args) {
@@ -46,15 +66,11 @@ System.out.println(Partygoer);
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public Boolean isMoving() {
-		return moving;
-	}
-	
-	public void setMoving(Boolean inpit) {
-		moving = inpit;
-	}
 
+	
+//Every turn, the partygoer will call moveOnRoute, which will move the character and return true if the route has rooms.
+//If moveOnRoute returns false, the ai will call route, which will call move if the character is adjacent.
+//If the destination is not adjacent, route will generate a path to the destination, and store it in the ArrayList.
  public void Move(Room destination) {
 	currroom.occupants.remove(this);
 	this.currroom = destination;
@@ -94,15 +110,19 @@ public ArrayList<Room> Route(Room destination) {
 	}
 }
 
-public Boolean moveOnRoute(HashSet<Room> route) {
+public Boolean moveOnRoute(ArrayList<Room> route) {
 	if (currentRoute.size() == 0) {
 		return false;
 	}
 	else {
-	Move(currentRoute.get(0));
+	Room daroom = currentRoute.get(0);
 	currentRoute.remove(currentRoute.get(0));
+	Move(daroom);
 	return true;
 	}
 }
+
+
+
 }
 

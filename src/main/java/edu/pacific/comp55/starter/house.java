@@ -1,6 +1,10 @@
 package edu.pacific.comp55.starter;
+import 
 
 import java.util.ArrayList;
+
+//Unsure why this isn't working.
+Partygoer currentPG;
 
 public class house {
 	public static Room DiningHall;
@@ -8,15 +12,17 @@ public class house {
 	public static Room Kitchen;
 	public static Room WineCellar;
 	public static Room GreenHouse;
-	public static Room TheStudy;
+	public static Room Study;
 	public static Room Armory;
 	public static Room Workshop;
-	public static Room TheCliff;
+	public static Room Cliff;
 	public static Room Dungeon;
+	public static Room Balcony;
 	public static Room Outdoors_1;
 	public static Room Outdoors_2;
 	public static Room Outdoors_3;
 	public static Room Outdoors_4;
+	public static Room Hallway;
 	public static Room Bedroom_1;
 	public static Room Bedroom_2;
 	public static Room Bedroom_3;
@@ -29,6 +35,138 @@ public class house {
 	public static Room Bedroom_10;
 	//sets the time of the house
 		private int time;
+		
+		public ArrayList<Room> busRoute(int beginning, int end) {
+			ArrayList<Room> route = new ArrayList<Room>();
+			//Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
+			if (beginning == 1 && end == 2) {
+				route.add(Apothecary);
+				route.add(Study);
+				route.add(DiningHall);
+				route.add(Hallway);
+			}
+			if (beginning == 1 && end == 3) {
+				route.add(Apothecary);
+				route.add(Balcony);
+				route.add(Armory);
+			}
+			if (beginning == 1 && end == 4) {
+				route.add(Apothecary);
+				route.add(Study);
+				route.add(DiningHall);
+				route.add(Kitchen);
+			}
+			if (beginning == 1 && end == 5) {
+				route.add(Apothecary);
+				route.add(Study);
+				route.add(DiningHall);
+				route.add(GreenHouse);
+				route.add(Outdoors_4);
+				route.add(Outdoors_3);
+			}
+			if (beginning == 2 && end == 1) {
+				route.add(Hallway);
+				route.add(DiningHall);
+				route.add(Study);
+				route.add(Apothecary);
+			}
+			if (beginning == 2 && end == 3) {
+				route.add(Hallway);
+				route.add(DiningHall);
+				route.add(Workshop);
+				route.add(Armory);
+			}
+			if (beginning == 2 && end == 4) {
+				route.add(Hallway);
+				route.add(DiningHall);
+				route.add(Kitchen);
+			}
+			if (beginning == 2 && end == 5) {
+				route.add(Hallway);
+				route.add(DiningHall);
+				route.add(Kitchen);
+				route.add(Outdoors_2);
+				route.add(Outdoors_1);
+				route.add(Outdoors_3);
+			}
+			if (beginning == 3 && end == 1) {
+				route.add(Armory);
+				route.add(Balcony);
+				route.add(Apothecary);
+			}
+			if (beginning == 3 && end == 2) {
+				route.add(Armory);
+				route.add(Workshop);
+				route.add(DiningHall);
+				route.add(Hallway);
+			}
+			if (beginning == 3 && end == 4) {
+				route.add(Armory);
+				route.add(Workshop);
+				route.add(DiningHall);
+				route.add(Kitchen);
+			}
+			if (beginning == 3 && end == 5) {
+				route.add(Armory);
+				route.add(Workshop);
+				route.add(DiningHall);
+				route.add(GreenHouse);
+				route.add(Apothecary);
+			}
+			if (beginning == 4 && end == 1) {
+				route.add(Kitchen);
+				route.add(DiningHall);
+				route.add(Study);
+				route.add(Apothecary);
+			}
+			if (beginning == 4 && end == 2) {
+				route.add(Kitchen);
+				route.add(DiningHall);
+				route.add(Hallway);
+			}
+			if (beginning == 4 && end == 3) {
+				route.add(Kitchen);
+				route.add(DiningHall);
+				route.add(Workshop);
+				route.add(Armory);
+			}
+			if (beginning == 4 && end == 5) {
+				route.add(Kitchen);
+				route.add(Outdoors_2);
+				route.add(Outdoors_1);
+				route.add(Outdoors_3);
+			}
+			if (beginning == 5 && end == 1) {
+				route.add(Outdoors_3);
+				route.add(Outdoors_4);
+				route.add(GreenHouse);
+				route.add(DiningHall);
+				route.add(Study);
+				route.add(Apothecary);
+			}
+			if (beginning == 5 && end == 2) {
+				route.add(Outdoors_3);
+				route.add(Outdoors_4);
+				route.add(GreenHouse);
+				route.add(DiningHall);
+				route.add(Hallway);
+			}
+			if (beginning == 5 && end == 3) {
+				route.add(Outdoors_3);
+				route.add(Outdoors_4);
+				route.add(GreenHouse);
+				route.add(DiningHall);
+				route.add(Workshop);
+				route.add(Armory);
+			}
+			if (beginning == 5 && end == 4) {
+				route.add(Outdoors_3);
+				route.add(Outdoors_1);
+				route.add(Outdoors_2);
+				route.add(Kitchen);
+			}
+			return route;
+		}
 		
 		//checks when it's night or day 
 		private Boolean isDark;

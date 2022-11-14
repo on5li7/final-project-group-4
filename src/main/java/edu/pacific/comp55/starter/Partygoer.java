@@ -1,11 +1,20 @@
 package edu.pacific.comp55.starter;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class Partygoer {
 	
+	ArrayList<Room> currentRoute;
+	Room currroom;
+	Boolean moving;
+	house thehouse;
+	String identity;
 	
-	
+	//This function will tell the house to move on to the next character.
+	public void endTurn() {
+		house.nextPlayer();
+	}
 	
 	public static void main(String[] args) {
 ArrayList<String> Partygoer = new ArrayList<String>();
@@ -37,4 +46,54 @@ System.out.println(Partygoer);
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Boolean isMoving() {
+		return moving;
+	}
+	
+	public void setMoving(Boolean inpit) {
+		moving = inpit;
+	}
+
+ public void Move(Room destination) {
+	currroom.occupants.remove(this);
+	this.currroom = destination;
+	destination.occupants.add(this);
+	this.endTurn();
 }
+
+public ArrayList<Room> Route(Room destination) {
+	ArrayList<Room> returnedset = new ArrayList<Room>(); 
+	//Checks to see if they are standing in the room
+	if (currroom == destination) {
+		return returnedset;
+		this.setMoving(false);
+	}
+	else if (currroom.adjacentRooms.contains(destination)){
+		returnedset.add(destination);
+		return returnedset;
+		}
+	else {
+		currroom.adjacentRooms.forEach((Room) -> {if(Room.getBusStop() != 0) {
+			returnedset.add(Room);
+			returnedset.
+		}
+		});
+	}
+		//Checks the nearest bus stop, and adds the bus route plus the destination to the route.
+	
+		
+	}
+
+public Boolean moveOnRoute(HashSet<Room> route) {
+	if (currentRoute.size() == 0) {
+		return false;
+	}
+	else {
+	Move(currentRoute.get(0));
+	currentRoute.remove(currentRoute.get(0));
+	return true;
+	}
+}
+}
+

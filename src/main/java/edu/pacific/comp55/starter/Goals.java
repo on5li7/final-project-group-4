@@ -12,40 +12,7 @@ public class Goals {
 	Random rando;
 	
 	//This needs to be moved to partygoer when it is posted.
-	public void Move(Room destination) {
-		currroom.partygoers.remove(this);
-		this.currroom = destination;
-		destination.partygoers.put(this);
-	}
-	
-	public HashSet<Room> Route(Room destination) {
-		HashSet<Room> returnedset = new HashSet<Room>; 
-		//Checks to see if they are standing in the room
-		if (currroom == destination) {
-			return null;
-		}
-		else {
-			for (int i; i < currroom.getAdjacentSetSize(); i++) {
-				//Checks to see if an adjacent room is the destination.
-				if (currroom.getAdjacentRooms().at(i) == destination) {
-					returnedset.put(currroom.getAdjacentRooms().at(i));
-					return returnedset;
-				}
-			}
-			//Checks the nearest bus stop, and adds the bus route plus the destination to the route.
-			for (int i; i < currroom.getAdjacentSetSize(); i++) {
-				if (currroom.getAdjacentRooms().at(i).isBusStop()) {
-					returnedset.put(currroom.getAdjacentRooms().at(i));
-					return returnedset;
-				}
-			}
-			
-		}
-	}
-	
-	public Boolean moveOnRoute(HashSet<Room> route) {
-		
-	}
+
 	
 	public void Brewing(partygoer user) {
 		if (user.isPlayer()) {

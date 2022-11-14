@@ -1,10 +1,7 @@
-package edu.pacific.comp55.starter;
-import 
+package edu.pacific.comp55.starter; 
 
 import java.util.ArrayList;
 
-//Unsure why this isn't working.
-Partygoer currentPG;
 
 public class house {
 	public static Room DiningHall;
@@ -33,6 +30,7 @@ public class house {
 	public static Room Bedroom_8;
 	public static Room Bedroom_9;
 	public static Room Bedroom_10;
+	Partygoer currentPG;
 	//sets the time of the house
 		private int time;
 		
@@ -40,24 +38,24 @@ public class house {
 			ArrayList<Room> route = new ArrayList<Room>();
 			//Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
 			if (beginning == 1 && end == 2) {
-				route.add(Apothecary);
+				
 				route.add(Study);
 				route.add(DiningHall);
 				route.add(Hallway);
 			}
 			if (beginning == 1 && end == 3) {
-				route.add(Apothecary);
+				
 				route.add(Balcony);
 				route.add(Armory);
 			}
 			if (beginning == 1 && end == 4) {
-				route.add(Apothecary);
+				
 				route.add(Study);
 				route.add(DiningHall);
 				route.add(Kitchen);
 			}
 			if (beginning == 1 && end == 5) {
-				route.add(Apothecary);
+				
 				route.add(Study);
 				route.add(DiningHall);
 				route.add(GreenHouse);
@@ -65,24 +63,24 @@ public class house {
 				route.add(Outdoors_3);
 			}
 			if (beginning == 2 && end == 1) {
-				route.add(Hallway);
+				
 				route.add(DiningHall);
 				route.add(Study);
 				route.add(Apothecary);
 			}
 			if (beginning == 2 && end == 3) {
-				route.add(Hallway);
+				
 				route.add(DiningHall);
 				route.add(Workshop);
 				route.add(Armory);
 			}
 			if (beginning == 2 && end == 4) {
-				route.add(Hallway);
+				
 				route.add(DiningHall);
 				route.add(Kitchen);
 			}
 			if (beginning == 2 && end == 5) {
-				route.add(Hallway);
+				
 				route.add(DiningHall);
 				route.add(Kitchen);
 				route.add(Outdoors_2);
@@ -90,54 +88,54 @@ public class house {
 				route.add(Outdoors_3);
 			}
 			if (beginning == 3 && end == 1) {
-				route.add(Armory);
+				
 				route.add(Balcony);
 				route.add(Apothecary);
 			}
 			if (beginning == 3 && end == 2) {
-				route.add(Armory);
+				
 				route.add(Workshop);
 				route.add(DiningHall);
 				route.add(Hallway);
 			}
 			if (beginning == 3 && end == 4) {
-				route.add(Armory);
+				
 				route.add(Workshop);
 				route.add(DiningHall);
 				route.add(Kitchen);
 			}
 			if (beginning == 3 && end == 5) {
-				route.add(Armory);
+				
 				route.add(Workshop);
 				route.add(DiningHall);
 				route.add(GreenHouse);
 				route.add(Apothecary);
 			}
 			if (beginning == 4 && end == 1) {
-				route.add(Kitchen);
+				
 				route.add(DiningHall);
 				route.add(Study);
 				route.add(Apothecary);
 			}
 			if (beginning == 4 && end == 2) {
-				route.add(Kitchen);
+				
 				route.add(DiningHall);
 				route.add(Hallway);
 			}
 			if (beginning == 4 && end == 3) {
-				route.add(Kitchen);
+				
 				route.add(DiningHall);
 				route.add(Workshop);
 				route.add(Armory);
 			}
 			if (beginning == 4 && end == 5) {
-				route.add(Kitchen);
+				
 				route.add(Outdoors_2);
 				route.add(Outdoors_1);
 				route.add(Outdoors_3);
 			}
 			if (beginning == 5 && end == 1) {
-				route.add(Outdoors_3);
+				
 				route.add(Outdoors_4);
 				route.add(GreenHouse);
 				route.add(DiningHall);
@@ -145,14 +143,14 @@ public class house {
 				route.add(Apothecary);
 			}
 			if (beginning == 5 && end == 2) {
-				route.add(Outdoors_3);
+				
 				route.add(Outdoors_4);
 				route.add(GreenHouse);
 				route.add(DiningHall);
 				route.add(Hallway);
 			}
 			if (beginning == 5 && end == 3) {
-				route.add(Outdoors_3);
+				
 				route.add(Outdoors_4);
 				route.add(GreenHouse);
 				route.add(DiningHall);
@@ -160,7 +158,7 @@ public class house {
 				route.add(Armory);
 			}
 			if (beginning == 5 && end == 4) {
-				route.add(Outdoors_3);
+				
 				route.add(Outdoors_1);
 				route.add(Outdoors_2);
 				route.add(Kitchen);

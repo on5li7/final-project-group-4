@@ -11,11 +11,13 @@ private Boolean inDoors;
 
 ArrayList<Convos> Interactables;
 
+house theHouse;
+
 Convos Ritual;
 
 GImage background;
 
-HashSet<Room> adjacentRooms;
+ArrayList<Room> adjacentRooms;
 
 public int getAdjacentSetSize() {
 	return adjacentRooms.size();
@@ -30,7 +32,7 @@ public int getBusStop() {
 }
 
 
-public Room(item[] looseStuff, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, HashSet<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
+public Room(item[] looseStuff, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.inDoors = inDoors;
 	this.Interactables = Interactables;

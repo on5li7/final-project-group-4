@@ -74,16 +74,26 @@ public ArrayList<Room> Route(Room destination) {
 		return returnedset;
 		}
 	else {
-		currroom.adjacentRooms.forEach((Room) -> {if(Room.getBusStop() != 0) {
-			returnedset.add(Room);
-			returnedset.
+		int int1 = 0;
+		int int2 = 0;
+		for (int i=0; i<currroom.adjacentRooms.size(); i++) {
+			if (currroom.adjacentRooms.get(i).getBusStop() != 0) {
+				returnedset.add(currroom.adjacentRooms.get(i));
+				int1 = currroom.adjacentRooms.get(i).getBusStop();
+				}
+		for (int o=0; o<destination.adjacentRooms.size(); o++) {
+				if (destination.adjacentRooms.get(o).getBusStop() != 0) {
+					int2 = destination.adjacentRooms.get(o).getBusStop();
+				}
+			}	//Checks the nearest bus stop, and adds the bus route plus the destination to the route.	
 		}
-		});
+		ArrayList<Room> busRoute = thehouse.busRoute(int1, int2);
+		for (int p=0; p<busRoute.size(); p++) {
+			returnedset.add(busRoute.get(p));
+		}
+		return returnedset;
 	}
-		//Checks the nearest bus stop, and adds the bus route plus the destination to the route.
-	
-		
-	}
+}
 
 public Boolean moveOnRoute(HashSet<Room> route) {
 	if (currentRoute.size() == 0) {

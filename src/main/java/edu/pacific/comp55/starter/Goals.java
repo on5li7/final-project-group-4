@@ -14,7 +14,7 @@ public class Goals {
 	//This needs to be moved to partygoer when it is posted.
 
 	
-	public void Brewing(partygoer user) {
+	public void Brewing(Partygoer user) {
 		if (user.isPlayer()) {
 			System.out.print("Choose an option");
 			if (user.checkItem("PoisonPlant")) {

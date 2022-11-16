@@ -295,6 +295,89 @@ public class house {
 			return adjRooms;
 		}
 		
+		public String RoomtoString() {
+			Room room=null;
+			if (room==DiningHall) {
+				return "Dining Hall";
+			}
+			else if (room==Apothecary) {
+				return "Apothecary";
+			}
+			else if (room==Kitchen) {
+				return "Kitchen";
+			}
+			else if (room==WineCellar) {
+				return "Wine Cellar";
+			}
+			else if (room==GreenHouse) {
+				return "Greenhouse";
+			}
+			else if (room==TheStudy) {
+				return "Study";
+			}
+			else if (room==Armory) {
+				return "Armory";
+			}
+			else if (room==Workshop) {
+				return "Workshop";
+			}
+			else if (room==Dungeon) {
+				return "Dungeon";
+			}
+			else if (room==Outdoors_1) {
+				return "Outdoors 1";
+			}
+			else if (room==Outdoors_2) {
+				return "Outdoors 2";
+			}
+			else if (room==Outdoors_3) {
+				return "Outdoors 3";
+			}
+			else if (room==Outdoors_4) {
+				return "Outdoors 4";
+			}
+			else if (room==Bedroom_1) {
+				return "Bedroom 1";
+			}
+			else if (room==Bedroom_2) {
+				return "Bedroom 2";
+			}
+			else if (room==Bedroom_3) {
+				return "Bedroom 3";
+			}
+			else if (room==Bedroom_4) {
+				return "Bedroom 4";
+			}
+			else if (room==Bedroom_5) {
+				return "Bedroom 5";
+			}
+			else if (room==Bedroom_6) {
+				return "Bedroom 6";
+			}
+			else if (room==Bedroom_7) {
+				return "Bedroom 7";
+			}
+			else if (room==Bedroom_8) {
+				return "Bedroom 8";
+			}
+			else if (room==Bedroom_9) {
+				return "Bedroom 9";
+			}
+			else if (room==Bedroom_10) {
+				return "Bedroom 10";
+			}
+			else if (room==TheCliff) {
+				return "Cliff";
+			}
+			else if (room==Hallway) {
+				return "Hallway";
+			}
+			else if (room==Morgue) {
+				return "Morgue";
+			}
+			return null;
+		}
+		
 		public static void main(String[] args) {
 			ArrayList<String> House = new ArrayList<String>();
 			DiningHall = new Room(null, isDark, null, null, adjacentRooms(DiningHall), null, 0);

@@ -13,6 +13,7 @@ public class Partygoer {
 	Boolean isPlayer;
 	Boolean isDetective;
 	Boolean isKiller;
+	ArrayList<Goals> allPossibleGoals;
 	
 	public void takeTurn() {
 		if (isPlayer == true) {
@@ -52,19 +53,20 @@ Partygoer.add("Gertrude Biblio"); //An occultist librarian (Starts with knowledg
 System.out.println(Partygoer);
 }
 
-	public boolean isDetective() {
-		// TODO Auto-generated method stub
-		return false;
+	public Boolean isDetective() {
+		return isDetective;
 	}
 
-	public boolean isKiller() {
-		// TODO Auto-generated method stub
-		return false;
+	public Boolean isKiller() {
+		return isKiller;
+	}
+	
+	public Boolean isPlayer() {
+		return isPlayer;
 	}
 
 	public String getIdentity() {
-		// TODO Auto-generated method stub
-		return null;
+		return identity;
 	}
 
 	

@@ -51,7 +51,7 @@ public Room(item[] looseStuff, Boolean inDoors, ArrayList<Convos> Interactables,
 //"1. Poison - 6 turns " //if they have the items just show how many turns, and give option to do it. if they don't have the items, write the requirements. does not take any turns to look at these options
 //"2. Antidote - 4 turns "
 //"3. Perfume - 2 turns "
-//On partygoer they should have a counter, they will stay there for 6 turns until the poison is made
+//On partygoer they should have a counter, they will stay there for however many turns until the poison is made
 //}
 //else { check current goal to see what they're trying to do
 

@@ -1,6 +1,7 @@
 package edu.pacific.comp55.starter; 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class house {
@@ -33,8 +34,14 @@ public class house {
 	public static Room Morgue;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
+	ArrayList<GoalSets> allGoalSets;
 	//sets the time of the house
 		private int time;
+		
+		HashMap<String, ArrayList<Goals>> goalsets;
+		public void generateGoalsets() {
+			.add
+		}
 		
 		public ArrayList<Room> busRoute(int beginning, int end) {
 			ArrayList<Room> route = new ArrayList<Room>();
@@ -266,8 +273,34 @@ public class house {
 				adjRooms.add(Outdoors_2);
 				adjRooms.add(GreenHouse);
 			}
-			else if (room==Bedroom_1||room==Bedroom_2||room==Bedroom_3||room==Bedroom_4||room==Bedroom_5||room==Bedroom_6||
-					room==Bedroom_7||room==Bedroom_8||room==Bedroom_9||room==Bedroom_10) {
+			else if (room==Bedroom_1) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_2) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_3) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_4) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_5) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_6) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_7) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_8) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_9) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==Bedroom_10) {
 				adjRooms.add(Hallway);
 			}
 			else if (room==TheCliff) {

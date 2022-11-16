@@ -273,34 +273,8 @@ public class house {
 				adjRooms.add(Outdoors_2);
 				adjRooms.add(GreenHouse);
 			}
-			else if (room==Bedroom_1) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_2) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_3) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_4) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_5) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_6) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_7) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_8) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_9) {
-				adjRooms.add(Hallway);
-			}
-			else if (room==Bedroom_10) {
+			else if (room==Bedroom_1||room==Bedroom_2||room==Bedroom_3||room==Bedroom_4||room==Bedroom_5
+					||room==Bedroom_6||room==Bedroom_7||room==Bedroom_8||room==Bedroom_9||room==Bedroom_10) {
 				adjRooms.add(Hallway);
 			}
 			else if (room==TheCliff) {

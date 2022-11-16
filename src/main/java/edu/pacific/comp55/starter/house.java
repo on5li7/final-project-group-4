@@ -1,6 +1,7 @@
 package edu.pacific.comp55.starter; 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class house {
@@ -30,10 +31,17 @@ public class house {
 	public static Room Bedroom_8;
 	public static Room Bedroom_9;
 	public static Room Bedroom_10;
+	public static Room Morgue;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
+	ArrayList<GoalSets> allGoalSets;
 	//sets the time of the house
 		private int time;
+		
+		HashMap<String, ArrayList<Goals>> goalsets;
+		public void generateGoalsets() {
+			.add
+		}
 		
 		public ArrayList<Room> busRoute(int beginning, int end) {
 			ArrayList<Room> route = new ArrayList<Room>();
@@ -202,33 +210,209 @@ public class house {
 			this.deadpeople = deadpeople;
 		}
 		//For each arraylist in each room. .add the room
+		public static ArrayList<Room> adjacentRooms(Room room) {
+			ArrayList<Room> adjRooms = new ArrayList<Room>();
+			if (room==DiningHall) {
+				adjRooms.add(Kitchen);
+				adjRooms.add(GreenHouse);
+				adjRooms.add(Hallway);
+				adjRooms.add(Apothecary);
+			}
+			else if (room==Apothecary) {
+				adjRooms.add(DiningHall);
+			}
+			else if (room==Kitchen) {
+				adjRooms.add(DiningHall);
+				adjRooms.add(GreenHouse);
+				adjRooms.add(Outdoors_2);
+			}
+			else if (room==WineCellar) {
+				adjRooms.add(Kitchen);
+				adjRooms.add(Outdoors_2);
+			}
+			else if (room==GreenHouse) {
+				adjRooms.add(Kitchen);
+				adjRooms.add(Outdoors_4);
+				adjRooms.add(DiningHall);
+			}
+			else if (room==TheStudy) {
+				adjRooms.add(DiningHall);
+				adjRooms.add(Apothecary);
+				adjRooms.add(Morgue);
+			}
+			else if (room==Armory) {
+				adjRooms.add(Workshop);
+				adjRooms.add(Balcony);
+				adjRooms.add(Dungeon);
+			}
+			else if (room==Workshop) {
+				adjRooms.add(Armory);
+				adjRooms.add(DiningHall);
+			}
+			else if (room==Dungeon) {
+				adjRooms.add(Armory);
+			}
+			else if (room==Outdoors_1) {
+				adjRooms.add(Outdoors_2);
+				adjRooms.add(Outdoors_3);
+				adjRooms.add(TheCliff);
+			}
+			else if (room==Outdoors_2) {
+				adjRooms.add(Outdoors_1);
+				adjRooms.add(Outdoors_4);
+				adjRooms.add(Kitchen);
+				adjRooms.add(WineCellar);
+			}
+			else if (room==Outdoors_3) {
+				adjRooms.add(TheCliff);
+				adjRooms.add(Outdoors_1);
+				adjRooms.add(Outdoors_4);
+			}
+			else if (room==Outdoors_4) {
+				adjRooms.add(Outdoors_3);
+				adjRooms.add(Outdoors_2);
+				adjRooms.add(GreenHouse);
+			}
+			else if (room==Bedroom_1||room==Bedroom_2||room==Bedroom_3||room==Bedroom_4||room==Bedroom_5
+					||room==Bedroom_6||room==Bedroom_7||room==Bedroom_8||room==Bedroom_9||room==Bedroom_10) {
+				adjRooms.add(Hallway);
+			}
+			else if (room==TheCliff) {
+				adjRooms.add(Outdoors_1);
+				adjRooms.add(Outdoors_3);
+			}
+			else if (room==Hallway) {
+				adjRooms.add(Bedroom_1);
+				adjRooms.add(Bedroom_2);
+				adjRooms.add(Bedroom_3);
+				adjRooms.add(Bedroom_4);
+				adjRooms.add(Bedroom_5);
+				adjRooms.add(Bedroom_6);
+				adjRooms.add(Bedroom_7);
+				adjRooms.add(Bedroom_8);
+				adjRooms.add(Bedroom_9);
+				adjRooms.add(Bedroom_10);
+				adjRooms.add(DiningHall);
+				adjRooms.add(Balcony);
+			}
+			else if (room==Morgue) {
+				adjRooms.add(TheStudy);
+				adjRooms.add(Apothecary);
+			}
+			return adjRooms;
+		}
+		
+		public String RoomtoString() {
+			Room room=null;
+			if (room==DiningHall) {
+				return "Dining Hall";
+			}
+			else if (room==Apothecary) {
+				return "Apothecary";
+			}
+			else if (room==Kitchen) {
+				return "Kitchen";
+			}
+			else if (room==WineCellar) {
+				return "Wine Cellar";
+			}
+			else if (room==GreenHouse) {
+				return "Greenhouse";
+			}
+			else if (room==TheStudy) {
+				return "Study";
+			}
+			else if (room==Armory) {
+				return "Armory";
+			}
+			else if (room==Workshop) {
+				return "Workshop";
+			}
+			else if (room==Dungeon) {
+				return "Dungeon";
+			}
+			else if (room==Outdoors_1) {
+				return "Outdoors 1";
+			}
+			else if (room==Outdoors_2) {
+				return "Outdoors 2";
+			}
+			else if (room==Outdoors_3) {
+				return "Outdoors 3";
+			}
+			else if (room==Outdoors_4) {
+				return "Outdoors 4";
+			}
+			else if (room==Bedroom_1) {
+				return "Bedroom 1";
+			}
+			else if (room==Bedroom_2) {
+				return "Bedroom 2";
+			}
+			else if (room==Bedroom_3) {
+				return "Bedroom 3";
+			}
+			else if (room==Bedroom_4) {
+				return "Bedroom 4";
+			}
+			else if (room==Bedroom_5) {
+				return "Bedroom 5";
+			}
+			else if (room==Bedroom_6) {
+				return "Bedroom 6";
+			}
+			else if (room==Bedroom_7) {
+				return "Bedroom 7";
+			}
+			else if (room==Bedroom_8) {
+				return "Bedroom 8";
+			}
+			else if (room==Bedroom_9) {
+				return "Bedroom 9";
+			}
+			else if (room==Bedroom_10) {
+				return "Bedroom 10";
+			}
+			else if (room==TheCliff) {
+				return "Cliff";
+			}
+			else if (room==Hallway) {
+				return "Hallway";
+			}
+			else if (room==Morgue) {
+				return "Morgue";
+			}
+			return null;
+		}
 		
 		public static void main(String[] args) {
 			ArrayList<String> House = new ArrayList<String>();
-			DiningHall = new Room(null, isDark, null, null, null, null, currentPG);
-			Apothecary = new Room(null, isDark, null, null, null, null, currentPG);
-			Kitchen = new Room(null, isDark, null, null, null, null, currentPG);
-			WineCellar = new Room(null, isDark, null, null, null, null, currentPG);
-			GreenHouse = new Room(null, isDark, null, null, null, null, currentPG);
-			TheStudy = new Room(null, isDark, null, null, null, null, currentPG);
-			Armory = new Room(null, isDark, null, null, null, null, currentPG);
-			Workshop = new Room(null, isDark, null, null, null, null, currentPG);
-			Dungeon = new Room(null, isDark, null, null, null, null, currentPG);
-			Outdoors_1 = new Room(null, isDark, null, null, null, null, currentPG);
-			Outdoors_2 = new Room(null, isDark, null, null, null, null, currentPG);
-			Outdoors_3 = new Room(null, isDark, null, null, null, null, currentPG);
-			Outdoors_4 = new Room(null, isDark, null, null, null, null, currentPG);
-		    Bedroom_1 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_2 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_3 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_4 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_5 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_6 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_7 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_8 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_9 = new Room(null, isDark, null, null, null, null, currentPG);
-			Bedroom_10 = new Room(null, isDark, null, null, null, null, currentPG);
-			TheCliff = new Room(null, isDark, null, null, null, null, currentPG);	
+			DiningHall = new Room(null, isDark, null, null, adjacentRooms(DiningHall), null, 0);
+			Apothecary = new Room(null, isDark, null, null, adjacentRooms(Apothecary), null, 1);
+			Kitchen = new Room(null, isDark, null, null, adjacentRooms(Kitchen), null, 4);
+			WineCellar = new Room(null, isDark, null, null, adjacentRooms(WineCellar), null, 0);
+			GreenHouse = new Room(null, isDark, null, null, adjacentRooms(GreenHouse), null, 0);
+			TheStudy = new Room(null, isDark, null, null, adjacentRooms(TheStudy), null, 0);
+			Armory = new Room(null, isDark, null, null, adjacentRooms(Armory), null, 3);
+			Workshop = new Room(null, isDark, null, null, adjacentRooms(Workshop), null, 0);
+			Dungeon = new Room(null, isDark, null, null, adjacentRooms(Dungeon), null, 0);
+			Outdoors_1 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_1), null, 0);
+			Outdoors_2 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_2), null, 0);
+			Outdoors_3 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_3), null, 5);
+			Outdoors_4 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_4), null, 0);
+		    Bedroom_1 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_1), null, 0);
+			Bedroom_2 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_2), null, 0);
+			Bedroom_3 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_3), null, 0);
+			Bedroom_4 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_4), null, 0);
+			Bedroom_5 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_5), null, 0);
+			Bedroom_6 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_6), null, 0);
+			Bedroom_7 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_7), null, 0);
+			Bedroom_8 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_8), null, 0);
+			Bedroom_9 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_9), null, 0);
+			Bedroom_10 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_10), null, 0);
+			TheCliff = new Room(null, isDark, null, null, adjacentRooms(TheCliff), null, 0);
+			Hallway = new Room(null,isDark,null,null,adjacentRooms(Hallway),null,2);
+			Morgue = new Room(null,isDark,null,null,adjacentRooms(Morgue),null,0);
 			System.out.println(House);
 		}
 }

@@ -57,6 +57,11 @@ Partygoer.add("Doctor Rieklen"); //A renowned surgeon (Can mend injuries and poi
 Partygoer.add("Jake of the West"); //Bounty Hunter (Can see through any lies, can detect MOTIVES with just clues.)
 Partygoer.add("Gertrude Biblio"); //An occultist librarian (Starts with knowledge of all books in the game, which can be coaxed out of her.)
 System.out.println(Partygoer);
+
+Partygoer p = new Partygoer("Maximillian",false,true);
+p.currroom = house.DiningHall;
+testMove(p);
+testMoveOnRoute(p);
 }
 
 	public Boolean isDetective() {

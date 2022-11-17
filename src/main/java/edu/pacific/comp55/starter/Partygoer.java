@@ -15,6 +15,12 @@ public class Partygoer {
 	Boolean isKiller;
 	ArrayList<Goals> allPossibleGoals;
 	
+	public Partygoer(String identity, Boolean isKiller, Boolean isDetective) {
+		this.identity = identity;
+		this.isKiller = isKiller;
+		this.isDetective = isDetective;
+	}
+	
 	public void takeTurn() {
 		if (isPlayer == true) {
 			this.playerTurn();
@@ -124,6 +130,24 @@ public Boolean moveOnRoute(ArrayList<Room> route) {
 	}
 }
 
+public static void testMove(Partygoer p) {
+	System.out.println("Testing move() function");
+	System.out.println("Show route from dining hall to balcony" + p.Route(house.Balcony));
+	p.Move(house.Balcony);
+}
+
+public static void testMoveOnRoute(Partygoer p) {
+	System.out.println("Now testing moveOnRoute()");
+	System.out.println("This should return false");
+	System.out.println("Moving to balcony" + p.moveOnRoute(p.Route(house.Balcony)));
+	System.out.println("These should return true");
+	System.out.println("Moving to hallway" + p.moveOnRoute(p.Route(house.Hallway)));
+	System.out.println("Moving to Bedroom 5" + p.moveOnRoute(p.Route(house.Bedroom_5)));
+	System.out.println("Moving to kitchen" + p.moveOnRoute(p.Route(house.Kitchen)));
+	System.out.println("Moving to wine cellar" + p.moveOnRoute(p.Route(house.WineCellar)));
+	System.out.println("This should return false");
+	System.out.println("Moving to wine cellar" + p.moveOnRoute(p.Route(house.WineCellar)));
+}
 
 
 }

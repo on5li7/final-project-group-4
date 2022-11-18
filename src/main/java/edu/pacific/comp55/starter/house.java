@@ -2,6 +2,7 @@ package edu.pacific.comp55.starter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 
 public class house {
@@ -385,34 +386,36 @@ public class house {
 			return null;
 		}
 		
-		public static void main(String[] args) {
-			ArrayList<String> House = new ArrayList<String>();
-			DiningHall = new Room(null, isDark, null, null, adjacentRooms(DiningHall), null, 0);
-			Apothecary = new Room(null, isDark, null, null, adjacentRooms(Apothecary), null, 1);
-			Kitchen = new Room(null, isDark, null, null, adjacentRooms(Kitchen), null, 4);
-			WineCellar = new Room(null, isDark, null, null, adjacentRooms(WineCellar), null, 0);
-			GreenHouse = new Room(null, isDark, null, null, adjacentRooms(GreenHouse), null, 0);
-			TheStudy = new Room(null, isDark, null, null, adjacentRooms(TheStudy), null, 0);
-			Armory = new Room(null, isDark, null, null, adjacentRooms(Armory), null, 3);
-			Workshop = new Room(null, isDark, null, null, adjacentRooms(Workshop), null, 0);
-			Dungeon = new Room(null, isDark, null, null, adjacentRooms(Dungeon), null, 0);
-			Outdoors_1 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_1), null, 0);
-			Outdoors_2 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_2), null, 0);
-			Outdoors_3 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_3), null, 5);
-			Outdoors_4 = new Room(null, isDark, null, null, adjacentRooms(Outdoors_4), null, 0);
-		    Bedroom_1 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_1), null, 0);
-			Bedroom_2 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_2), null, 0);
-			Bedroom_3 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_3), null, 0);
-			Bedroom_4 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_4), null, 0);
-			Bedroom_5 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_5), null, 0);
-			Bedroom_6 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_6), null, 0);
-			Bedroom_7 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_7), null, 0);
-			Bedroom_8 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_8), null, 0);
-			Bedroom_9 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_9), null, 0);
-			Bedroom_10 = new Room(null, isDark, null, null, adjacentRooms(Bedroom_10), null, 0);
-			TheCliff = new Room(null, isDark, null, null, adjacentRooms(TheCliff), null, 0);
-			Hallway = new Room(null,isDark,null,null,adjacentRooms(Hallway),null,2);
-			Morgue = new Room(null,isDark,null,null,adjacentRooms(Morgue),null,0);
-			System.out.println(House);
+		public static house generateHouse() {
+			//ArrayList<String> House = new ArrayList<String>();
+			house returnHouse = new house();
+			returnHouse.DiningHall = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(DiningHall), new HashSet<Partygoer>(), 0);
+			returnHouse.Apothecary = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Apothecary), new HashSet<Partygoer>(), 1);
+			returnHouse.Kitchen = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Kitchen), new HashSet<Partygoer>(), 4);
+			returnHouse.WineCellar = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(WineCellar), new HashSet<Partygoer>(), 0);
+			returnHouse.GreenHouse = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(GreenHouse), new HashSet<Partygoer>(), 0);
+			returnHouse.TheStudy = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(TheStudy), new HashSet<Partygoer>(), 0);
+			returnHouse.Armory = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Armory), new HashSet<Partygoer>(), 3);
+			returnHouse.Workshop = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Workshop), new HashSet<Partygoer>(), 0);
+			returnHouse.Dungeon = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Dungeon), new HashSet<Partygoer>(), 0);
+			returnHouse.Outdoors_1 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_1), new HashSet<Partygoer>(), 0);
+			returnHouse.Outdoors_2 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_2), new HashSet<Partygoer>(), 0);
+			returnHouse.Outdoors_3 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_3), new HashSet<Partygoer>(), 5);
+			returnHouse.Outdoors_4 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_4), new HashSet<Partygoer>(), 0);
+		    returnHouse.Bedroom_1 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_1), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_2 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_2), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_3 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_3), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_4 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_4), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_5 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_5), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_6 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_6), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_7 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_7), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_8 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_8), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_9 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_9), new HashSet<Partygoer>(), 0);
+			returnHouse.Bedroom_10 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_10), new HashSet<Partygoer>(), 0);
+			returnHouse.TheCliff = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(TheCliff), new HashSet<Partygoer>(), 0);
+			returnHouse.Hallway = new Room(null,isDark,new ArrayList<Convos>(),null,adjacentRooms(Hallway),new HashSet<Partygoer>(),2);
+			returnHouse.Morgue = new Room(null,isDark,new ArrayList<Convos>(),null,adjacentRooms(Morgue),new HashSet<Partygoer>(),0);
+			return returnHouse;
+			//System.out.println(House);
 		}
 }

@@ -21,6 +21,11 @@ public class Partygoer {
 		this.isDetective = isDetective;
 	}
 	
+	public static void placeinRoom(Partygoer p, Room r) {
+		p.currroom = r;
+		r.occupants.add(p);
+	}
+	
 	public void takeTurn() {
 		if (isPlayer == true) {
 			this.playerTurn();
@@ -59,9 +64,11 @@ Partygoer.add("Gertrude Biblio"); //An occultist librarian (Starts with knowledg
 System.out.println(Partygoer);
 
 Partygoer p = new Partygoer("Maximillian",false,true);
-p.currroom = house.DiningHall;
+p.thehouse = house.generateHouse();
+//p.currroom = house.DiningHall;
+placeinRoom(p, p.thehouse.DiningHall);
 testMove(p);
-testMoveOnRoute(p);
+//testMoveOnRoute(p);
 }
 
 	public Boolean isDetective() {
@@ -123,36 +130,39 @@ public ArrayList<Room> Route(Room destination) {
 	}
 }
 
-public Boolean moveOnRoute(ArrayList<Room> route) {
-	if (currentRoute.size() == 0) {
-		return false;
-	}
-	else {
+public Boolean moveOnRoute() {
+	if (currentRoute.get(0) != null) {
 	Room daroom = currentRoute.get(0);
 	currentRoute.remove(currentRoute.get(0));
 	Move(daroom);
 	return true;
 	}
+	else {
+		return false;
+	}
+	
 }
 
 public static void testMove(Partygoer p) {
 	System.out.println("Testing move() function");
-	System.out.println("Show route from dining hall to balcony" + p.Route(house.Balcony));
-	p.Move(house.Balcony);
+	p.currroom = house.DiningHall;
+	p.currentRoute = p.Route(house.Balcony);
+	System.out.println("Show route from dining hall to balcony " + p.currentRoute);
+	System.out.println("Should return true: " + p.moveOnRoute());
 }
 
-public static void testMoveOnRoute(Partygoer p) {
-	System.out.println("Now testing moveOnRoute()");
-	System.out.println("This should return false");
-	System.out.println("Moving to balcony" + p.moveOnRoute(p.Route(house.Balcony)));
-	System.out.println("These should return true");
-	System.out.println("Moving to hallway" + p.moveOnRoute(p.Route(house.Hallway)));
-	System.out.println("Moving to Bedroom 5" + p.moveOnRoute(p.Route(house.Bedroom_5)));
-	System.out.println("Moving to kitchen" + p.moveOnRoute(p.Route(house.Kitchen)));
-	System.out.println("Moving to wine cellar" + p.moveOnRoute(p.Route(house.WineCellar)));
-	System.out.println("This should return false");
-	System.out.println("Moving to wine cellar" + p.moveOnRoute(p.Route(house.WineCellar)));
-}
+//public static void testMoveOnRoute(Partygoer p) {
+	//System.out.println("Now testing moveOnRoute()");
+	//System.out.println("This should return false");
+	//System.out.println("Moving to balcony: " + p.moveOnRoute(p.Route(house.Balcony)));
+	//System.out.println("These should return true");
+	//System.out.println("Moving to hallway: " + p.moveOnRoute(p.Route(house.Hallway)));
+	//System.out.println("Moving to Bedroom 5: " + p.moveOnRoute(p.Route(house.Bedroom_5)));
+	//System.out.println("Moving to kitchen: " + p.moveOnRoute(p.Route(house.Kitchen)));
+	//System.out.println("Moving to wine cellar: " + p.moveOnRoute(p.Route(house.WineCellar)));
+	//System.out.println("This should return false");
+	//System.out.println("Moving to wine cellar: " + p.moveOnRoute(p.Route(house.WineCellar)));
+//}
 
 
 }

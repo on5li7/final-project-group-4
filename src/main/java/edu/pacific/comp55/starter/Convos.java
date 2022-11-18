@@ -13,19 +13,19 @@ public class Convos {
 	public void Brewing(Partygoer user) {
 		if (user.isPlayer()) {
 			System.out.print("Choose an option");
-			if (user.checkItem("PoisonPlant")) {
+			if (user.checkItem(item.NOXIOUS_PLANT)) {
 				System.out.print("1) Poison: 6 turns");
 			}
 			else{
 				System.out.print("Poison: Requires poisonous plants");
 			}
-			if (user.checkItem("MedicinalPlant")) {
+			if (user.checkItem(item.MEDICINAL_PLANT)) {
 				System.out.print("2) Antidote: 4 turns");
 			}
 			else{
 				System.out.print("Antidote: Requires medicinal Plants");
 			}
-			if (user.checkItem("FragrantPlant")) {
+			if (user.checkItem(item.FRAGRANT_PLANT)) {
 				System.out.print("Perfume: 2 turns");
 			}
 			else{
@@ -34,7 +34,7 @@ public class Convos {
 		}
 		else {
 			if (user.getGoal() == "Poison") {
-				if (user.checkItem("PoisonPlant")) {
+				if (user.checkItem(item.NOXIOUS_PLANT)) {
 					System.out.print("1) Poison: 6 turns");
 				}
 				else{
@@ -42,7 +42,7 @@ public class Convos {
 				}
 			}
 			else if (user.getGoal() == "Antidote") {
-				if (user.checkItem("MedicinalPlant")) {
+				if (user.checkItem(item.MEDICINAL_PLANT)) {
 					System.out.print("2) Antidote: 4 turns");
 				}
 				else{
@@ -50,7 +50,7 @@ public class Convos {
 				}
 			}
 			else if (user.getGoal() == "Perfume") {
-				if (user.checkItem("FragrantPlant")) {
+				if (user.checkItem(item.FRAGRANT_PLANT)) {
 					System.out.print("Perfume: 2 turns");
 				}
 				else{
@@ -63,11 +63,25 @@ public class Convos {
 	public void knifeset(Partygoer user) {
 		if(user.isPlayer()) {
 			System.out.print("Choose an option");
+			if (user.checkItem(item.KNIFE1)) {
+				System.out.print("1) Grab Knife: 2 turns");
+			}
+			else {
+				System.out.print("Knife: Did not grab knife");
+			}
+		}
+			else {
+				if(user.getGoal() == "Murderous") {
+					if(user.checkItem(item.KNIFE1)) {
+						System.out.print("1) Stab: 3 turns");
+					}
+				}
 			
 		}
 	}
 	//drinking, should give strength and charisma but reduce dexterity. For now just a boolean check, no effect on player
 	//eating, in dining hall, should change hungry from no to yes
+	//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 	//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
 	//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 	//riflecase, checks if you have a fixed_key then you can get the rifle

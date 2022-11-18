@@ -14,6 +14,7 @@ public class Partygoer {
 	Boolean isDetective;
 	Boolean isKiller;
 	ArrayList<Goals> allPossibleGoals;
+	ArrayList<item> Inventory; //need to set a cap of 4
 	
 	public Partygoer(String identity, Boolean isKiller, Boolean isDetective) {
 		this.identity = identity;
@@ -163,6 +164,18 @@ public static void testMove(Partygoer p) {
 	//System.out.println("This should return false");
 	//System.out.println("Moving to wine cellar: " + p.moveOnRoute(p.Route(house.WineCellar)));
 //}
+
+public boolean checkItem(item inputItem) {
+	// TODO Auto-generated method stub
+	Inventory.contains(inputItem);
+	return false;
+}
+
+public String getGoal() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 
 
 }

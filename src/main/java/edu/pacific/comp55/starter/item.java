@@ -3,7 +3,7 @@ package edu.pacific.comp55.starter;
 public enum item {
 	TORCH, LANTERN, OIL, MONEY, COFFEE, BANDAGE, ANTIDOTE, FIRST_AID_KIT,
 	INK, TAPE, HEMLOCK, BAD_FOOD, NIGHTSHADE, TREE_FROG_VENOM, SEDATIVES,
-	CHLOROFORM, KNIFE, SWORD, PISTOL, RIFLE, RITES_OF_THE_HORSEMAN,
+	CHLOROFORM, KNIFE1, KNIFE2, KNIFE3, KNIFE4, SWORD, PISTOL, RIFLE, RITES_OF_THE_HORSEMAN,
 	THE_7_RITES_OF_RUIN, FAMILIARS, THE_DEMONS_LEGEND, FAE_JOKE_BOOK,
 	DOLL, JADE_STONE, RAT, BROKEN_KEY, BISMUTH, COBALT, DEMON_TOOTH,
 	COBWEB, EYE_OF_NEWT, SENTIMENTAL_PEN, FEMUR, BRIMSTONE, CLOVE_OF_GARLIC,
@@ -28,7 +28,10 @@ public enum item {
 			case TREE_FROG_VENOM: return "tree_frog_venom";
 			case SEDATIVES: return "sedatives";
 			case CHLOROFORM: return "chloroform";
-			case KNIFE: return "knife";
+			case KNIFE1: return "knife";
+			case KNIFE2: return "knife";
+			case KNIFE3: return "knife";
+			case KNIFE4: return "knife";
 			case SWORD: return "sword";
 			case PISTOL: return "pistol";
 			case RIFLE: return "rifle";

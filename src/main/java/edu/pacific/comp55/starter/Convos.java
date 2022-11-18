@@ -60,7 +60,7 @@ public class Convos {
 			}
 		}
 	//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
-	public void knifeset(Partygoer user) {
+	public void Knifeset(Partygoer user) {
 		if(user.isPlayer()) {
 			System.out.print("Choose an option");
 			if (user.checkItem(item.KNIFE1)) {
@@ -75,8 +75,7 @@ public class Convos {
 					if(user.checkItem(item.KNIFE1)) {
 						System.out.print("1) Stab: 3 turns");
 					}
-				}
-			
+				}		
 		}
 	}
 	//drinking, should give strength and charisma but reduce dexterity. For now just a boolean check, no effect on player

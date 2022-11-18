@@ -154,6 +154,11 @@ public static void testMoveOnRoute(Partygoer p) {
 	System.out.println("Moving to wine cellar" + p.moveOnRoute(p.Route(house.WineCellar)));
 }
 
+public boolean checkItem(String string) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
 
 }
 

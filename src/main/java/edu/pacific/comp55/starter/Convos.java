@@ -83,6 +83,16 @@ public class Convos {
 	//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 	//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
 	//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
+	public void fix_key(Partygoer user) {
+		if(user.currroom == house.Workshop) {
+			if(user.checkItem(item.BROKEN_KEY)) {
+				System.out.print("You have a broken key, let's fix it?");
+			}
+			else {
+				System.out.print("Nothing for us to do here for now...");
+			}
+		}
+	}
 	//riflecase, checks if you have a fixed_key then you can get the rifle
 	//conversation interactions between partygoers, will be in partygoer.java, like pushing someone off a cliff when you click them
 	//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)

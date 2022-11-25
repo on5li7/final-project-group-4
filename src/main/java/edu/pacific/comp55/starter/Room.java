@@ -47,8 +47,9 @@ Interactable.put("Antidote", "GreenHouse");
 //TODO:Finish adding interactables
 }
 
-public Room(item[] looseStuff, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
+public Room(item[] looseStuff, house thehouse, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
+	this.theHouse = thehouse;
 	this.inDoors = inDoors;
 	this.Interactables = Interactables;
 	this.Ritual = Ritual;

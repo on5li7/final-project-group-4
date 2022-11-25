@@ -408,5 +408,36 @@ public class house {
 			this.Hallway = new Room(new ArrayList<item>(), this, isDark,new ArrayList<Convos>(),null,new ArrayList<Room>(),new HashSet<Partygoer>(),2);
 			this.Morgue = new Room(new ArrayList<item>(), this, isDark,new ArrayList<Convos>(),null,new ArrayList<Room>(),new HashSet<Partygoer>(),0);
 			adjacentRooms();
+			Partygoer partyholder;
+			partyholder = new Partygoer("Maximillian", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Bob", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Frank", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Chad", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Todd", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Constable Smithy", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Ariana Stocracy", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Doctor Reiklen", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Jake of the West", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
+			partyholder = new Partygoer("Gertrude Biblio", false, false, this.DiningHall, this);
+			this.allPartygoers.add(partyholder);
+			this.DiningHall.occupants.add(partyholder);
 		}
 }

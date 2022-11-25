@@ -53,17 +53,8 @@ public class Partygoer {
 		thehouse.nextPlayer();
 	}
 	
-	public static void main(String[] args) {
-ArrayList<String> Partygoer = new ArrayList<String>();
-house TheHouse = new house();
-
-
-Partygoer p = new Partygoer("Maximillian",false,true, thehouse);
-p.thehouse = TheHouse;
-//p.currroom = house.DiningHall;
-placeinRoom(p, TheHouse.DiningHall);
-testMove(p);
-//testMoveOnRoute(p);
+public static void main(String[] args) {
+testMove();
 }
 
 	public Boolean isDetective() {
@@ -97,9 +88,11 @@ public void Route(Room destination) {
 	currentRoute = new ArrayList<Room>(); 
 	//Checks to see if they are standing in the room
 	if (currroom == destination) {
+		System.out.print("Already there!");
 		return;
 	}
 	else if (currroom.adjacentRooms.contains(destination)){
+		System.out.print("It's nearby!");
 		currentRoute.add(destination);
 		return;
 		}
@@ -139,27 +132,24 @@ public Boolean moveOnRoute() {
 }
 
 public static void testMove() {
-	this.
 	System.out.println("Testing move() function");
-	house = new house();
-	p.currroom = house.DiningHall;
-	p.Route(house.Balcony);
-	System.out.println("Show route from dining hall to balcony " + p.currentRoute);
-	System.out.println("Should return true: " + p.moveOnRoute());
+	house testHouse = new house();
+	testHouse.allPartygoers.get(0);
+	testHouse.allPartygoers.get(0).Route(testHouse.Balcony);
+	System.out.println("Show route from dining hall to balcony " + testHouse.allPartygoers.get(0).currentRoute);
+	testHouse.allPartygoers.get(0).testMoveOnRoute();
+	
 }
 
-//public static void testMoveOnRoute(Partygoer p) {
-	//System.out.println("Now testing moveOnRoute()");
-	//System.out.println("This should return false");
-	//System.out.println("Moving to balcony: " + p.moveOnRoute(p.Route(house.Balcony)));
-	//System.out.println("These should return true");
-	//System.out.println("Moving to hallway: " + p.moveOnRoute(p.Route(house.Hallway)));
-	//System.out.println("Moving to Bedroom 5: " + p.moveOnRoute(p.Route(house.Bedroom_5)));
-	//System.out.println("Moving to kitchen: " + p.moveOnRoute(p.Route(house.Kitchen)));
-	//System.out.println("Moving to wine cellar: " + p.moveOnRoute(p.Route(house.WineCellar)));
-	//System.out.println("This should return false");
-	//System.out.println("Moving to wine cellar: " + p.moveOnRoute(p.Route(house.WineCellar)));
-//}
+public void testMoveOnRoute() {
+while(this.currentRoute.size() > 0) {
+	System.out.print("Should be true: " + (this.moveOnRoute()) + "\n");
+	System.out.print("Current Room: " + (currroom.theHouse.RoomtoString(currroom)) + "\n");
+	if (this.currentRoute.size() == 0) {
+	System.out.print("Current Room: " + (currroom.theHouse.RoomtoString(currroom)) + "\n");
+	}
+}
+}
 
 public boolean checkItem(item inputItem) {
 	return Inventory.contains(inputItem);

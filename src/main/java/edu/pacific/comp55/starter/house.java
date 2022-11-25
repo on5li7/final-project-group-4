@@ -381,7 +381,9 @@ public class house {
 			this.time = 1;
 			this.isDark = false;
 			this.goalsets = new GoalSets();
+			this.allPartygoers = new ArrayList<Partygoer>();
 			this.DiningHall = new Room(new ArrayList<item>(), this, isDark, new ArrayList<Convos>(), null, new ArrayList<Room>(), new HashSet<Partygoer>(), 0);
+			this.Balcony = new Room(new ArrayList<item>(), this, isDark, new ArrayList<Convos>(), null, new ArrayList<Room>(), new HashSet<Partygoer>(), 0);
 			this.Apothecary = new Room(new ArrayList<item>(), this, isDark, new ArrayList<Convos>(), null, new ArrayList<Room>(), new HashSet<Partygoer>(), 1);
 			this.Kitchen = new Room(new ArrayList<item>(), this, isDark, new ArrayList<Convos>(), null, new ArrayList<Room>(), new HashSet<Partygoer>(), 4);
 			this.WineCellar = new Room(new ArrayList<item>(), this, isDark, new ArrayList<Convos>(), null, new ArrayList<Room>(), new HashSet<Partygoer>(), 0);

@@ -4,7 +4,7 @@ import acm.graphics.GImage;
 import java.util.HashMap;
 public class Room {
 	
-item[] looseStuff;
+ArrayList<item> looseStuff;
 
 private Boolean inDoors;
 
@@ -47,7 +47,7 @@ Interactable.put("Antidote", "GreenHouse");
 //TODO:Finish adding interactables
 }
 
-public Room(item[] looseStuff, house thehouse, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
+public Room(ArrayList<item> looseStuff, house thehouse, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.theHouse = thehouse;
 	this.inDoors = inDoors;

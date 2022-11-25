@@ -16,11 +16,12 @@ public class Partygoer {
 	ArrayList<Goal> allPossibleGoals;
 	ArrayList<item> Inventory; //need to set a cap of 4
 	
-	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, house theHouse) {
+	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {
 		this.identity = identity;
 		this.isKiller = isKiller;
 		this.isDetective = isDetective;
-		this.thehouse = theHouse;
+		this.currroom = startingRoom;
+		this.thehouse = thehouse;
 	}
 	
 	public static void placeinRoom(Partygoer p, Room r) {

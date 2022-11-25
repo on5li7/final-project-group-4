@@ -6,20 +6,21 @@ import java.util.HashSet;
 public class Partygoer {
 	
 	ArrayList<Room> currentRoute;
-	Goals currGoal;
+	Goal currGoal;
 	Room currroom;
 	house thehouse;
 	String identity;
 	Boolean isPlayer;
 	Boolean isDetective;
 	Boolean isKiller;
-	ArrayList<Goals> allPossibleGoals;
+	ArrayList<Goal> allPossibleGoals;
 	ArrayList<item> Inventory; //need to set a cap of 4
 	
-	public Partygoer(String identity, Boolean isKiller, Boolean isDetective) {
+	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, house theHouse) {
 		this.identity = identity;
 		this.isKiller = isKiller;
 		this.isDetective = isDetective;
+		this.thehouse = theHouse;
 	}
 	
 	public static void placeinRoom(Partygoer p, Room r) {
@@ -27,12 +28,14 @@ public class Partygoer {
 		r.occupants.add(p);
 	}
 	
+	//This function calls moveonRoute, which will move the character and return true if there is a current route.
+	//If moveonRoute is false, the player AI will instead check the room for their goal.
 	public void takeTurn() {
 		if (isPlayer == true) {
 			this.playerTurn();
 		}
 		else {
-			if (!moveOnRoute(currentRoute)) {
+			if (moveOnRoute()) {
 				
 			}
 		}
@@ -51,6 +54,7 @@ public class Partygoer {
 	
 	public static void main(String[] args) {
 ArrayList<String> Partygoer = new ArrayList<String>();
+house TheHouse = new house();
 Partygoer.add("Maximillian"); //Politician (reduces slight fear and gains slight attitude in partygoers in every conversation)
 Partygoer.add("Bob"); //Homeless man (Hard to notice and like. Can hide in plain sight and gather info very easily, but the partygoers don’t believe a thing he says. INCLUDING IF HE KNOWS WHO THE KILLER IS. Meaning, if the player chooses to play as him, the player will have to confront the killer themselves.)
 Partygoer.add("Frank"); //Sommelier (can’t be poisoned, very friendly and strong when he’s drunk, people always accept a drink from him, except the player, keeps his trusty flask on hand)
@@ -64,10 +68,10 @@ Partygoer.add("Jake of the West"); //Bounty Hunter (Can see through any lies, ca
 Partygoer.add("Gertrude Biblio"); //An occultist librarian (Starts with knowledge of all books in the game, which can be coaxed out of her.)
 System.out.println(Partygoer);
 
-Partygoer p = new Partygoer("Maximillian",false,true);
-p.thehouse = house.generateHouse();
+Partygoer p = new Partygoer("Maximillian",false,true, thehouse);
+p.thehouse = TheHouse;
 //p.currroom = house.DiningHall;
-placeinRoom(p, p.thehouse.DiningHall);
+placeinRoom(p, TheHouse.DiningHall);
 testMove(p);
 //testMoveOnRoute(p);
 }
@@ -99,22 +103,22 @@ testMove(p);
 	this.endTurn();
 }
 
-public ArrayList<Room> Route(Room destination) {
-	ArrayList<Room> returnedset = new ArrayList<Room>(); 
+public void Route(Room destination) {
+	currentRoute = new ArrayList<Room>(); 
 	//Checks to see if they are standing in the room
 	if (currroom == destination) {
-		return returnedset;
+		return;
 	}
 	else if (currroom.adjacentRooms.contains(destination)){
-		returnedset.add(destination);
-		return returnedset;
+		currentRoute.add(destination);
+		return;
 		}
 	else {
 		int int1 = 0;
 		int int2 = 0;
 		for (int i=0; i<currroom.adjacentRooms.size(); i++) {
 			if (currroom.adjacentRooms.get(i).getBusStop() != 0) {
-				returnedset.add(currroom.adjacentRooms.get(i));
+				currentRoute.add(currroom.adjacentRooms.get(i));
 				int1 = currroom.adjacentRooms.get(i).getBusStop();
 				}
 		for (int o=0; o<destination.adjacentRooms.size(); o++) {
@@ -125,9 +129,9 @@ public ArrayList<Room> Route(Room destination) {
 		}
 		ArrayList<Room> busRoute = thehouse.busRoute(int1, int2);
 		for (int p=0; p<busRoute.size(); p++) {
-			returnedset.add(busRoute.get(p));
+			currentRoute.add(busRoute.get(p));
 		}
-		return returnedset;
+		currentRoute.add(destination);
 	}
 }
 
@@ -144,10 +148,12 @@ public Boolean moveOnRoute() {
 	
 }
 
-public static void testMove(Partygoer p) {
+public static void testMove() {
+	this.
 	System.out.println("Testing move() function");
+	house = new house();
 	p.currroom = house.DiningHall;
-	p.currentRoute = p.Route(house.Balcony);
+	p.Route(house.Balcony);
 	System.out.println("Show route from dining hall to balcony " + p.currentRoute);
 	System.out.println("Should return true: " + p.moveOnRoute());
 }
@@ -166,9 +172,7 @@ public static void testMove(Partygoer p) {
 //}
 
 public boolean checkItem(item inputItem) {
-	// TODO Auto-generated method stub
-	Inventory.contains(inputItem);
-	return false;
+	return Inventory.contains(inputItem);
 }
 
 public String getGoal() {

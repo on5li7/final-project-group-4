@@ -4,15 +4,23 @@ import java.util.*;
 public class GoalSets {
 
 	
-public static ArrayList<Goal> innocuous;
-public static ArrayList<Goal> sociable;
-public static ArrayList<Goal> drinking;
-public static ArrayList<Goal> poisonous;
-public static ArrayList<Goal> gathering;
-public static ArrayList<Goal> murderous;
-public static ArrayList<Goal> rituals;
+public ArrayList<Goal> innocuous;
+public ArrayList<Goal> sociable;
+public ArrayList<Goal> drinking;
+public ArrayList<Goal> poisonous;
+public ArrayList<Goal> gathering;
+public ArrayList<Goal> murderous;
+public ArrayList<Goal> rituals;
 
-public void generateSets() {
+public GoalSets() {
+	this.innocuous = new ArrayList<Goal>();
+	this.sociable = new ArrayList<Goal>();
+	this.drinking = new ArrayList<Goal>();
+	this.poisonous = new ArrayList<Goal>();
+	this.gathering = new ArrayList<Goal>();
+	this.murderous = new ArrayList<Goal>();
+	this.rituals = new ArrayList<Goal>();
+	
 innocuous.add(Goal.EATING);
 innocuous.add(Goal.DRINKING_HALL);
 innocuous.add(Goal.GOSSIPING);

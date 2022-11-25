@@ -6,43 +6,40 @@ import java.util.HashSet;
 
 
 public class house {
-	public static Room DiningHall;
-	public static Room Apothecary;
-	public static Room Kitchen;
-	public static Room WineCellar;
-	public static Room GreenHouse;
-	public static Room TheStudy;
-	public static Room Armory;
-	public static Room Workshop;
-	public static Room TheCliff;
-	public static Room Dungeon;
-	public static Room Balcony;
-	public static Room Outdoors_1;
-	public static Room Outdoors_2;
-	public static Room Outdoors_3;
-	public static Room Outdoors_4;
-	public static Room Hallway;
-	public static Room Bedroom_1;
-	public static Room Bedroom_2;
-	public static Room Bedroom_3;
-	public static Room Bedroom_4;
-	public static Room Bedroom_5;
-	public static Room Bedroom_6;
-	public static Room Bedroom_7;
-	public static Room Bedroom_8;
-	public static Room Bedroom_9;
-	public static Room Bedroom_10;
-	public static Room Morgue;
+	public Room DiningHall;
+	public Room Apothecary;
+	public Room Kitchen;
+	public Room WineCellar;
+	public Room GreenHouse;
+	public Room TheStudy;
+	public Room Armory;
+	public Room Workshop;
+	public Room TheCliff;
+	public Room Dungeon;
+	public Room Balcony;
+	public Room Outdoors_1;
+	public Room Outdoors_2;
+	public Room Outdoors_3;
+	public Room Outdoors_4;
+	public Room Hallway;
+	public Room Bedroom_1;
+	public Room Bedroom_2;
+	public Room Bedroom_3;
+	public Room Bedroom_4;
+	public Room Bedroom_5;
+	public Room Bedroom_6;
+	public Room Bedroom_7;
+	public Room Bedroom_8;
+	public Room Bedroom_9;
+	public Room Bedroom_10;
+	public Room Morgue;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
 	ArrayList<GoalSets> allGoalSets;
 	//sets the time of the house
 		private int time;
 		
-		HashMap<String, ArrayList<Goals>> goalsets;
-		public void generateGoalsets() {
-			.add
-		}
+		GoalSets goalsets = new GoalSets();
 		
 		public ArrayList<Room> busRoute(int beginning, int end) {
 			ArrayList<Room> route = new ArrayList<Room>();
@@ -303,8 +300,7 @@ public class house {
 			return adjRooms;
 		}
 		
-		public String RoomtoString() {
-			Room room=null;
+		public String RoomtoString(Room room) {
 			if (room==DiningHall) {
 				return "Dining Hall";
 			}
@@ -386,36 +382,34 @@ public class house {
 			return null;
 		}
 		
-		public static house generateHouse() {
+		public house() {
 			//ArrayList<String> House = new ArrayList<String>();
-			house returnHouse = new house();
-			returnHouse.DiningHall = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(DiningHall), new HashSet<Partygoer>(), 0);
-			returnHouse.Apothecary = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Apothecary), new HashSet<Partygoer>(), 1);
-			returnHouse.Kitchen = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Kitchen), new HashSet<Partygoer>(), 4);
-			returnHouse.WineCellar = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(WineCellar), new HashSet<Partygoer>(), 0);
-			returnHouse.GreenHouse = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(GreenHouse), new HashSet<Partygoer>(), 0);
-			returnHouse.TheStudy = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(TheStudy), new HashSet<Partygoer>(), 0);
-			returnHouse.Armory = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Armory), new HashSet<Partygoer>(), 3);
-			returnHouse.Workshop = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Workshop), new HashSet<Partygoer>(), 0);
-			returnHouse.Dungeon = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Dungeon), new HashSet<Partygoer>(), 0);
-			returnHouse.Outdoors_1 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_1), new HashSet<Partygoer>(), 0);
-			returnHouse.Outdoors_2 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_2), new HashSet<Partygoer>(), 0);
-			returnHouse.Outdoors_3 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_3), new HashSet<Partygoer>(), 5);
-			returnHouse.Outdoors_4 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_4), new HashSet<Partygoer>(), 0);
-		    returnHouse.Bedroom_1 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_1), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_2 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_2), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_3 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_3), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_4 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_4), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_5 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_5), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_6 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_6), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_7 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_7), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_8 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_8), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_9 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_9), new HashSet<Partygoer>(), 0);
-			returnHouse.Bedroom_10 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_10), new HashSet<Partygoer>(), 0);
-			returnHouse.TheCliff = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(TheCliff), new HashSet<Partygoer>(), 0);
-			returnHouse.Hallway = new Room(null,isDark,new ArrayList<Convos>(),null,adjacentRooms(Hallway),new HashSet<Partygoer>(),2);
-			returnHouse.Morgue = new Room(null,isDark,new ArrayList<Convos>(),null,adjacentRooms(Morgue),new HashSet<Partygoer>(),0);
-			return returnHouse;
+			this.DiningHall = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(DiningHall), new HashSet<Partygoer>(), 0);
+			this.Apothecary = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Apothecary), new HashSet<Partygoer>(), 1);
+			this.Kitchen = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Kitchen), new HashSet<Partygoer>(), 4);
+			this.WineCellar = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(WineCellar), new HashSet<Partygoer>(), 0);
+			this.GreenHouse = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(GreenHouse), new HashSet<Partygoer>(), 0);
+			this.TheStudy = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(TheStudy), new HashSet<Partygoer>(), 0);
+			this.Armory = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Armory), new HashSet<Partygoer>(), 3);
+			this.Workshop = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Workshop), new HashSet<Partygoer>(), 0);
+			this.Dungeon = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Dungeon), new HashSet<Partygoer>(), 0);
+			this.Outdoors_1 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_1), new HashSet<Partygoer>(), 0);
+			this.Outdoors_2 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_2), new HashSet<Partygoer>(), 0);
+			this.Outdoors_3 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_3), new HashSet<Partygoer>(), 5);
+			this.Outdoors_4 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Outdoors_4), new HashSet<Partygoer>(), 0);
+		    this.Bedroom_1 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_1), new HashSet<Partygoer>(), 0);
+			this.Bedroom_2 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_2), new HashSet<Partygoer>(), 0);
+			this.Bedroom_3 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_3), new HashSet<Partygoer>(), 0);
+			this.Bedroom_4 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_4), new HashSet<Partygoer>(), 0);
+			this.Bedroom_5 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_5), new HashSet<Partygoer>(), 0);
+			this.Bedroom_6 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_6), new HashSet<Partygoer>(), 0);
+			this.Bedroom_7 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_7), new HashSet<Partygoer>(), 0);
+			this.Bedroom_8 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_8), new HashSet<Partygoer>(), 0);
+			this.Bedroom_9 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_9), new HashSet<Partygoer>(), 0);
+			this.Bedroom_10 = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(Bedroom_10), new HashSet<Partygoer>(), 0);
+			this.TheCliff = new Room(null, isDark, new ArrayList<Convos>(), null, adjacentRooms(TheCliff), new HashSet<Partygoer>(), 0);
+			this.Hallway = new Room(null,isDark,new ArrayList<Convos>(),null,adjacentRooms(Hallway),new HashSet<Partygoer>(),2);
+			this.Morgue = new Room(null,isDark,new ArrayList<Convos>(),null,adjacentRooms(Morgue),new HashSet<Partygoer>(),0);
 			//System.out.println(House);
 		}
 }

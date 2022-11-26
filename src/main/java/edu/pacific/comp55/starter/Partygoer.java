@@ -114,6 +114,7 @@ public void Route(Room destination) {
 public Boolean moveOnRoute(Room destination) {
 	if (currroom.adjacentRooms.contains(destination)) {
 		System.out.print("It's right here!");
+		currentRoute.remove(destination);
 		Move(destination);
 		return true;
 	}
@@ -140,7 +141,15 @@ public static void testMove() {
 	}
 	System.out.print("\n");
 	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.Balcony);
-	
+	System.out.print("Now to cliff!" + "\n");
+	testHouse.allPartygoers.get(0).Route(testHouse.TheCliff);
+	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.TheCliff);
+	System.out.print("Now to dungeon!" + "\n");
+	testHouse.allPartygoers.get(0).Route(testHouse.Dungeon);
+	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.Dungeon);
+	System.out.print("Now to wine cellar!" + "\n");
+	testHouse.allPartygoers.get(0).Route(testHouse.WineCellar);
+	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.WineCellar);
 }
 
 public void testMoveOnRoute(Room destination) {

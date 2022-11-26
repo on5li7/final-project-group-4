@@ -334,6 +334,9 @@ public class house {
 			if (room==DiningHall) {
 				return "Dining Hall";
 			}
+			else if (room == Balcony) {
+				return "Balcony";
+			}
 			else if (room==Apothecary) {
 				return "Apothecary";
 			}

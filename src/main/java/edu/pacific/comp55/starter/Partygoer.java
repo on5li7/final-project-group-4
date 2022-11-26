@@ -97,29 +97,27 @@ public void Route(Room destination) {
 		return;
 		}
 	else {
-		int int1 = 0;
-		int int2 = 0;
-		for (int i=0; i<currroom.adjacentRooms.size(); i++) {
-			if (currroom.adjacentRooms.get(i).getBusStop() != 0) {
-				currentRoute.add(currroom.adjacentRooms.get(i));
-				int1 = currroom.adjacentRooms.get(i).getBusStop();
-				}
-		for (int o=0; o<destination.adjacentRooms.size(); o++) {
-				if (destination.adjacentRooms.get(o).getBusStop() != 0) {
-					int2 = destination.adjacentRooms.get(o).getBusStop();
-				}
-			}	//Checks the nearest bus stop, and adds the bus route plus the destination to the route.	
-		}
+		System.out.print("Need to take the bus...");
+		int int1 = thehouse.getBusStop(currroom);
+		int int2 = thehouse.getBusStop(destination);
+	//Checks the nearest bus stop, and adds the bus route plus the destination to the route.	
 		ArrayList<Room> busRoute = thehouse.busRoute(int1, int2);
 		for (int p=0; p<busRoute.size(); p++) {
 			currentRoute.add(busRoute.get(p));
 		}
-		currentRoute.add(destination);
+		if (currentRoute.contains(destination) == false) {
+			currentRoute.add(destination);
+		}
 	}
 }
 
-public Boolean moveOnRoute() {
-	if (currentRoute.get(0) != null) {
+public Boolean moveOnRoute(Room destination) {
+	if (currroom.adjacentRooms.contains(destination)) {
+		System.out.print("It's right here!");
+		Move(destination);
+		return true;
+	}
+	else if (currentRoute.size() != 0) {
 	Room daroom = currentRoute.get(0);
 	currentRoute.remove(currentRoute.get(0));
 	Move(daroom);
@@ -136,19 +134,38 @@ public static void testMove() {
 	house testHouse = new house();
 	testHouse.allPartygoers.get(0);
 	testHouse.allPartygoers.get(0).Route(testHouse.Balcony);
-	System.out.println("Show route from dining hall to balcony " + testHouse.allPartygoers.get(0).currentRoute);
-	testHouse.allPartygoers.get(0).testMoveOnRoute();
+	System.out.println("Show route from dining hall to balcony " );
+	for (int i=0; i < testHouse.allPartygoers.get(0).currentRoute.size(); i++) {
+		System.out.print(testHouse.RoomtoString(testHouse.allPartygoers.get(0).currentRoute.get(i)) + ", ");
+	}
+	System.out.print("\n");
+	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.Balcony);
 	
 }
 
-public void testMoveOnRoute() {
-while(this.currentRoute.size() > 0) {
-	System.out.print("Should be true: " + (this.moveOnRoute()) + "\n");
+public void testMoveOnRoute(Room destination) {
+while(this.currentRoute.size() > 0 || currentRoute.get(0) != null || this.currroom != destination) {
+	System.out.print("Should be true: " + (this.moveOnRoute(destination)) + "\n");
 	System.out.print("Current Room: " + (currroom.theHouse.RoomtoString(currroom)) + "\n");
+	if (this.currroom == destination) {
+	System.out.print("Ended because we got to the destination!");
+	return;
+	}
 	if (this.currentRoute.size() == 0) {
-	System.out.print("Current Room: " + (currroom.theHouse.RoomtoString(currroom)) + "\n");
+	System.out.print("Ended because route array has no values.");
+	return;
+	}
+	if (this.currentRoute.get(0) == null) {
+	System.out.print("Ended because first value in array is null.");
+	this.currentRoute = new ArrayList<Room>();
 	}
 }
+	if (currroom == destination) {
+		System.out.print("Made it!");
+	}
+	else {
+		System.out.print("Did not make it.");
+	}
 }
 
 public boolean checkItem(item inputItem) {

@@ -3,6 +3,7 @@ package edu.pacific.comp55.starter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 
 
 public class house {
@@ -33,6 +34,7 @@ public class house {
 	public Room Bedroom_9;
 	public Room Bedroom_10;
 	public Room Morgue;
+	public Random rando;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
 	//sets the time of the house
@@ -44,7 +46,6 @@ public class house {
 			ArrayList<Room> route = new ArrayList<Room>();
 			//Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
 			if (beginning == 1 && end == 2) {
-				
 				route.add(TheStudy);
 				route.add(DiningHall);
 				route.add(Hallway);
@@ -294,6 +295,41 @@ public class house {
 
 		}
 		
+		public int getBusStop(Room room) {
+			int result = 0;
+			if (room == Apothecary || room == Morgue || room == TheStudy) {
+				return 1;
+			}
+			else if (room == Balcony) {
+				return rando.nextInt(3)+1;
+			}
+			else if (room == Armory || room == Dungeon || room == Workshop) {
+				return 3;
+			}
+			else if (room == DiningHall) {
+				int randocheck = rando.nextInt(2);
+				if (randocheck == 0) {
+					return 2;
+				}
+				if (randocheck == 1) {
+					return 4;
+				}
+			}
+			else if (room == Bedroom_1 || room == Bedroom_2 || room == Bedroom_3 || room == Bedroom_4 || room == Bedroom_5 || room == Bedroom_6 || room == Bedroom_7 || room == Bedroom_8 || room == Bedroom_9 || room == Bedroom_10) {
+				return 2;
+			}
+			else if (room == Kitchen || room == WineCellar || room == GreenHouse || room == Outdoors_2) {
+				return 4;
+			}
+			else if (room == Outdoors_1 || room == Outdoors_3 || room == Outdoors_4 || room == TheCliff) {
+				return 5;
+			}
+			if (result == 0) {
+				System.out.print("No bus stop found.");
+			}
+			return result;
+		}
+		
 		public String RoomtoString(Room room) {
 			if (room==DiningHall) {
 				return "Dining Hall";
@@ -380,6 +416,7 @@ public class house {
 			//ArrayList<String> House = new ArrayList<String>();
 			this.time = 1;
 			this.isDark = false;
+			this.rando = new Random();
 			this.goalsets = new GoalSets();
 			this.allPartygoers = new ArrayList<Partygoer>();
 			this.DiningHall = new Room(new ArrayList<item>(), this, isDark, new ArrayList<Convos>(), null, new ArrayList<Room>(), new HashSet<Partygoer>(), 0);

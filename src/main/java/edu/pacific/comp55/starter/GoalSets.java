@@ -31,6 +31,10 @@ sociable.add(Goal.GOSSIPING);
 sociable.add(Goal.GOSSIPING);
 sociable.add(Goal.GOSSIPING);
 sociable.add(Goal.GOSSIPING);
+sociable.add(Goal.GET_FRAGRANT_PLANT_GREENHOUSE);
+sociable.add(Goal.BREWING_PERFUME_APOTH);
+sociable.add(Goal.BREWING_PERFUME_CELLAR);
+sociable.add(Goal.BREWING_PERFUME_WITCH);
 
 drinking.add(Goal.DRINKING_CELLAR);
 drinking.add(Goal.DRINKING_HALL);
@@ -41,6 +45,7 @@ drinking.add(Goal.DRINKING_KITCHEN);
 drinking.add(Goal.DRINKING_CELLAR);
 drinking.add(Goal.DRINKING_HALL);
 drinking.add(Goal.DRINKING_KITCHEN);
+drinking.add(Goal.GATHER_ALCOHOL);
 
 gathering.add(Goal.OOHSHINY);
 gathering.add(Goal.OOHSHINY);
@@ -51,5 +56,13 @@ gathering.add(Goal.RANSACK);
 gathering.add(Goal.GET_KNIFE);
 gathering.add(Goal.GET_RIFLE);
 gathering.add(Goal.GET_SWORD);
+gathering.add(Goal.GET_RITUAL_ITEM);
+
+murderous.add(Goal.ASSAULT);
+murderous.add(Goal.ASSAULT);
+murderous.add(Goal.ASSAULT);
+murderous.add(Goal.GET_SWORD);
+murderous.add(Goal.GET_RIFLE);
+murderous.add(Goal.GET_KNIFE);
 }
 }

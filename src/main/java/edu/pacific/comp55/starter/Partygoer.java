@@ -186,6 +186,20 @@ public String getGoal() {
 	return null;
 }
 
+public Room GoalInterpLocation(Goal goal) {
+	currGoal = goal;
+	if (goal==Goal.BREWING_POISON_WITCH||goal==Goal.BREWING_ANTIDOTE_WITCH||goal==Goal.BREWING_PERFUME_WITCH||goal==Goal.BREWING_KO_WITCH) {
+		return thehouse.Outdoors_1;
+	}
+	else if (goal==Goal.BREWING_POISON_CELLAR||goal==Goal.BREWING_ANTIDOTE_CELLAR||goal==Goal.BREWING_PERFUME_CELLAR||goal==Goal.BREWING_KO_CELLAR) {
+		return thehouse.WineCellar;
+	}
+	else if (goal==Goal.BREWING_POISON_APOTH||goal==Goal.BREWING_ANTIDOTE_APOTH||goal==Goal.BREWING_PERFUME_APOTH||goal==Goal.BREWING_KO_APOTH) {
+		return thehouse.Apothecary;
+	}
+	return null;
+}
+
 
 
 }

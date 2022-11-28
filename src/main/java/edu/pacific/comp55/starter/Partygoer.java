@@ -198,7 +198,7 @@ public Room GoalInterpLocation(Goal goal) {
 	else if (goal==Goal.BREWING_POISON_APOTH||goal==Goal.BREWING_ANTIDOTE_APOTH||goal==Goal.BREWING_PERFUME_APOTH||goal==Goal.BREWING_KO_APOTH) {
 		return thehouse.Apothecary;
 	}
-	else if (goal==Goal.CRAFTING_LOCKPICK||goal==Goal.CRAFTING_PISTOL) {
+	else if (goal==Goal.CRAFTING_LOCKPICK||goal==Goal.CRAFTING_PISTOL||goal==Goal.MAKE_BOMB) {
 		return thehouse.Workshop;
 	}
 	else if (goal==Goal.GET_FRAGRANT_PLANT_GREENHOUSE||goal==Goal.GET_POISONOUS_PLANT_GREENHOUSE||goal==Goal.GET_NOXIOUS_PLANT_GREENHOUSE) {

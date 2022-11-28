@@ -191,11 +191,39 @@ public Room GoalInterpLocation(Goal goal) {
 	if (goal==Goal.BREWING_POISON_WITCH||goal==Goal.BREWING_ANTIDOTE_WITCH||goal==Goal.BREWING_PERFUME_WITCH||goal==Goal.BREWING_KO_WITCH) {
 		return thehouse.Outdoors_1;
 	}
-	else if (goal==Goal.BREWING_POISON_CELLAR||goal==Goal.BREWING_ANTIDOTE_CELLAR||goal==Goal.BREWING_PERFUME_CELLAR||goal==Goal.BREWING_KO_CELLAR) {
+	else if (goal==Goal.BREWING_POISON_CELLAR||goal==Goal.BREWING_ANTIDOTE_CELLAR||goal==Goal.BREWING_PERFUME_CELLAR||goal==Goal.BREWING_KO_CELLAR
+			||goal==Goal.POISON_WINE_CELLAR||goal==Goal.GATHER_ALCOHOL||goal==Goal.DRINKING_CELLAR) {
 		return thehouse.WineCellar;
 	}
 	else if (goal==Goal.BREWING_POISON_APOTH||goal==Goal.BREWING_ANTIDOTE_APOTH||goal==Goal.BREWING_PERFUME_APOTH||goal==Goal.BREWING_KO_APOTH) {
 		return thehouse.Apothecary;
+	}
+	else if (goal==Goal.CRAFTING_LOCKPICK||goal==Goal.CRAFTING_PISTOL) {
+		return thehouse.Workshop;
+	}
+	else if (goal==Goal.GET_FRAGRANT_PLANT_GREENHOUSE||goal==Goal.GET_POISONOUS_PLANT_GREENHOUSE||goal==Goal.GET_NOXIOUS_PLANT_GREENHOUSE) {
+		return thehouse.GreenHouse;
+	}
+	else if (goal==Goal.GET_FRAGRANT_PLANT_OUTDOORS) {
+		return thehouse.Outdoors_2;
+	}
+	else if (goal==Goal.GET_NOXIOUS_PLANT_OUTDOORS) {
+		return thehouse.Outdoors_3;
+	}
+	else if (goal==Goal.GET_POISONOUS_PLANT_OUTDOORS) {
+		return thehouse.Outdoors_4;
+	}
+	else if (goal==Goal.POISON_WINE_KITCHEN||goal==Goal.DRINKING_KITCHEN||goal==Goal.POISON_FOOD) {
+		return thehouse.Kitchen;
+	}
+	else if (goal==Goal.DRINKING_HALL||goal==Goal.LOOSEN_CHANDELIER) {
+		return thehouse.DiningHall;
+	}
+	else if (goal==Goal.BALCONY_STALKER||goal==Goal.LOOSEN_BALCONY) {
+		return thehouse.Balcony;
+	}
+	else if (goal==Goal.CLIFF_STALKER) {
+		return thehouse.TheCliff;
 	}
 	return null;
 }

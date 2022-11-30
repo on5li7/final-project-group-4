@@ -78,13 +78,17 @@ public class Convos {
 				}		
 		}
 	}
+	//NOTE: DO NOT ADD A CHECK FOR LOCATION
+	//STICK EVERYTHING IN CONVOS INTO HOUSE
+	//copy and paste this to house and change variables to match house
+	
 	//drinking, should give strength and charisma but reduce dexterity. For now just a boolean check, no effect on player
+	
 	//eating, in dining hall, should change hungry from no to yes
 	//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 	//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
 	//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 	public void fix_key(Partygoer user) {
-		if(user.currroom == house.Workshop) {
 			if(user.checkItem(item.BROKEN_KEY)) {
 				System.out.print("You have a broken key, let's fix it?");
 			}
@@ -99,7 +103,7 @@ public class Convos {
 	
 	//function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
 	
-	}
+	
 	
 	
 	

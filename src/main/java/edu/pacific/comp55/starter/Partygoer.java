@@ -1,6 +1,7 @@
 package edu.pacific.comp55.starter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 
 
 public class Partygoer {
@@ -13,6 +14,8 @@ public class Partygoer {
 	Boolean isPlayer;
 	Boolean isDetective;
 	Boolean isKiller;
+	GoalSets newGoalSets;
+	Random rando;
 	ArrayList<Goal> allPossibleGoals;
 	ArrayList<item> Inventory; //need to set a cap of 4
 	
@@ -181,9 +184,31 @@ public boolean checkItem(item inputItem) {
 	return Inventory.contains(inputItem);
 }
 
-public String getGoal() {
+public void pickGoal() {
 	// TODO Auto-generated method stub
-	return null;
+	allPossibleGoals = new ArrayList<Goal>();
+	for (int i=0;i<newGoalSets.innocuous.size();i++) {
+		allPossibleGoals.add(newGoalSets.innocuous.get(i));
+	}
+	for (int a=0;a<newGoalSets.sociable.size();a++) {
+		allPossibleGoals.add(newGoalSets.sociable.get(a));
+	}
+	for (int b=0;b<newGoalSets.drinking.size();b++) {
+		allPossibleGoals.add(newGoalSets.drinking.get(b));
+	}
+	for (int c=0;c<newGoalSets.poisonous.size();c++) {
+		allPossibleGoals.add(newGoalSets.poisonous.get(c));
+	}
+	for (int d=0;d<newGoalSets.gathering.size();d++) {
+		allPossibleGoals.add(newGoalSets.gathering.get(d));
+	}
+	for (int e=0;e<newGoalSets.murderous.size();e++) {
+		allPossibleGoals.add(newGoalSets.murderous.get(e));
+	}
+	for (int f=0;f<newGoalSets.rituals.size();f++) {
+		allPossibleGoals.add(newGoalSets.rituals.get(f));
+	}
+	currGoal = allPossibleGoals.get(rando.nextInt(allPossibleGoals.size()));
 }
 
 public Room GoalInterpLocation(Goal goal) {

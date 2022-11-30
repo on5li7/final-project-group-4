@@ -182,6 +182,8 @@ public boolean checkItem(item inputItem) {
 	return Inventory.contains(inputItem);
 }
 
+
+
 public String getGoal() {
 	// TODO Auto-generated method stub
 	return null;

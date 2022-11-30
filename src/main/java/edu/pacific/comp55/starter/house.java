@@ -546,7 +546,7 @@ public class house {
 				if(user.isPlayer()) {
 					System.out.print("Choose an option");
 					if (user.checkItem(item.KNIFE1)) {
-						System.out.print("1) Grab Knife: 2 turns");
+						System.out.print("1) Grab Knife: 1 turns");
 					}
 					else {
 						System.out.print("Knife: Did not grab knife");
@@ -565,14 +565,15 @@ public class house {
 			//copy and paste this to house and change variables to match house
 			
 			//drinking, should give strength and charisma but reduce dexterity. For now just a boolean check, no effect on player
-			public void drinking(Partygoer user) {
-				if(user.isPlayer()) {
-					
+			//eating, in dining hall, should change hungry from no to yes
+			public void eat(Partygoer user) {
+				if (user.checkItem(item.BAD_FOOD)) {
+					System.out.print("Eat the food if hungry: 2 turns");
 				}
 			}
-			//eating, in dining hall, should change hungry from no to yes
 			//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 			//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
+			
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 			public void fix_key(Partygoer user) {
 					if(user.checkItem(item.BROKEN_KEY)) {

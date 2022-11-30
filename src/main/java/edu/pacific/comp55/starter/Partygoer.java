@@ -15,6 +15,7 @@ public class Partygoer {
 	Boolean isKiller;
 	ArrayList<Goal> allPossibleGoals;
 	ArrayList<item> Inventory; //need to set a cap of 4
+	//BusyCounter
 	
 	
 	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {

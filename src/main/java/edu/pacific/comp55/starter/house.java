@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class house {
@@ -487,28 +488,36 @@ public class house {
 		public class Convos {
 			Random rando;
 			//house House;
+			//Scanner
+			Scanner input = new Scanner(System.in);
+			int userChoice;
 			
 			/*public Convos(house House) {
 				this.House = House;
 			}*/
 			
-			public void Brewing(Partygoer user) {
+			public int Brewing(Partygoer user) {
+				
 				if (user.isPlayer()) {
 					System.out.print("Choose an option");
 					if (user.checkItem(item.NOXIOUS_PLANT)) {
+				
 						System.out.print("1) Poison: 6 turns");
+						return 6;
 					}
 					else{
 						System.out.print("Poison: Requires poisonous plants");
 					}
 					if (user.checkItem(item.MEDICINAL_PLANT)) {
 						System.out.print("2) Antidote: 4 turns");
+						return 4;
 					}
 					else{
 						System.out.print("Antidote: Requires medicinal Plants");
 					}
 					if (user.checkItem(item.FRAGRANT_PLANT)) {
 						System.out.print("Perfume: 2 turns");
+						return 2;
 					}
 					else{
 						System.out.print("Perfume: Requires Fragrant Plants");
@@ -518,6 +527,7 @@ public class house {
 					if (user.getGoal() == "Poison") {
 						if (user.checkItem(item.NOXIOUS_PLANT)) {
 							System.out.print("1) Poison: 6 turns");
+							return 6;
 						}
 						else{
 							System.out.print("Poison: Requires poisonous plants");
@@ -526,6 +536,7 @@ public class house {
 					else if (user.getGoal() == "Antidote") {
 						if (user.checkItem(item.MEDICINAL_PLANT)) {
 							System.out.print("2) Antidote: 4 turns");
+							return 4;
 						}
 						else{
 							System.out.print("Antidote: Requires medicinal Plants");
@@ -534,12 +545,14 @@ public class house {
 					else if (user.getGoal() == "Perfume") {
 						if (user.checkItem(item.FRAGRANT_PLANT)) {
 							System.out.print("Perfume: 2 turns");
+							return 2;
 						}
 						else{
 							System.out.print("Perfume: Requires Fragrant Plants");
 						}
 					}
 					}
+				return 0;
 				}
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
 			public void Knifeset(Partygoer user) {
@@ -573,7 +586,11 @@ public class house {
 			}
 			//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 			//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
-			
+			public void workbench(Partygoer user) {
+				if (user.getGoal() == "Murderous") {
+					System.out.print("You need a gun: 6 turns");
+				}
+			}
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 			public void fix_key(Partygoer user) {
 					if(user.checkItem(item.BROKEN_KEY)) {
@@ -585,13 +602,14 @@ public class house {
 				}
 			}
 			//riflecase, checks if you have a fixed_key then you can get the rifle
+		
 			//conversation interactions between partygoers, will be in partygoer.java, like pushing someone off a cliff when you click them
 			//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)
 			
 			//function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
 			
 			
-			
+			//change functions to return an int that increases the busyCounter
 			
 			
 

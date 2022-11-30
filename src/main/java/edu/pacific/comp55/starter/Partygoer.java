@@ -19,6 +19,7 @@ public class Partygoer {
 	ArrayList<Goal> allPossibleGoals;
 	ArrayList<item> Inventory; //need to set a cap of 4
 	
+	
 	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {
 		this.identity = identity;
 		this.isKiller = isKiller;

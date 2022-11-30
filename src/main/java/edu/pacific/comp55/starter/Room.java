@@ -8,11 +8,11 @@ ArrayList<item> looseStuff;
 
 private Boolean inDoors;
 
-ArrayList<Convos> Interactables;
+//ArrayList<Convos> Interactables;
 
 house theHouse;
 
-Convos Ritual;
+//Convos Ritual;
 
 GImage background;
 
@@ -47,12 +47,12 @@ Interactable.put("Antidote", "GreenHouse");
 //TODO:Finish adding interactables
 }
 
-public Room(ArrayList<item> looseStuff, house thehouse, Boolean inDoors, ArrayList<Convos> Interactables, Convos Ritual, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
+public Room(ArrayList<item> looseStuff, house thehouse, Boolean inDoors, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.theHouse = thehouse;
 	this.inDoors = inDoors;
-	this.Interactables = Interactables;
-	this.Ritual = Ritual;
+	//this.Interactables = Interactables;
+	//this.Ritual = Ritual;
 	this.adjacentRooms = adjacentRooms;
 	this.occupants = occupants;
 	this.BusStop = BusStop;

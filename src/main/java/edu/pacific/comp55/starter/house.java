@@ -524,7 +524,7 @@ public class house {
 					}
 				}
 				else {
-					if (user.getGoal() == "Poison") {
+					if (user.pickGoal() == Poison) {
 						if (user.checkItem(item.NOXIOUS_PLANT)) {
 							System.out.print("1) Poison: 6 turns");
 							return 6;

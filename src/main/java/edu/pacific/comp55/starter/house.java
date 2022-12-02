@@ -487,7 +487,7 @@ public class house {
 		}
 		
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
-			Scanner input = new Scanner(System.in);
+			Scanner input = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens
 			int userChoice;
 			
 			/*public Convos(house House) {
@@ -522,7 +522,7 @@ public class house {
 					}
 				}
 				else {
-					if (user.pickGoal() == Poison) {
+					if (user.currGoal == Goal.BREWING_POISON_APOTH) {
 						if (user.checkItem(item.NOXIOUS_PLANT)) {
 							System.out.print("1) Poison: 6 turns");
 							return 6;
@@ -531,7 +531,7 @@ public class house {
 							System.out.print("Poison: Requires poisonous plants");
 						}
 					}
-					else if (user.getGoal() == "Antidote") {
+					else if (user.currGoal == Goal.BREWING_ANTIDOTE_APOTH) {
 						if (user.checkItem(item.MEDICINAL_PLANT)) {
 							System.out.print("2) Antidote: 4 turns");
 							return 4;
@@ -540,7 +540,7 @@ public class house {
 							System.out.print("Antidote: Requires medicinal Plants");
 						}
 					}
-					else if (user.getGoal() == "Perfume") {
+					else if (user.currGoal == Goal.BREWING_PERFUME_APOTH) {
 						if (user.checkItem(item.FRAGRANT_PLANT)) {
 							System.out.print("Perfume: 2 turns");
 							return 2;
@@ -564,7 +564,7 @@ public class house {
 					}
 				}
 					else {
-						if(user.getGoal() == "Murderous") {
+						if(user.currGoal == Goal.GET_KNIFE) {
 							if(user.checkItem(item.KNIFE1)) {
 								System.out.print("1) Stab: 3 turns");
 							}
@@ -578,6 +578,7 @@ public class house {
 			//drinking, should give strength and charisma but reduce dexterity. For now just a boolean check, no effect on player
 			//eating, in dining hall, should change hungry from no to yes
 			public void eat(Partygoer user) {
+				if (user.currGoal == Goal.EATING)
 				if (user.checkItem(item.BAD_FOOD)) {
 					System.out.print("Eat the food if hungry: 2 turns");
 				}
@@ -585,7 +586,7 @@ public class house {
 			//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 			//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
 			public void workbench(Partygoer user) {
-				if (user.getGoal() == "Murderous") {
+				if (user.currGoal == Goal.CRAFTING_PISTOL) {
 					System.out.print("You need a gun: 6 turns");
 				}
 			}

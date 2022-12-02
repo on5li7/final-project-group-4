@@ -1,4 +1,5 @@
 package edu.pacific.comp55.starter;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -127,7 +128,7 @@ public class Partygoer {
 				return false;
 			}
 		}
-		else if (currGoal == Goal.GET_FRAGRANT_PLANT_GREENHOUSE || currGoal == Goal.GET_NOXIOUS_PLANT_GREENHOUSE || currGoal == Goal.GET_POISONOUS_PLANT_GREENHOUSE || Goal.GET_MEDICINAL_PLANT_GREENHOUSE) {
+		else if (currGoal == Goal.GET_FRAGRANT_PLANT_GREENHOUSE || currGoal == Goal.GET_NOXIOUS_PLANT_GREENHOUSE || currGoal == Goal.GET_POISONOUS_PLANT_GREENHOUSE || currGoal == Goal.GET_MEDICINAL_PLANT_GREENHOUSE) {
 			if (currroom == thehouse.GreenHouse) {
 				busynum = thehouse.getPlant(this);
 				return true;

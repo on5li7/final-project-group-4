@@ -591,25 +591,42 @@ public class house {
 				}
 			}
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
-			public void fix_key(Partygoer user) {
+			public item fix_key(Partygoer user) {
 					if(user.checkItem(item.BROKEN_KEY)) {
 						System.out.print("You have a broken key, let's fix it?");
+						return item.FIXED_KEY;
 					}
 					else {
 						System.out.print("Nothing for us to do here for now...");
 					}
+					return null;
 				}
-			}
 			//riflecase, checks if you have a fixed_key then you can get the rifle
-		
+			public item riflecase(Partygoer user) {
+				if (user.checkItem(item.FIXED_KEY)) {
+					System.out.print("You have a fixed key for the riflecase, and picked up a rifle");
+					return item.RIFLE;
+				}
+				else {
+					System.out.print("You need a key to access the riflecase, there's a rifle inside");
+					return null;
+				}
+			}	
 			//conversation interactions between partygoers, will be in partygoer.java, like pushing someone off a cliff when you click them
 			//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)
-			
+			public void chandelier(Partygoer user) {
+				if (user.currGoal == Goal.LOOSEN_CHANDELIER)
+				if(user.checkItem(item.SCREWDRIVER)) {
+					System.out.print("You loosen up the chandelier, hopefully it falls on someone xD");
+				}
+				else { 
+					System.out.print("You want to loosen the chandelier but you need tools to do so...");
+				}
+			}
 			//function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
-			
 			
 			//change functions to return an int that increases the busyCounter
 			
 			
 
-
+}

@@ -8,7 +8,7 @@ public enum item {
 	DOLL, JADE_STONE, RAT, BROKEN_KEY, BISMUTH, COBALT, DEMON_TOOTH,
 	COBWEB, EYE_OF_NEWT, SENTIMENTAL_PEN, FEMUR, BRIMSTONE, CLOVE_OF_GARLIC,
 	OLD_PICTURE, CRUSTY_TOADSTOOL, FROG, ROACH, GOAT_HEAD, URN, SPIDER,
-	FRAGRANT_PLANT, MEDICINAL_PLANT, NOXIOUS_PLANT, SCREWDRIVER, WRENCH, HAMMER;
+	FRAGRANT_PLANT, MEDICINAL_PLANT, NOXIOUS_PLANT, SCREWDRIVER, WRENCH, HAMMER, FIXED_KEY;
 	
 	public String toString() {
 		switch(this) {
@@ -66,6 +66,7 @@ public enum item {
 			case SCREWDRIVER: return "screwdriver";
 			case WRENCH: return "wrench";
 			case HAMMER: return "hammer";
+			case FIXED_KEY: return "fixed_key";
 		}
 		return "n/a";
 	}

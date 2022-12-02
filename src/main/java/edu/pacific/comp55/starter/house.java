@@ -499,7 +499,6 @@ public class house {
 				if (user.isPlayer()) {
 					System.out.print("Choose an option");
 					if (user.checkItem(item.NOXIOUS_PLANT)) {
-				
 						System.out.print("1) Poison: 6 turns");
 						return 6;
 					}

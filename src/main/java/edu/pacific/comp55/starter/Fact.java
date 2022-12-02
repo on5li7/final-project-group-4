@@ -2,25 +2,33 @@ package edu.pacific.comp55.starter;
 import java.util.ArrayList;
 
 public class Fact {
-	public class fact {
 		
 		//Unique ID for each fact so that incomplete facts can be combined.
-		int ID;
+		public int ID;
 
 		//Who
-		Partygoer instigator;
-		ArrayList<Partygoer> victims;
-		ArrayList<Partygoer> bystanders;
+		public Partygoer instigator;
+		public ArrayList<Partygoer> victims;
+		public ArrayList<Partygoer> bystanders;
 
 		//What or how
-		Convos theevent;
+		public String theevent;
 
+		public String getTheEvent() {
+			return theevent;
+		}
+		
+		public void setTheEvent(String event) {
+			theevent = event;
+		}
 		//When
-		int thetime;
+		public int thetime;
 
 		//Where
-		Room Room;
-
+		public Room Room;
+		
+		Goal motive;
+		
 		//Checks to see if any of the above factoids are lies
 		Boolean eventislie;
 		Boolean timeislie;
@@ -31,14 +39,17 @@ public class Fact {
 
 		//Can be turned into EVIDENCE?
 		Boolean incriminating;
-
+		
+		Fact(int ID) {
+			this.ID = ID;
+			createNullFact();
+		}
 
 		//This is put into the addToKnownFact function, in the first argument in order to create a known fact from nothing.
 		public void createNullFact() {
-			this.ID = -1;
 			this.instigator = null;
-			this.victims = null;
-			this.bystanders = null;
+			this.victims = new ArrayList<Partygoer>();
+			this.bystanders = new ArrayList<Partygoer>();
 			this.theevent = null;
 			this.thetime = 0;
 			this.instislie = false;
@@ -49,6 +60,7 @@ public class Fact {
 			this.Room = null;
 			this.roomislie = false;
 			this.incriminating = false;
+			this.motive = null;
 		}
 
 
@@ -93,20 +105,12 @@ public class Fact {
 			this.thetime = time;
 		}
 
-		public Convos getTheEvent() {
-			return theevent;
-		}
-
 		public Room getRoom() {
 			return Room;
 		}
 
 		public void setRoom(Room newroom) {
 			this.Room = newroom;
-		}
-
-		public void setTheEvent(Convos newevent) {
-			this.theevent = newevent;
 		}
 
 		public Boolean isEventLie() {
@@ -159,7 +163,7 @@ public class Fact {
 
 
 		//Generates a new fact if passed a null fact in the first argument.
-		public Boolean addToKnownFact (fact knownFact, fact incomingfact) {
+		public Boolean addToKnownFact (Fact knownFact, Fact incomingfact) {
 			
 			
 			//If fact is a null fact, it is initialized with incomingfact's data.
@@ -204,4 +208,3 @@ public class Fact {
 		}
 		}
 
-}

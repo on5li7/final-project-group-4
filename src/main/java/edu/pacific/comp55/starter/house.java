@@ -36,6 +36,7 @@ public class house {
 	public Room Bedroom_10;
 	public Room Morgue;
 	public Random rando;
+	public int factcounter;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
 	//sets the time of the house
@@ -419,6 +420,7 @@ public class house {
 		public house() {
 			//ArrayList<String> House = new ArrayList<String>();
 			this.time = 1;
+			this.factcounter = 0;
 			this.isDark = false;
 			this.rando = new Random();
 			this.goalsets = new GoalSets();
@@ -485,10 +487,6 @@ public class house {
 		}
 		
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
-		public class Convos {
-			Random rando;
-			//house House;
-			//Scanner
 			Scanner input = new Scanner(System.in);
 			int userChoice;
 			
@@ -614,5 +612,3 @@ public class house {
 			
 
 
-
-}

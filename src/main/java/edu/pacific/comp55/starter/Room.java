@@ -1,7 +1,6 @@
 package edu.pacific.comp55.starter;
 import java.util.*;
 import acm.graphics.GImage;
-import java.util.HashMap;
 public class Room {
 	
 ArrayList<item> looseStuff;
@@ -25,7 +24,7 @@ public int getAdjacentSetSize() {
 //Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
 int BusStop;
 
-HashSet<Partygoer> occupants;
+ArrayList<Partygoer> occupants;
 public int getBusStop() {
 	return BusStop;
 }
@@ -47,7 +46,7 @@ Interactable.put("Antidote", "GreenHouse");
 //TODO:Finish adding interactables
 }
 
-public Room(ArrayList<item> looseStuff, house thehouse, Boolean inDoors, ArrayList<Room> adjacentRooms, HashSet<Partygoer> occupants, int BusStop) {
+public Room(ArrayList<item> looseStuff, house thehouse, Boolean inDoors, ArrayList<Room> adjacentRooms, ArrayList<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.theHouse = thehouse;
 	this.inDoors = inDoors;

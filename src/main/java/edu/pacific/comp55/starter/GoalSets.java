@@ -57,6 +57,12 @@ gathering.add(Goal.GET_KNIFE);
 gathering.add(Goal.GET_RIFLE);
 gathering.add(Goal.GET_SWORD);
 gathering.add(Goal.GET_RITUAL_ITEM);
+gathering.add(Goal.GET_MEDICINAL_PLANT_GREENHOUSE);
+gathering.add(Goal.GET_MEDICINAL_PLANT_OUTDOORS);
+gathering.add(Goal.GET_FRAGRANT_PLANT_GREENHOUSE);
+gathering.add(Goal.GET_FRAGRANT_PLANT_OUTDOORS);
+gathering.add(Goal.GET_MEDICINAL_PLANT_GREENHOUSE);
+gathering.add(Goal.GET_MEDICINAL_PLANT_OUTDOORS);
 
 murderous.add(Goal.ASSAULT);
 murderous.add(Goal.ASSAULT);

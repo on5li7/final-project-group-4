@@ -549,7 +549,8 @@ public class Partygoer {
 	//This is the function that waits for the player to click on something to do something
 	//This will instead just take an integer to choose an action in the text version.
 	public void playerTurn() {
-		
+		Scanner input = new Scanner(System.in);
+		ArrayList<Method> methodList = new ArrayList<Method>();
 	}
 	
 	//This function will tell the house to move on to the next character.

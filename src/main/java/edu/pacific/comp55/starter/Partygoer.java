@@ -27,7 +27,7 @@ public class Partygoer {
 	ArrayList<item> Inventory; //need to set a cap of 4
 	//BusyCounter
 	
-	
+	//add getClue() which takes addtoKnownFact from Partygoer to make the madlibs
 	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {
 		this.identity = identity;
 		this.isKiller = isKiller;

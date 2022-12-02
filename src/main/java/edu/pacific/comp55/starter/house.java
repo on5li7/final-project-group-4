@@ -487,9 +487,11 @@ public class house {
 		}
 		
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
-			Scanner input = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens
+			Scanner in = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens //partygoer, room and fact also need scanner
 			int userChoice;
-			
+			String input;
+			//Facts should be formatted like "_stabbing_" for madlibs
+			//also need to work on evidence
 			/*public Convos(house House) {
 				this.House = House;
 			}*/
@@ -497,7 +499,7 @@ public class house {
 			public int Brewing(Partygoer user) {
 				
 				if (user.isPlayer()) {
-					System.out.print("Choose an option");
+					System.out.print("Choose an option:");
 					if (user.checkItem(item.NOXIOUS_PLANT)) {
 						System.out.print("1) Poison: 6 turns");
 						return 6;
@@ -622,7 +624,7 @@ public class house {
 					System.out.print("You want to loosen the chandelier but you need tools to do so...");
 				}
 			}
-			//function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
+			//THIS GOES INTO FACT.JAVA : function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
 			
 			//change functions to return an int that increases the busyCounter
 			

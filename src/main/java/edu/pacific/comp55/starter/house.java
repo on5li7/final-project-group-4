@@ -265,7 +265,7 @@ public class house {
 		}
 		
 		//the number of dead people
-		private int deadpeople;
+		public int deadpeople;
 		
 		//The partygoer whose turn it currently is.
 		Partygoer currPlayer;
@@ -726,6 +726,7 @@ public class house {
 				if (user.currGoal == Goal.LOOSEN_CHANDELIER)
 				if(user.checkItem(item.SCREWDRIVER)) {
 					System.out.print("You loosen up the chandelier, hopefully it falls on someone xD");
+					this.chandelierLoose = true;
 				}
 				else { 
 					System.out.print("You want to loosen the chandelier but you need tools to do so...");

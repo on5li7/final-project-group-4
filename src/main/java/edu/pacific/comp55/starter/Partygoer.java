@@ -5,12 +5,16 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
+import edu.pacific.comp55.starter.Rituals.effect;
+
 
 public class Partygoer {
 	
 	ArrayList<Room> currentRoute;
 	Goal currGoal;
+	Goal heldGoal;
 	int busynum;
+	ArrayList<Rituals> knownRituals = new ArrayList<Rituals>();
 	int aggronum;
 	Room currroom;
 	house thehouse;
@@ -104,9 +108,16 @@ public class Partygoer {
 			this.playerTurn();
 		}
 		else {
-			//AI Turn follows
-			if (currGoal == null) {
-				pickGoal();
+			//AI TURN FOLLOWS
+			if (currGoal == Goal.HARDROUTE) {
+				if(currentRoute.size() == 0) {
+					currGoal = heldGoal;
+					heldGoal = null;
+				}
+				else {
+					moveOnRoute(currentRoute.get(0));
+					return;
+				}
 			}
 			if (aggronum != 0) {
 				if (aggronum == 1) {
@@ -117,6 +128,10 @@ public class Partygoer {
 					onTheHunt();
 					return;
 				}
+			}
+			//AI TURN AFTER CHECKS
+			if (currGoal == null) {
+				pickGoal();
 			}
 			if (doGoal()) {
 				return;
@@ -144,16 +159,17 @@ public class Partygoer {
 				return false;
 			}
 		}
-		else if (currGoal == Goal.GET_FRAGRANT_PLANT_GREENHOUSE || currGoal == Goal.GET_NOXIOUS_PLANT_GREENHOUSE || currGoal == Goal.GET_POISONOUS_PLANT_GREENHOUSE || currGoal == Goal.GET_MEDICINAL_PLANT_GREENHOUSE) {
+		else if (currGoal == Goal.GET_FRAGRANT_PLANT_GREENHOUSE || currGoal == Goal.GET_NOXIOUS_PLANT_GREENHOUSE 
+				|| currGoal == Goal.GET_POISONOUS_PLANT_GREENHOUSE || currGoal == Goal.GET_MEDICINAL_PLANT_GREENHOUSE) {
 			if (currroom == thehouse.GreenHouse) {
-				busynum = thehouse.getPlant(this);
-				return true;
+				currGoal = Goal.RANSACK;
 			}
 			else {
 				return false;
 			}
 		}
-		else if (currGoal == Goal.DRINKING_CELLAR || currGoal == Goal.DRINKING_HALL || currGoal == Goal.DRINKING_KITCHEN) {
+		else if (currGoal == Goal.DRINKING_CELLAR || currGoal == Goal.DRINKING_HALL 
+				|| currGoal == Goal.DRINKING_KITCHEN) {
 			if (currroom == thehouse.WineCellar || currroom == thehouse.Kitchen || currroom == thehouse.DiningHall) {
 			thehouse.Drinking(this);
 			return true;
@@ -162,7 +178,8 @@ public class Partygoer {
 			return false;
 			}
 		}
-		else if (currGoal == Goal.CRAFTING_BOMB || currGoal == Goal.CRAFTING_LOCKPICK || currGoal == Goal.CRAFTING_LOCKPICK) {
+		else if (currGoal == Goal.CRAFTING_BOMB || currGoal == Goal.CRAFTING_LOCKPICK 
+				|| currGoal == Goal.CRAFTING_LOCKPICK || currGoal == Goal.FIX_KEY) {
 			if (currroom == thehouse.Workshop) {
 			thehouse.Crafting(this);
 				}
@@ -213,8 +230,274 @@ public class Partygoer {
 					return doGoal();
 				}
 		}
+		else if (currGoal == Goal.CAST_RITUAL_BALCONY) {
+			for (int i =0; i<knownRituals.size(); i++) {
+				if (Inventory.contains(knownRituals.get(i).item1) 
+						&& Inventory.contains(knownRituals.get(i).item2) 
+						&& currroom == thehouse.Balcony) {
+					int check;
+					if (knownRituals.get(i).Spell == effect.KILL) {
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check) == this) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = true;
+						thehouse.deadpeople++;
+					}
+					else if (thehouse.deadpeople >= 1){
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check).Dead == false && thehouse.deadpeople >= 1) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = false;
+						thehouse.deadpeople--;	
+					}
+				Fact ritualfact = new Fact(thehouse.factcounter);
+				thehouse.factcounter++;
+				ritualfact.theevent = (" cast a spell, ");
+				if(knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				if(knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				ritualfact.Room = currroom;
+				ritualfact.thetime = thehouse.getTime();
+				ritualfact.instigator = this;
+				if (knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.incriminating = true;
+				}
+				else if (knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.incriminating = false;
+				}
+				currroom.clues.add(ritualfact);
+				}
+			}
+		}
+		else if (currGoal == Goal.CAST_RITUAL_OD1) {
+			for (int i =0; i<knownRituals.size(); i++) {
+				if (Inventory.contains(knownRituals.get(i).item1) 
+						&& Inventory.contains(knownRituals.get(i).item2) 
+						&& currroom == thehouse.Outdoors_1) {
+					int check;
+					if (knownRituals.get(i).Spell == effect.KILL) {
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check) == this) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = true;
+						thehouse.deadpeople++;
+					}
+					else if (thehouse.deadpeople >= 1){
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check).Dead == false && thehouse.deadpeople >= 1) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = false;
+						thehouse.deadpeople--;	
+					}
+				Fact ritualfact = new Fact(thehouse.factcounter);
+				thehouse.factcounter++;
+				ritualfact.theevent = (" cast a spell, ");
+				if(knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				if(knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				ritualfact.Room = currroom;
+				ritualfact.thetime = thehouse.getTime();
+				ritualfact.instigator = this;
+				if (knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.incriminating = true;
+				}
+				else if (knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.incriminating = false;
+				}
+				currroom.clues.add(ritualfact);
+				}
+			}
+		}
+		else if (currGoal == Goal.CAST_RITUAL_OD2) {
+			for (int i =0; i<knownRituals.size(); i++) {
+				if (Inventory.contains(knownRituals.get(i).item1) 
+						&& Inventory.contains(knownRituals.get(i).item2) 
+						&& currroom == thehouse.Outdoors_2) {
+					int check;
+					if (knownRituals.get(i).Spell == effect.KILL) {
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check) == this) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = true;
+						thehouse.deadpeople++;
+					}
+					else if (thehouse.deadpeople >= 1){
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check).Dead == false && thehouse.deadpeople >= 1) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = false;
+						thehouse.deadpeople--;	
+					}
+				Fact ritualfact = new Fact(thehouse.factcounter);
+				thehouse.factcounter++;
+				ritualfact.theevent = (" cast a spell, ");
+				if(knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				if(knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				ritualfact.Room = currroom;
+				ritualfact.thetime = thehouse.getTime();
+				ritualfact.instigator = this;
+				if (knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.incriminating = true;
+				}
+				else if (knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.incriminating = false;
+				}
+				currroom.clues.add(ritualfact);
+				}
+			}
+		}
+		else if (currGoal == Goal.CAST_RITUAL_OD3) {
+			for (int i =0; i<knownRituals.size(); i++) {
+				if (Inventory.contains(knownRituals.get(i).item1) 
+						&& Inventory.contains(knownRituals.get(i).item2) 
+						&& currroom == thehouse.Outdoors_3) {
+					int check;
+					if (knownRituals.get(i).Spell == effect.KILL) {
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check) == this) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = true;
+						thehouse.deadpeople++;
+					}
+					else if (thehouse.deadpeople >= 1){
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check).Dead == false && thehouse.deadpeople >= 1) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = false;
+						thehouse.deadpeople--;	
+					}
+				Fact ritualfact = new Fact(thehouse.factcounter);
+				thehouse.factcounter++;
+				ritualfact.theevent = (" cast a spell, ");
+				if(knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				if(knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				ritualfact.Room = currroom;
+				ritualfact.thetime = thehouse.getTime();
+				ritualfact.instigator = this;
+				if (knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.incriminating = true;
+				}
+				else if (knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.incriminating = false;
+				}
+				currroom.clues.add(ritualfact);
+				}
+			}
+		}
+		else if (currGoal == Goal.CAST_RITUAL_OD4) {
+			for (int i =0; i<knownRituals.size(); i++) {
+				if (Inventory.contains(knownRituals.get(i).item1) 
+						&& Inventory.contains(knownRituals.get(i).item2) 
+						&& currroom == thehouse.Outdoors_4) {
+					int check;
+					if (knownRituals.get(i).Spell == effect.KILL) {
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check) == this) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = true;
+						thehouse.deadpeople++;
+					}
+					else if (thehouse.deadpeople >= 1){
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check).Dead == false && thehouse.deadpeople >= 1) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = false;
+						thehouse.deadpeople--;	
+					}
+				Fact ritualfact = new Fact(thehouse.factcounter);
+				thehouse.factcounter++;
+				ritualfact.theevent = (" cast a spell, ");
+				if(knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				if(knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				ritualfact.Room = currroom;
+				ritualfact.thetime = thehouse.getTime();
+				ritualfact.instigator = this;
+				if (knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.incriminating = true;
+				}
+				else if (knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.incriminating = false;
+				}
+				currroom.clues.add(ritualfact);
+				}
+			}
+		}
+		else if (currGoal == Goal.CAST_RITUAL_CLIFF) {
+			for (int i =0; i<knownRituals.size(); i++) {
+				if (Inventory.contains(knownRituals.get(i).item1) 
+						&& Inventory.contains(knownRituals.get(i).item2) 
+						&& currroom == thehouse.TheCliff) {
+					int check;
+					if (knownRituals.get(i).Spell == effect.KILL) {
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check) == this) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = true;
+						thehouse.deadpeople++;
+					}
+					else if (thehouse.deadpeople >= 1){
+						check = rando.nextInt(thehouse.allPartygoers.size());
+						while (thehouse.allPartygoers.get(check).Dead == false && thehouse.deadpeople >= 1) {
+							check = rando.nextInt(thehouse.allPartygoers.size());
+						}
+						thehouse.allPartygoers.get(check).Dead = false;
+						thehouse.deadpeople--;	
+					}
+				Fact ritualfact = new Fact(thehouse.factcounter);
+				thehouse.factcounter++;
+				ritualfact.theevent = (" cast a spell, ");
+				if(knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				if(knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.add(thehouse.allPartygoers.get(check));
+				}
+				ritualfact.Room = currroom;
+				ritualfact.thetime = thehouse.getTime();
+				ritualfact.instigator = this;
+				if (knownRituals.get(i).Spell == effect.KILL) {
+					ritualfact.incriminating = true;
+				}
+				else if (knownRituals.get(i).Spell == effect.REVIVE) {
+					ritualfact.incriminating = false;
+				}
+				currroom.clues.add(ritualfact);
+				}
+			}
+		}
 			else if (currGoal == Goal.ASSAULT) {
 				aggronum = 5;
+				currGoal = null;
+				return true;
 			}
 		}
 		
@@ -227,7 +510,7 @@ public class Partygoer {
 					assault(this, currroom.occupants.get(0));
 				}
 				aggronum = 0;
-				currGoal = Goal.CLEANUP;
+				currGoal = Goal.CLEANUP_KITCHEN;
 			}
 			else {
 				aggronum--;
@@ -528,10 +811,10 @@ public class Partygoer {
 								}
 								else if (currroom == thehouse.Outdoors_4) {
 										if (check == 0) {
-											return item.BROKEN_KEY;
+											return item.FRAGRANT_PLANT;
 										}
 										if (check == 1) {
-											return item.FAMILIARS;
+											return item.LANTERN;
 										}
 										if (check == 2) {
 										return item.URN;
@@ -597,11 +880,10 @@ testMove();
 //Every turn, the partygoer will call moveOnRoute, which will move the character and return true if the route has rooms.
 //If moveOnRoute returns false, the ai will call route, which will call move if the character is adjacent.
 //If the destination is not adjacent, route will generate a path to the destination, and store it in the ArrayList.
- public Boolean Move(Room destination) {
+ public void Move(Room destination) {
 	currroom.occupants.remove(this);
 	this.currroom = destination;
 	destination.occupants.add(this);
-	return true;
 }
 
 public void Route(Room destination) {
@@ -656,52 +938,9 @@ public Boolean moveOnRoute(Room destination) {
 	
 }
 
-public static void testMove() {
-	System.out.println("Testing move() function");
-	house testHouse = new house();
-	testHouse.allPartygoers.get(0);
-	testHouse.allPartygoers.get(0).Route(testHouse.Balcony);
-	System.out.println("Show route from dining hall to balcony " );
-	for (int i=0; i < testHouse.allPartygoers.get(0).currentRoute.size(); i++) {
-		System.out.print(testHouse.RoomtoString(testHouse.allPartygoers.get(0).currentRoute.get(i)) + ", ");
-	}
-	System.out.print("\n");
-	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.Balcony);
-	System.out.print("Now to cliff!" + "\n");
-	testHouse.allPartygoers.get(0).Route(testHouse.TheCliff);
-	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.TheCliff);
-	System.out.print("Now to dungeon!" + "\n");
-	testHouse.allPartygoers.get(0).Route(testHouse.Dungeon);
-	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.Dungeon);
-	System.out.print("Now to wine cellar!" + "\n");
-	testHouse.allPartygoers.get(0).Route(testHouse.WineCellar);
-	testHouse.allPartygoers.get(0).testMoveOnRoute(testHouse.WineCellar);
-}
 
-public void testMoveOnRoute(Room destination) {
-while(this.currentRoute.size() > 0 || currentRoute.get(0) != null || this.currroom != destination) {
-	System.out.print("Should be true: " + (this.moveOnRoute(destination)) + "\n");
-	System.out.print("Current Room: " + (currroom.theHouse.RoomtoString(currroom)) + "\n");
-	if (this.currroom == destination) {
-	System.out.print("Ended because we got to the destination!");
-	return;
-	}
-	if (this.currentRoute.size() == 0) {
-	System.out.print("Ended because route array has no values.");
-	return;
-	}
-	if (this.currentRoute.get(0) == null) {
-	System.out.print("Ended because first value in array is null.");
-	this.currentRoute = new ArrayList<Room>();
-	}
-}
-	if (currroom == destination) {
-		System.out.print("Made it!");
-	}
-	else {
-		System.out.print("Did not make it.");
-	}
-}
+
+
 
 public boolean checkItem(item inputItem) {
 	return Inventory.contains(inputItem);
@@ -736,29 +975,37 @@ public void pickGoal() {
 
 public Room GoalInterpLocation(Goal goal) {
 	currGoal = goal;
-	if (goal==Goal.BREWING_POISON_WITCH||goal==Goal.BREWING_ANTIDOTE_WITCH||goal==Goal.BREWING_PERFUME_WITCH||goal==Goal.BREWING_KO_WITCH) {
+	if (goal==Goal.BREWING_POISON_WITCH||goal==Goal.BREWING_ANTIDOTE_WITCH||
+		goal==Goal.BREWING_PERFUME_WITCH||goal==Goal.BREWING_KO_WITCH
+		||goal==Goal.CAST_RITUAL_OD1 || goal==Goal.GET_MEDICINAL_PLANT_OUTDOORS) {
 		return thehouse.Outdoors_1;
 	}
-	else if (goal==Goal.BREWING_POISON_CELLAR||goal==Goal.BREWING_ANTIDOTE_CELLAR||goal==Goal.BREWING_PERFUME_CELLAR||goal==Goal.BREWING_KO_CELLAR
-			||goal==Goal.POISON_WINE_CELLAR||goal==Goal.GATHER_ALCOHOL||goal==Goal.DRINKING_CELLAR) {
+	else if (goal==Goal.BREWING_POISON_CELLAR||goal==Goal.BREWING_ANTIDOTE_CELLAR||
+			goal==Goal.BREWING_PERFUME_CELLAR||goal==Goal.BREWING_KO_CELLAR
+			||goal==Goal.POISON_WINE_CELLAR||goal==Goal.DRINKING_CELLAR) {
 		return thehouse.WineCellar;
 	}
-	else if (goal==Goal.BREWING_POISON_APOTH||goal==Goal.BREWING_ANTIDOTE_APOTH||goal==Goal.BREWING_PERFUME_APOTH||goal==Goal.BREWING_KO_APOTH) {
+	else if (goal==Goal.BREWING_POISON_APOTH||goal==Goal.BREWING_ANTIDOTE_APOTH||
+			goal==Goal.BREWING_PERFUME_APOTH||goal==Goal.BREWING_KO_APOTH) {
 		return thehouse.Apothecary;
 	}
-	else if (goal==Goal.CRAFTING_LOCKPICK||goal==Goal.CRAFTING_PISTOL||goal==Goal.CRAFTING_BOMB) {
+	else if (goal==Goal.CRAFTING_LOCKPICK||goal==Goal.CRAFTING_PISTOL||
+			goal==Goal.CRAFTING_BOMB ||goal ==Goal.FIX_KEY ||
+			goal==Goal.GET_WRENCH || goal==Goal.GET_HAMMER ||
+			goal==Goal.GET_SCREWDRIVER) {
 		return thehouse.Workshop;
 	}
-	else if (goal==Goal.GET_FRAGRANT_PLANT_GREENHOUSE||goal==Goal.GET_POISONOUS_PLANT_GREENHOUSE||goal==Goal.GET_NOXIOUS_PLANT_GREENHOUSE) {
+	else if (goal==Goal.GET_FRAGRANT_PLANT_GREENHOUSE||goal==Goal.GET_POISONOUS_PLANT_GREENHOUSE
+			||goal==Goal.GET_NOXIOUS_PLANT_GREENHOUSE) {
 		return thehouse.GreenHouse;
 	}
-	else if (goal==Goal.GET_FRAGRANT_PLANT_OUTDOORS) {
+	else if (goal==Goal.GET_FRAGRANT_PLANT_OUTDOORS || goal==Goal.CAST_RITUAL_OD2) {
 		return thehouse.Outdoors_2;
 	}
-	else if (goal==Goal.GET_NOXIOUS_PLANT_OUTDOORS) {
+	else if (goal==Goal.GET_NOXIOUS_PLANT_OUTDOORS || goal==Goal.CAST_RITUAL_OD3) {
 		return thehouse.Outdoors_3;
 	}
-	else if (goal==Goal.GET_POISONOUS_PLANT_OUTDOORS) {
+	else if (goal==Goal.GET_NOXIOUS_PLANT_OUTDOORS || goal==Goal.CAST_RITUAL_OD4) {
 		return thehouse.Outdoors_4;
 	}
 	else if (goal==Goal.POISON_WINE_KITCHEN||goal==Goal.DRINKING_KITCHEN||goal==Goal.POISON_FOOD) {
@@ -767,7 +1014,7 @@ public Room GoalInterpLocation(Goal goal) {
 	else if (goal==Goal.DRINKING_HALL||goal==Goal.LOOSEN_CHANDELIER) {
 		return thehouse.DiningHall;
 	}
-	else if (goal==Goal.BALCONY_STALKER||goal==Goal.LOOSEN_BALCONY) {
+	else if (goal==Goal.BALCONY_STALKER||goal==Goal.LOOSEN_BALCONY ||goal==Goal.CAST_RITUAL_BALCONY) {
 		return thehouse.Balcony;
 	}
 	else if (goal==Goal.CLIFF_STALKER) {

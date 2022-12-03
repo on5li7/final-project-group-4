@@ -38,6 +38,7 @@ public class Partygoer {
 		this.Inventory.add(null);
 		}
 	}
+
 	
 	public static void placeinRoom(Partygoer p, Room r) {
 		p.currroom = r;
@@ -92,23 +93,37 @@ public class Partygoer {
 	//This function calls moveonRoute, which will move the character and return true if there is a current route.
 	//If moveonRoute is false, the player AI will instead check the room for their goal.
 	public void takeTurn() {
+		if (Dead) {
+			return;
+		}
+		if (busynum != 0) {
+			busynum--;
+			return;
+		}
 		if (isPlayer == true) {
 			this.playerTurn();
 		}
 		else {
+			//AI Turn follows
 			if (currGoal == null) {
 				pickGoal();
 			}
+			if (aggronum != 0) {
+				if (aggronum == 1) {
+				pickGoal();
+				aggronum = 0;
+				}
+				else {
+					onTheHunt();
+				}
+			}
 			if (doGoal()) {
-				endTurn();
 				return;
 			}
 			if(currentRoute.size() == 0) {
 			Route(GoalInterpLocation(currGoal));
 			}
 			moveOnRoute(GoalInterpLocation(currGoal));
-			endTurn();
-			return;
 		}
 	}
 	
@@ -204,7 +219,6 @@ public class Partygoer {
 		
 		public void onTheHunt() {
 			if(currroom.occupants.size() == 2) {
-				Partygoer target;
 				if (currroom.occupants.get(0) == this) {
 					assault(this, currroom.occupants.get(1));
 				}
@@ -550,13 +564,13 @@ public class Partygoer {
 	//This will instead just take an integer to choose an action in the text version.
 	public void playerTurn() {
 		Scanner input = new Scanner(System.in);
-		ArrayList<Method> methodList = new ArrayList<Method>();
+		ArrayList<Object> methodList = new ArrayList<Object>();
+		for (int i=0; i < currroom.adjacentRooms.size(); i++) {
+			Move(currroom.adjacentRooms.get(i));
+			methodList.add(Move(currroom.adjacentRooms.get(i)));
+		}
 	}
 	
-	//This function will tell the house to move on to the next character.
-	public void endTurn() {
-		thehouse.nextPlayer();
-	}
 	
 public static void main(String[] args) {
 testMove();
@@ -582,10 +596,11 @@ testMove();
 //Every turn, the partygoer will call moveOnRoute, which will move the character and return true if the route has rooms.
 //If moveOnRoute returns false, the ai will call route, which will call move if the character is adjacent.
 //If the destination is not adjacent, route will generate a path to the destination, and store it in the ArrayList.
- public void Move(Room destination) {
+ public Boolean Move(Room destination) {
 	currroom.occupants.remove(this);
 	this.currroom = destination;
 	destination.occupants.add(this);
+	return true;
 }
 
 public void Route(Room destination) {

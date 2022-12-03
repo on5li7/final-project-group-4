@@ -27,6 +27,19 @@ innocuous.add(Goal.GOSSIPING);
 innocuous.add(Goal.RANSACK);
 innocuous.add(Goal.OOHSHINY);
 
+this.rituals.add(Goal.CAST_RITUAL_BALCONY);
+this.rituals.add(Goal.CAST_RITUAL_BALCONY);
+this.rituals.add(Goal.CAST_RITUAL_CLIFF);
+this.rituals.add(Goal.CAST_RITUAL_CLIFF);
+this.rituals.add(Goal.CAST_RITUAL_OD1);
+this.rituals.add(Goal.CAST_RITUAL_OD1);
+this.rituals.add(Goal.CAST_RITUAL_OD2);
+this.rituals.add(Goal.CAST_RITUAL_OD2);
+this.rituals.add(Goal.CAST_RITUAL_OD3);
+this.rituals.add(Goal.CAST_RITUAL_OD3);
+this.rituals.add(Goal.CAST_RITUAL_OD4);
+this.rituals.add(Goal.CAST_RITUAL_OD4);
+
 sociable.add(Goal.GOSSIPING);
 sociable.add(Goal.GOSSIPING);
 sociable.add(Goal.GOSSIPING);
@@ -45,7 +58,6 @@ drinking.add(Goal.DRINKING_KITCHEN);
 drinking.add(Goal.DRINKING_CELLAR);
 drinking.add(Goal.DRINKING_HALL);
 drinking.add(Goal.DRINKING_KITCHEN);
-drinking.add(Goal.GATHER_ALCOHOL);
 
 gathering.add(Goal.OOHSHINY);
 gathering.add(Goal.OOHSHINY);

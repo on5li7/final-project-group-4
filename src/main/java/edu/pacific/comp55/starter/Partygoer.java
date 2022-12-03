@@ -115,6 +115,7 @@ public class Partygoer {
 				}
 				else {
 					onTheHunt();
+					return;
 				}
 			}
 			if (doGoal()) {
@@ -284,7 +285,7 @@ public class Partygoer {
 			else if (defenderstr <= attackerstr) {
 				defender.Dead = true;
 				attacker.Bloodied = true;
-				attacker.currGoal = Goal.CLEANUP;
+				attacker.currGoal = Goal.CLEANUP_KITCHEN;
 				Fact newFact = new Fact(thehouse.factcounter);
 				thehouse.factcounter++;
 				newFact.setInstigator(attacker);
@@ -312,7 +313,7 @@ public class Partygoer {
 					return item.BROKEN_KEY;
 				}
 				if (check == 3) {
-					return item.COBWEB;
+					return item.COFFEE;
 				}
 			}
 		else if (currroom == thehouse.Balcony) {
@@ -359,10 +360,10 @@ public class Partygoer {
 			}
 				else if (currroom == thehouse.Morgue) {
 					if (check == 0) {
-						return item.FEMUR;
+						return item.CHLOROFORM;
 					}
 					if (check == 1) {
-						return item.RAT;
+						return item.ANTIDOTE;
 					}
 					if (check == 2) {
 					return item.SKULL;
@@ -387,10 +388,10 @@ public class Partygoer {
 			}
 				else if (currroom == thehouse.Dungeon) {
 					if (check == 0) {
-						return item.FEMUR;
+						return item.POISON;
 					}
 					if (check == 1) {
-						return item.BISMUTH;
+						return item.FIRST_AID_KIT;
 					}
 					if (check == 2) {
 					return item.RAT;
@@ -457,7 +458,7 @@ public class Partygoer {
 					}
 					else if (currroom == thehouse.Kitchen) {
 						if (check == 0) {
-							return item.CLOVE_OF_GARLIC;
+							return item.OIL;
 						}
 						if (check == 1) {
 							return item.COFFEE;
@@ -474,7 +475,7 @@ public class Partygoer {
 							return item.FRAGRANT_PLANT;
 						}
 						if (check == 1) {
-							return item.NIGHTSHADE;
+							return item.MEDICINAL_PLANT;
 						}
 						if (check == 2) {
 						return item.NOXIOUS_PLANT;
@@ -491,7 +492,7 @@ public class Partygoer {
 								return item.DEMON_TOOTH;
 							}
 							if (check == 2) {
-							return item.CLOVE_OF_GARLIC;
+							return item.MEDICINAL_PLANT;
 							}
 							if (check == 3) {
 							return item.THE_7_RITES_OF_RUIN;
@@ -505,10 +506,10 @@ public class Partygoer {
 									return item.RAT;
 								}
 								if (check == 2) {
-								return item.SPIDER;
+								return item.LANTERN;
 								}
 								if (check == 3) {
-								return item.FROG;
+								return item.NOXIOUS_PLANT;
 								}
 							}
 								else if (currroom == thehouse.Outdoors_3) {
@@ -519,10 +520,10 @@ public class Partygoer {
 										return item.BISMUTH;
 									}
 									if (check == 2) {
-									return item.BRIMSTONE;
+									return item.DAGGER;
 									}
 									if (check == 3) {
-									return item.COBALT;
+									return item.HEMLOCK;
 									}
 								}
 								else if (currroom == thehouse.Outdoors_4) {

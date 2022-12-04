@@ -604,6 +604,8 @@ public class house {
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
 			Scanner input = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens
 			int userChoice;
+			public boolean KitchenWinePoison;
+			public boolean CellarWinePoison;
 			
 			/*public Convos(house House) {
 				this.House = House;
@@ -668,7 +670,7 @@ public class house {
 				return 0;
 				}
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
-			public void Knifeset(Partygoer user) {
+			public Boolean Knifeset(Partygoer user) {
 				if(user.isPlayer()) {
 					System.out.print("Choose an option");
 					if (user.Inventory.contains(item.KNIFE)) {
@@ -685,6 +687,7 @@ public class house {
 							}
 						}		
 				}
+				return true;
 			}
 			//NOTE: DO NOT ADD A CHECK FOR LOCATION
 			//STICK EVERYTHING IN CONVOS INTO HOUSE

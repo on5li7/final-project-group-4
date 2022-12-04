@@ -82,5 +82,14 @@ murderous.add(Goal.ASSAULT);
 murderous.add(Goal.GET_SWORD);
 murderous.add(Goal.GET_RIFLE);
 murderous.add(Goal.GET_KNIFE);
+
+poisonous.add(Goal.POISON_WINE_CELLAR);
+poisonous.add(Goal.POISON_WINE_CELLAR);
+poisonous.add(Goal.POISON_WINE_CELLAR);
+poisonous.add(Goal.POISON_WINE_CELLAR);
+poisonous.add(Goal.POISON_WINE_KITCHEN);
+poisonous.add(Goal.POISON_WINE_KITCHEN);
+poisonous.add(Goal.POISON_WINE_KITCHEN);
+poisonous.add(Goal.POISON_WINE_KITCHEN);
 }
 }

@@ -37,6 +37,7 @@ public class house {
 	public Room Bedroom_9;
 	public Room Bedroom_10;
 	public Room Morgue;
+	ArrayList<item> knifeset;
 	public Random rando;
 	Boolean foodPoisoned;
 	Boolean gameEnd;
@@ -50,10 +51,13 @@ public class house {
 		GoalSets goalsets;
 		
 		public static void Main(String args[]) {
+			Random rando = new Random();
 			house thehouse = new house();
 			thehouse.allPartygoers.get(0).isPlayer = true;
 			thehouse.allPartygoers.get(0).isDetective = true;
-			thehouse.allPartygoers.get(thehouse.rando.nextInt(9)+1).isKiller = true;
+			int killernum = thehouse.rando.nextInt(9);
+			thehouse.allPartygoers.get(killernum).isKiller = true;
+			thehouse.allPartygoers.get(killernum).Inventory.add(item.KNIFE);
 			thehouse.characterSelect();
 			thehouse.RunGame();
 		}
@@ -527,6 +531,9 @@ public class house {
 			this.isDark = false;
 			this.rando = new Random();
 			this.goalsets = new GoalSets();
+			this.knifeset.add(item.KNIFE);
+			this.knifeset.add(item.KNIFE);
+			this.knifeset.add(item.KNIFE);
 			this.allPartygoers = new ArrayList<Partygoer>();
 			this.DiningHall = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
 			this.Balcony = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
@@ -606,7 +613,7 @@ public class house {
 				
 				if (user.isPlayer()) {
 					System.out.print("Choose an option");
-					if (user.checkItem(item.NOXIOUS_PLANT)) {
+					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
 				
 						System.out.print("1) Poison: 6 turns");
 						return 6;
@@ -614,14 +621,14 @@ public class house {
 					else{
 						System.out.print("Poison: Requires poisonous plants");
 					}
-					if (user.checkItem(item.MEDICINAL_PLANT)) {
+					if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
 						System.out.print("2) Antidote: 4 turns");
 						return 4;
 					}
 					else{
 						System.out.print("Antidote: Requires medicinal Plants");
 					}
-					if (user.checkItem(item.FRAGRANT_PLANT)) {
+					if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
 						System.out.print("Perfume: 2 turns");
 						return 2;
 					}
@@ -631,7 +638,7 @@ public class house {
 				}
 				else {
 					if (user.currGoal == Goal.BREWING_POISON_APOTH) {
-						if (user.checkItem(item.NOXIOUS_PLANT)) {
+						if (user.Inventory.contains(item.NOXIOUS_PLANT)) {
 							System.out.print("1) Poison: 6 turns");
 							return 6;
 						}
@@ -640,7 +647,7 @@ public class house {
 						}
 					}
 					else if (user.currGoal == Goal.BREWING_ANTIDOTE_APOTH) {
-						if (user.checkItem(item.MEDICINAL_PLANT)) {
+						if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
 							System.out.print("2) Antidote: 4 turns");
 							return 4;
 						}
@@ -649,7 +656,7 @@ public class house {
 						}
 					}
 					else if (user.currGoal == Goal.BREWING_PERFUME_APOTH) {
-						if (user.checkItem(item.FRAGRANT_PLANT)) {
+						if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
 							System.out.print("Perfume: 2 turns");
 							return 2;
 						}
@@ -664,7 +671,7 @@ public class house {
 			public void Knifeset(Partygoer user) {
 				if(user.isPlayer()) {
 					System.out.print("Choose an option");
-					if (user.checkItem(item.KNIFE1)) {
+					if (user.Inventory.contains(item.KNIFE)) {
 						System.out.print("1) Grab Knife: 1 turns");
 					}
 					else {
@@ -673,7 +680,7 @@ public class house {
 				}
 					else {
 						if(user.currGoal == Goal.GET_KNIFE) {
-							if(user.checkItem(item.KNIFE1)) {
+							if(user.Inventory.contains(item.KNIFE)) {
 								System.out.print("1) Stab: 3 turns");
 							}
 						}		
@@ -687,7 +694,7 @@ public class house {
 			//eating, in dining hall, should change hungry from no to yes
 			public void eat(Partygoer user) {
 				if (user.currGoal == Goal.EATING)
-				if (user.checkItem(item.BAD_FOOD)) {
+				if (user.Inventory.contains(item.BAD_FOOD)) {
 					System.out.print("Eat the food if hungry: 2 turns");
 				}
 			}
@@ -700,7 +707,7 @@ public class house {
 			}
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 			public item fix_key(Partygoer user) {
-					if(user.checkItem(item.BROKEN_KEY)) {
+					if(user.Inventory.contains(item.BROKEN_KEY)) {
 						System.out.print("You have a broken key, let's fix it?");
 						return item.FIXED_KEY;
 					}
@@ -711,7 +718,7 @@ public class house {
 				}
 			//riflecase, checks if you have a fixed_key then you can get the rifle
 			public item riflecase(Partygoer user) {
-				if (user.checkItem(item.FIXED_KEY)) {
+				if (user.Inventory.contains(item.FIXED_KEY)) {
 					System.out.print("You have a fixed key for the riflecase, and picked up a rifle");
 					return item.RIFLE;
 				}
@@ -724,7 +731,7 @@ public class house {
 			//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)
 			public void chandelier(Partygoer user) {
 				if (user.currGoal == Goal.LOOSEN_CHANDELIER)
-				if(user.checkItem(item.SCREWDRIVER)) {
+				if(user.Inventory.contains(item.SCREWDRIVER)) {
 					System.out.print("You loosen up the chandelier, hopefully it falls on someone xD");
 					this.chandelierLoose = true;
 				}

@@ -33,9 +33,10 @@ Rituals() {
 	this.item2 = ritualItemPool.get(check);
 	ritualItemPool.remove(ritualItemPool.get(check));
 	check = rando.nextInt(2);
-	if (check = 0) {
+	if (check == 0) {
 		this.Spell = effect.REVIVE;
 	}
+	else {this.Spell = effect.KILL;}
 }
 
 public enum effect {

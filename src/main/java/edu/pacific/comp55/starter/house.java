@@ -613,7 +613,7 @@ public class house {
 			
 			public int Brewing(Partygoer user) {
 				
-				if (user.isPlayer()) {
+				if (user.isPlayer) {
 					System.out.print("Choose an option");
 					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
 				
@@ -671,7 +671,7 @@ public class house {
 				}
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
 			public Boolean Knifeset(Partygoer user) {
-				if(user.isPlayer()) {
+				if(user.isPlayer) {
 					System.out.print("Choose an option");
 					if (user.Inventory.contains(item.KNIFE)) {
 						System.out.print("1) Grab Knife: 1 turns");

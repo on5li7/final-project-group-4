@@ -282,6 +282,8 @@ public class Partygoer {
 		}
 	}
 	
+	
+	
 	public Boolean castRitual() {
 		if(currroom == thehouse.Balcony || currroom == thehouse.TheCliff || currroom == thehouse.Outdoors_1
 		|| currroom == thehouse.Outdoors_2 || currroom == thehouse.Outdoors_3 || currroom == thehouse.Outdoors_4)

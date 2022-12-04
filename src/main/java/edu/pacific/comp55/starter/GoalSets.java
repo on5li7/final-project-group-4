@@ -22,6 +22,10 @@ public GoalSets() {
 	this.rituals = new ArrayList<Goal>();
 	
 innocuous.add(Goal.EATING);
+innocuous.add(Goal.EATING);
+innocuous.add(Goal.EATING);
+innocuous.add(Goal.EATING);
+innocuous.add(Goal.EATING);
 innocuous.add(Goal.DRINKING_HALL);
 innocuous.add(Goal.GOSSIPING);
 innocuous.add(Goal.RANSACK);
@@ -87,6 +91,8 @@ poisonous.add(Goal.POISON_WINE_CELLAR);
 poisonous.add(Goal.POISON_WINE_CELLAR);
 poisonous.add(Goal.POISON_WINE_CELLAR);
 poisonous.add(Goal.POISON_WINE_CELLAR);
+poisonous.add(Goal.POISON_FOOD);
+poisonous.add(Goal.POISON_FOOD);
 poisonous.add(Goal.POISON_FOOD);
 poisonous.add(Goal.POISON_WINE_KITCHEN);
 poisonous.add(Goal.POISON_WINE_KITCHEN);

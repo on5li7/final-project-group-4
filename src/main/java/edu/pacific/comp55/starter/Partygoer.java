@@ -11,6 +11,8 @@ import edu.pacific.comp55.starter.Rituals.effect;
 public class Partygoer {
 	
 	ArrayList<Room> currentRoute;
+	ArrayList<Fact> knownFacts;
+	ArrayList<Fact> evidence;
 	Goal currGoal;
 	Goal heldGoal;
 	int busynum;
@@ -243,7 +245,7 @@ public class Partygoer {
 					return doGoal();
 				}
 		}
-		else if (currGoal == Goal.POISON_WINE) {
+		else if (currGoal == Goal.POISON_WINE_CELLAR || currGoal == Goal.POISON_WINE_KITCHEN) {
 			if (Inventory.contains(item.TREE_FROG_VENOM) || Inventory.contains(item.POISON)) {
 				if (currroom == thehouse.Kitchen) {
 					thehouse.KitchenWinePoison = true;
@@ -712,24 +714,26 @@ public class Partygoer {
 			System.out.print("commited " + inputfact.theevent);
 		}
 		else if (inputfact.theevent != null && inputfact.incriminating == false) {
-			
+			System.out.print("did " + inputfact.theevent);
 		}
-	}
-
-	public Boolean isDetective() {
-		return isDetective;
-	}
-
-	public Boolean isKiller() {
-		return isKiller;
-	}
-	
-	public Boolean isPlayer() {
-		return isPlayer;
-	}
-
-	public String getIdentity() {
-		return identity;
+		if(inputfact.roomislie == null) {
+			System.out.print("somewhere");
+		}
+		else {
+			System.out.print(" in the " + thehouse.RoomtoString(currroom));
+		}
+		if (inputfact.thetime == 0) {
+			System.out.print(" at some point ");
+		}
+		else {
+			System.out.print("on turn " + inputfact.thetime);
+		}
+		if (inputfact.victims.size() != 0 || inputfact.incriminating == true) {
+			for (int i=0; i<inputfact.victims.size(); i++) {
+				System.out.print(" to poor " + inputfact.victims.get(i) + "! And");
+			}
+			System.out.print(" they won't get away with it!");
+		}
 	}
 
 	

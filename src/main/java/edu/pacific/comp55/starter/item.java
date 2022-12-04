@@ -12,6 +12,7 @@ public enum item {
 	
 	public String toString() {
 		switch(this) {
+			case SKULL: return "skull";
 			case TORCH: return "torch";
 			case LANTERN: return "lantern";
 			case OIL: return "oil";
@@ -28,10 +29,7 @@ public enum item {
 			case TREE_FROG_VENOM: return "tree_frog_venom";
 			case SEDATIVES: return "sedatives";
 			case CHLOROFORM: return "chloroform";
-			case KNIFE1: return "knife";
-			case KNIFE2: return "knife";
-			case KNIFE3: return "knife";
-			case KNIFE4: return "knife";
+			case KNIFE: return "knife";
 			case SWORD: return "sword";
 			case PISTOL: return "pistol";
 			case RIFLE: return "rifle";
@@ -67,6 +65,8 @@ public enum item {
 			case WRENCH: return "wrench";
 			case HAMMER: return "hammer";
 			case FIXED_KEY: return "fixed_key";
+			case DAGGER: return "dagger";
+			case POISON: return "poison";
 		}
 		return "n/a";
 	}

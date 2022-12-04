@@ -87,6 +87,7 @@ poisonous.add(Goal.POISON_WINE_CELLAR);
 poisonous.add(Goal.POISON_WINE_CELLAR);
 poisonous.add(Goal.POISON_WINE_CELLAR);
 poisonous.add(Goal.POISON_WINE_CELLAR);
+poisonous.add(Goal.POISON_FOOD);
 poisonous.add(Goal.POISON_WINE_KITCHEN);
 poisonous.add(Goal.POISON_WINE_KITCHEN);
 poisonous.add(Goal.POISON_WINE_KITCHEN);

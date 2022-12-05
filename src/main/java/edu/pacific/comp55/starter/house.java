@@ -746,6 +746,37 @@ public class house {
 			
 			//change functions to return an int that increases the busyCounter
 			
+			public Boolean converse(Partygoer pg1, Partygoer pg2) {
+				return true;
+			}
+			
+			public Boolean gossip(Partygoer pg1, Partygoer pg2) {
+				int checkNum1 = 0;
+				int checkNum2 = 0;
+				int checkNum3 = 0;
+				int randoInt = 0;
+				while (checkNum1==0||checkNum2==0||checkNum3==0) {
+					while (rando.nextInt(5) + 1==checkNum1||rando.nextInt(5) + 1==checkNum2||rando.nextInt(5)+1==checkNum3) {
+						
+					}
+				}
+				if (checkNum1 != 0) {
+					Fact newFact = new Fact(checkNum1);
+				}
+				else if (checkNum2 != 0) {
+					Fact newFact = new Fact(checkNum2);
+				}
+				else if (checkNum3 != 0) {
+					Fact newFact = new Fact(checkNum3);
+				}
+				//Fact inputFact = pg2.add
+				return true;
+			}
+			
+			public Boolean arrest() {
+				return true;
+			}
+			
 			
 
 }

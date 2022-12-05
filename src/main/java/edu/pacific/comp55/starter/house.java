@@ -3,6 +3,7 @@ package edu.pacific.comp55.starter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class house {
 	public Room Balcony;
 	public Room Outdoors_1;
 	public Room Outdoors_2;
+	Scanner reader = null;
 	public Room Outdoors_3;
 	public Room Outdoors_4;
 	public Room Hallway;
@@ -35,18 +37,99 @@ public class house {
 	public Room Bedroom_9;
 	public Room Bedroom_10;
 	public Room Morgue;
+	ArrayList<item> knifeset;
 	public Random rando;
+	Boolean foodPoisoned;
+	Boolean gameEnd;
 	public int factcounter;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
 	//sets the time of the house
 		private int time;
-		
+		//decides what endScreen is displayed.
+		int endType;
 		GoalSets goalsets;
+		
+		public static void Main(String args[]) {
+			Random rando = new Random();
+			house thehouse = new house();
+			thehouse.allPartygoers.get(0).isPlayer = true;
+			thehouse.allPartygoers.get(0).isDetective = true;
+			int killernum = thehouse.rando.nextInt(9);
+			thehouse.allPartygoers.get(killernum).isKiller = true;
+			thehouse.allPartygoers.get(killernum).Inventory.add(item.KNIFE);
+			thehouse.characterSelect();
+			thehouse.RunGame();
+		}
+		
+		public void characterSelect() {
+			int response = 0;
+			System.out.print("1. Gertrude Biblio - Genius Librarian");
+			System.out.print("2. Frank - Robust Sommelier");
+			System.out.print("3. Constable Smithy - Furtive Lawman");
+			System.out.print("4. Doctor Reiklen - Surgeon Extraordinaire");
+			System.out.print("5. Ariana Stocracy - Alluring Socialite");
+			System.out.print("6. bob");
+			System.out.print("7. Maximillian - Disarming Politician");
+			System.out.print("8. Jake of the West - Bounty Hunter");
+			System.out.print("9. Chad - Millio- no, Billionaire");
+			System.out.print("10. Todd - Local Teen");
+			try {
+				response = reader.nextInt();
+			}
+			catch(Exception InputMismatchException) {
+				characterSelect();
+			}
+			finally {
+				if (response < 1 || response > 10) {
+				characterSelect();	
+				}
+				else {
+					ArrayList<String> identities =  new ArrayList<String>();
+					ArrayList<Partygoer> partyholder = new ArrayList<Partygoer>();
+					identities.add("Gertrude Biblio");
+					identities.add("Frank");
+					identities.add("Constable Smithy");
+					identities.add("Doctor Reiklen");
+					identities.add("Ariana");
+					identities.add("bob");
+					identities.add("Maximillian");
+					identities.add("Jake");
+					identities.add("Chad");
+					identities.add("Todd");
+					allPartygoers.get(0).identity = identities.get(response-1);
+					partyholder.add(allPartygoers.get(response-1));
+					allPartygoers.remove(response-1);
+					while (allPartygoers.size() != 0) {
+						int checknum = rando.nextInt(allPartygoers.size());
+						allPartygoers.get(checknum).identity = identities.get(checknum);
+						partyholder.add(partyholder.get(checknum));
+						allPartygoers.remove(checknum);
+						identities.remove(checknum);
+					}
+					allPartygoers = partyholder;
+				}
+			}
+			
+				
+			}
+		
+		public void RunGame() {
+			int i = 0;
+			while (gameEnd == false) {
+			allPartygoers.get(i).takeTurn();
+			if(i==9) {i=0;}
+			}
+			endGame(endType);
+		}
+		
+		public void endGame(int choice) {
+			//TO DO ENDSCREENS
+		}
 		
 		public ArrayList<Room> busRoute(int beginning, int end) {
 			ArrayList<Room> route = new ArrayList<Room>();
-			//Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
+			//Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottom left is stop 5.
 			if (beginning == 1 && end == 2) {
 				route.add(TheStudy);
 				route.add(DiningHall);
@@ -186,10 +269,11 @@ public class house {
 		}
 		
 		//the number of dead people
-		private int deadpeople;
+		public int deadpeople;
 		
 		//The partygoer whose turn it currently is.
 		Partygoer currPlayer;
+		private boolean chandelierLoose;
 		
 		public int getTime() {
 			return time;
@@ -208,6 +292,29 @@ public class house {
 		}
 		public void setDeadpeople(int deadpeople) {
 			this.deadpeople = deadpeople;
+		}
+		
+		public void printScoreBoard() {
+			for (int i=0; i<10; i++) {
+				System.out.print(allPartygoers.get(i).identity + " Status: ");
+				if (allPartygoers.get(i).Dead) {
+					System.out.print("DEAD ");
+				}
+				else {
+					System.out.print("Alive. ");
+				}
+			System.out.print("Inventory: ");
+			for (int o=0; o<allPartygoers.get(i).Inventory.size(); o++) {
+				System.out.print(allPartygoers.get(i).Inventory.get(o).toString() + ", ");
+			}
+			System.out.print("\n");
+			if (allPartygoers.get(i).Dead) {
+			System.out.print("Current Goal: Being dead \n");
+			}
+			else {
+				System.out.print("Current Goal: " + allPartygoers.get(i).currGoal.toString() + "\n");
+				}
+			}
 		}
 		
 		public void adjacentRooms() {
@@ -424,6 +531,9 @@ public class house {
 			this.isDark = false;
 			this.rando = new Random();
 			this.goalsets = new GoalSets();
+			this.knifeset.add(item.KNIFE);
+			this.knifeset.add(item.KNIFE);
+			this.knifeset.add(item.KNIFE);
 			this.allPartygoers = new ArrayList<Partygoer>();
 			this.DiningHall = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
 			this.Balcony = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
@@ -453,6 +563,11 @@ public class house {
 			this.Hallway = new Room(new ArrayList<item>(), this, isDark,null,new ArrayList<Partygoer>(),2);
 			this.Morgue = new Room(new ArrayList<item>(), this, isDark,null,new ArrayList<Partygoer>(),0);
 			adjacentRooms();
+			this.endType = 0;
+			this.deadpeople = 0;
+			this.foodPoisoned = false;
+			this.chandelierLoose = false;
+			this.factcounter = 0;
 			Partygoer partyholder;
 			partyholder = new Partygoer("Maximillian", false, false, this.DiningHall, this);
 			this.allPartygoers.add(partyholder);
@@ -489,32 +604,45 @@ public class house {
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
 			Scanner in = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens //partygoer, room and fact also need scanner
 			int userChoice;
+<<<<<<< HEAD
 			String input;
 			//Facts should be formatted like "_stabbing_" for madlibs
 			//also need to work on evidence
+=======
+			public boolean KitchenWinePoison;
+			public boolean CellarWinePoison;
+			
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 			/*public Convos(house House) {
 				this.House = House;
 			}*/
 			
 			public int Brewing(Partygoer user) {
 				
+<<<<<<< HEAD
 				if (user.isPlayer()) {
 					System.out.print("Choose an option:");
 					if (user.checkItem(item.NOXIOUS_PLANT)) {
+=======
+				if (user.isPlayer) {
+					System.out.print("Choose an option");
+					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
+				
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 						System.out.print("1) Poison: 6 turns");
 						return 6;
 					}
 					else{
 						System.out.print("Poison: Requires poisonous plants");
 					}
-					if (user.checkItem(item.MEDICINAL_PLANT)) {
+					if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
 						System.out.print("2) Antidote: 4 turns");
 						return 4;
 					}
 					else{
 						System.out.print("Antidote: Requires medicinal Plants");
 					}
-					if (user.checkItem(item.FRAGRANT_PLANT)) {
+					if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
 						System.out.print("Perfume: 2 turns");
 						return 2;
 					}
@@ -524,7 +652,7 @@ public class house {
 				}
 				else {
 					if (user.currGoal == Goal.BREWING_POISON_APOTH) {
-						if (user.checkItem(item.NOXIOUS_PLANT)) {
+						if (user.Inventory.contains(item.NOXIOUS_PLANT)) {
 							System.out.print("1) Poison: 6 turns");
 							return 6;
 						}
@@ -533,7 +661,7 @@ public class house {
 						}
 					}
 					else if (user.currGoal == Goal.BREWING_ANTIDOTE_APOTH) {
-						if (user.checkItem(item.MEDICINAL_PLANT)) {
+						if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
 							System.out.print("2) Antidote: 4 turns");
 							return 4;
 						}
@@ -542,7 +670,7 @@ public class house {
 						}
 					}
 					else if (user.currGoal == Goal.BREWING_PERFUME_APOTH) {
-						if (user.checkItem(item.FRAGRANT_PLANT)) {
+						if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
 							System.out.print("Perfume: 2 turns");
 							return 2;
 						}
@@ -554,10 +682,10 @@ public class house {
 				return 0;
 				}
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
-			public void Knifeset(Partygoer user) {
-				if(user.isPlayer()) {
+			public Boolean Knifeset(Partygoer user) {
+				if(user.isPlayer) {
 					System.out.print("Choose an option");
-					if (user.checkItem(item.KNIFE1)) {
+					if (user.Inventory.contains(item.KNIFE)) {
 						System.out.print("1) Grab Knife: 1 turns");
 					}
 					else {
@@ -566,11 +694,12 @@ public class house {
 				}
 					else {
 						if(user.currGoal == Goal.GET_KNIFE) {
-							if(user.checkItem(item.KNIFE1)) {
+							if(user.Inventory.contains(item.KNIFE)) {
 								System.out.print("1) Stab: 3 turns");
 							}
 						}		
 				}
+				return true;
 			}
 			//NOTE: DO NOT ADD A CHECK FOR LOCATION
 			//STICK EVERYTHING IN CONVOS INTO HOUSE
@@ -580,7 +709,7 @@ public class house {
 			//eating, in dining hall, should change hungry from no to yes
 			public void eat(Partygoer user) {
 				if (user.currGoal == Goal.EATING)
-				if (user.checkItem(item.BAD_FOOD)) {
+				if (user.Inventory.contains(item.BAD_FOOD)) {
 					System.out.print("Eat the food if hungry: 2 turns");
 				}
 			}
@@ -593,7 +722,7 @@ public class house {
 			}
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 			public item fix_key(Partygoer user) {
-					if(user.checkItem(item.BROKEN_KEY)) {
+					if(user.Inventory.contains(item.BROKEN_KEY)) {
 						System.out.print("You have a broken key, let's fix it?");
 						return item.FIXED_KEY;
 					}
@@ -604,7 +733,7 @@ public class house {
 				}
 			//riflecase, checks if you have a fixed_key then you can get the rifle
 			public item riflecase(Partygoer user) {
-				if (user.checkItem(item.FIXED_KEY)) {
+				if (user.Inventory.contains(item.FIXED_KEY)) {
 					System.out.print("You have a fixed key for the riflecase, and picked up a rifle");
 					return item.RIFLE;
 				}
@@ -617,8 +746,9 @@ public class house {
 			//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)
 			public void chandelier(Partygoer user) {
 				if (user.currGoal == Goal.LOOSEN_CHANDELIER)
-				if(user.checkItem(item.SCREWDRIVER)) {
+				if(user.Inventory.contains(item.SCREWDRIVER)) {
 					System.out.print("You loosen up the chandelier, hopefully it falls on someone xD");
+					this.chandelierLoose = true;
 				}
 				else { 
 					System.out.print("You want to loosen the chandelier but you need tools to do so...");

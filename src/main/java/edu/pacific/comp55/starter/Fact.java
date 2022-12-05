@@ -163,41 +163,41 @@ public class Fact {
 
 
 		//Generates a new fact if passed a null fact in the first argument.
-		public Boolean addToKnownFact (Fact knownFact, Fact incomingfact) {
+		public Boolean addToKnownFact (Fact incomingfact) {
 			
 			
 			//If fact is a null fact, it is initialized with incomingfact's data.
-			if (knownFact.getID() == -1) {
-				knownFact.setID(incomingfact.getID());
+			if (this.getID() == 0) {
+				this.setID(incomingfact.getID());
 			}
 			
 			//Checks to see if a factoid is unknown or a lie, and puts in the new data.
 			//One cannot disprove lies with more lies
-			if (knownFact.getID() == incomingfact.getID()) {
+			if (this.getID() == incomingfact.getID()) {
 			
-			if (knownFact.getInstigator() == null || knownFact.isInstLie()) {
-				knownFact.setInstigator(incomingfact.getInstigator());
-				knownFact.setInstLie(incomingfact.isInstLie());
+			if ((this.getInstigator() == null || this.isInstLie()) && incomingfact.getInstigator() != null) {
+				this.setInstigator(incomingfact.getInstigator());
+				this.setInstLie(incomingfact.isInstLie());
 			}
-			if (knownFact.getVictim() == null || knownFact.isVicLie()) {
-				knownFact.setVictims(incomingfact.getVictim());
-				knownFact.setVicLie(incomingfact.isVicLie());
+			if ((this.getVictim() == null || this.isVicLie()) && incomingfact.victims.size() != 0) {
+				this.setVictims(incomingfact.getVictim());
+				this.setVicLie(incomingfact.isVicLie());
 			}
-			if (knownFact.getBystanders() == null || knownFact.isByLie()) {
-				knownFact.setBystanders(incomingfact.getBystanders());
-				knownFact.setByLie(incomingfact.isByLie());
+			if ((this.getBystanders() == null || this.isByLie()) && incomingfact.bystanders.size() != 0) {
+				this.setBystanders(incomingfact.getBystanders());
+				this.setByLie(incomingfact.isByLie());
 			}
-			if (knownFact.getTheEvent() == null || knownFact.isEventLie()) {
-				knownFact.setTheEvent(incomingfact.getTheEvent());
-				knownFact.setEventLie(incomingfact.isEventLie());
+			if ((this.getTheEvent() == null || this.isEventLie()) && incomingfact.getTheEvent() != null) {
+				this.setTheEvent(incomingfact.getTheEvent());
+				this.setEventLie(incomingfact.isEventLie());
 			}
-			if (knownFact.getTime() == 0 || knownFact.isEventLie()) {
-				knownFact.setTime(incomingfact.getTime());
-				knownFact.setTimeLie(incomingfact.isRoomLie());
+			if ((this.getTime() == 0 || this.isEventLie()) && incomingfact.getTime() != 0) {
+				this.setTime(incomingfact.getTime());
+				this.setTimeLie(incomingfact.isRoomLie());
 			}
-			if (knownFact.getRoom() == null || knownFact.isRoomLie()) {
-				knownFact.setRoom(incomingfact.getRoom());
-				knownFact.setRoomLie(incomingfact.isRoomLie());
+			if ((this.getRoom() == null || this.isRoomLie()) && incomingfact.getRoom() != null) {
+				this.setRoom(incomingfact.getRoom());
+				this.setRoomLie(incomingfact.isRoomLie());
 			}
 			
 			return true;

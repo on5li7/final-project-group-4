@@ -24,6 +24,8 @@ public int getAdjacentSetSize() {
 //Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
 int BusStop;
 
+ArrayList<Fact> clues;
+
 ArrayList<Partygoer> occupants;
 public int getBusStop() {
 	return BusStop;
@@ -50,6 +52,7 @@ public Room(ArrayList<item> looseStuff, house thehouse, Boolean inDoors, ArrayLi
 	this.looseStuff = looseStuff;
 	this.theHouse = thehouse;
 	this.inDoors = inDoors;
+	this.clues = new ArrayList<Fact>();
 	//this.Interactables = Interactables;
 	//this.Ritual = Ritual;
 	this.adjacentRooms = adjacentRooms;

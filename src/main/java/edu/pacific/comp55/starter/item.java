@@ -3,15 +3,17 @@ package edu.pacific.comp55.starter;
 public enum item {
 	TORCH, LANTERN, OIL, MONEY, COFFEE, BANDAGE, ANTIDOTE, FIRST_AID_KIT, DAGGER,
 	INK, TAPE, HEMLOCK, BAD_FOOD, NIGHTSHADE, TREE_FROG_VENOM, SEDATIVES, POISON,
-	CHLOROFORM, KNIFE1, KNIFE2, KNIFE3, KNIFE4, SWORD, PISTOL, RIFLE, RITES_OF_THE_HORSEMAN,
+	CHLOROFORM, KNIFE, SWORD, PISTOL, RIFLE, RITES_OF_THE_HORSEMAN,
 	THE_7_RITES_OF_RUIN, FAMILIARS, THE_DEMONS_LEGEND, FAE_JOKE_BOOK, SKULL,
-	DOLL, JADE_STONE, RAT, BROKEN_KEY, BISMUTH, COBALT, DEMON_TOOTH,
+	DOLL, JADE_STONE, RAT, BROKEN_KEY, BISMUTH, COBALT, DEMON_TOOTH, 
 	COBWEB, EYE_OF_NEWT, SENTIMENTAL_PEN, FEMUR, BRIMSTONE, CLOVE_OF_GARLIC,
 	OLD_PICTURE, CRUSTY_TOADSTOOL, FROG, ROACH, GOAT_HEAD, URN, SPIDER,
-	FRAGRANT_PLANT, MEDICINAL_PLANT, NOXIOUS_PLANT, SCREWDRIVER, WRENCH, HAMMER, FIXED_KEY;
+	FRAGRANT_PLANT, MEDICINAL_PLANT, NOXIOUS_PLANT, SCREWDRIVER, WRENCH, HAMMER, FIXED_KEY, BLOODY_KNIFE, BLOODY_SWORD;
 	
 	public String toString() {
 		switch(this) {
+			
+			case SKULL: return "skull";
 			case TORCH: return "torch";
 			case LANTERN: return "lantern";
 			case OIL: return "oil";
@@ -28,10 +30,7 @@ public enum item {
 			case TREE_FROG_VENOM: return "tree_frog_venom";
 			case SEDATIVES: return "sedatives";
 			case CHLOROFORM: return "chloroform";
-			case KNIFE1: return "knife";
-			case KNIFE2: return "knife";
-			case KNIFE3: return "knife";
-			case KNIFE4: return "knife";
+			case KNIFE: return "knife";
 			case SWORD: return "sword";
 			case PISTOL: return "pistol";
 			case RIFLE: return "rifle";
@@ -67,6 +66,8 @@ public enum item {
 			case WRENCH: return "wrench";
 			case HAMMER: return "hammer";
 			case FIXED_KEY: return "fixed_key";
+			case DAGGER: return "dagger";
+			case POISON: return "poison";
 		}
 		return "n/a";
 	}

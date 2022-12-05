@@ -604,31 +604,27 @@ public class house {
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
 			Scanner in = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens //partygoer, room and fact also need scanner
 			int userChoice;
-<<<<<<< HEAD
+
 			String input;
 			//Facts should be formatted like "_stabbing_" for madlibs
 			//also need to work on evidence
-=======
+
 			public boolean KitchenWinePoison;
 			public boolean CellarWinePoison;
 			
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 			/*public Convos(house House) {
 				this.House = House;
 			}*/
 			
 			public int Brewing(Partygoer user) {
 				
-<<<<<<< HEAD
 				if (user.isPlayer()) {
 					System.out.print("Choose an option:");
 					if (user.checkItem(item.NOXIOUS_PLANT)) {
-=======
 				if (user.isPlayer) {
 					System.out.print("Choose an option");
 					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
 				
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 						System.out.print("1) Poison: 6 turns");
 						return 6;
 					}
@@ -678,9 +674,11 @@ public class house {
 							System.out.print("Perfume: Requires Fragrant Plants");
 						}
 					}
-					}
+					else {	
 				return 0;
 				}
+				}}}}
+				
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
 			public Boolean Knifeset(Partygoer user) {
 				if(user.isPlayer) {

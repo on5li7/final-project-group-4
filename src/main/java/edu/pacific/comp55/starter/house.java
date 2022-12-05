@@ -49,8 +49,9 @@ public class house {
 		//decides what endScreen is displayed.
 		int endType;
 		GoalSets goalsets;
+
 		
-		public static void Main(String args[]) {
+		public void start() {
 			Random rando = new Random();
 			house thehouse = new house();
 			thehouse.allPartygoers.get(0).isPlayer = true;
@@ -616,31 +617,43 @@ public class house {
 				this.House = House;
 			}*/
 			
-			public int Brewing(Partygoer user) {
-				
+			public void Brewing(Partygoer user) {
 				if (user.isPlayer) {
 					System.out.print("Choose an option:");
-					if (user.Inventory.contains(item.NOXIOUS_PLANT)) {
-				if (user.isPlayer) {
-					System.out.print("Choose an option");
+						System.out.print("1) Poison: 6 turns");
+						System.out.print("2) Antidote: 4 turns");
+						System.out.print("3) Perfume: 2 turns");
+						userChoice = in.nextInt();
+						System.out.println("You entered " + userChoice);
+				if (userChoice == 1) {
 					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
 				
-						System.out.print("1) Poison: 6 turns");
-						return 6;
+						System.out.print("1) Poison: 6 turns");	
+					/*
+						new Fact(factcounter);
+					factcounter++;
+					inputfact.instigator = user;
+					inputfact.Room = user.currroom;
+					inputfact.time=thetime;
+					inputfact.theevent="brewing";
+					inputfact.incriminating=true;
+					user.currroom.clues.add(inputfact);
+					*/
+					
 					}
 					else{
 						System.out.print("Poison: Requires poisonous plants");
 					}
 					if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
 						System.out.print("2) Antidote: 4 turns");
-						return 4;
+
 					}
 					else{
 						System.out.print("Antidote: Requires medicinal Plants");
 					}
 					if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
-						System.out.print("Perfume: 2 turns");
-						return 2;
+						System.out.print("3) Perfume: 2 turns");
+
 					}
 					else{
 						System.out.print("Perfume: Requires Fragrant Plants");
@@ -650,7 +663,7 @@ public class house {
 					if (user.currGoal == Goal.BREWING_POISON_APOTH) {
 						if (user.Inventory.contains(item.NOXIOUS_PLANT)) {
 							System.out.print("1) Poison: 6 turns");
-							return 6;
+
 						}
 						else{
 							System.out.print("Poison: Requires poisonous plants");
@@ -659,7 +672,7 @@ public class house {
 					else if (user.currGoal == Goal.BREWING_ANTIDOTE_APOTH) {
 						if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
 							System.out.print("2) Antidote: 4 turns");
-							return 4;
+
 						}
 						else{
 							System.out.print("Antidote: Requires medicinal Plants");
@@ -668,20 +681,17 @@ public class house {
 					else if (user.currGoal == Goal.BREWING_PERFUME_APOTH) {
 						if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
 							System.out.print("Perfume: 2 turns");
-							return 2;
+					
 						}
 						else{
 							System.out.print("Perfume: Requires Fragrant Plants");
 						}
 					}
-					else {	
-				return 0;
+					
 				}
 				}
 				}
-				}
-				return deadpeople;
-				}
+			
 				
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
 			public Boolean Knifeset(Partygoer user) {

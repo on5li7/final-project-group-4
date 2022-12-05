@@ -10,13 +10,14 @@ import edu.pacific.comp55.starter.Rituals.effect;
 
 public class Partygoer {
 	
-	ArrayList<Room> currentRoute;
-	ArrayList<Fact> knownFacts;
-	ArrayList<Fact> evidence;
+	public ArrayList<Fact> fingerprints;
+	public ArrayList<Room> currentRoute;
+	public ArrayList<Fact> knownFacts;
+	public ArrayList<Fact> evidence;
 	Goal currGoal;
 	Goal heldGoal;
 	int busynum;
-	ArrayList<Rituals> knownRituals = new ArrayList<Rituals>();
+	public ArrayList<Rituals> knownRituals = new ArrayList<Rituals>();
 	int aggronum;
 	Room currroom;
 	house thehouse;
@@ -29,8 +30,8 @@ public class Partygoer {
 	Scanner userinput;
 	GoalSets newGoalSets;
 	Random rando;
-	ArrayList<Goal> allPossibleGoals;
-	ArrayList<item> Inventory; //need to set a cap of 4
+	public ArrayList<Goal> allPossibleGoals;
+	public ArrayList<item> Inventory; //need to set a cap of 4
 	//BusyCounter
 	
 	
@@ -41,6 +42,7 @@ public class Partygoer {
 		this.isDetective = isDetective;
 		this.knownRituals = new ArrayList<Rituals>();
 		this.Inventory = new ArrayList<item>();
+		this.fingerprints = new ArrayList<Fact>();
 		this.currroom = startingRoom;
 		this.thehouse = thehouse;
 		this.currentRoute = new ArrayList<Room>();
@@ -53,13 +55,24 @@ public class Partygoer {
 		r.occupants.add(p);
 	}
 	
-	public void addItem(item addeditem, ArrayList<item> source) {
+	public Fact physicalEvidence(Fact inputfact) {
+		Fact returnfact = inputfact;
+		if (thehouse.getTime() > inputfact.getTime()+10) {
+			returnfact.setTime(0);
+		}
+		fingerprints.add(inputfact);
+		returnfact.instigator = null;
+		return returnfact;
+	}
+	
+	public Boolean addItem(item addeditem, ArrayList<item> source) {
 				if ((source == this.Inventory && source.size() < 4) || (source == this.currroom.looseStuff && this.currroom.looseStuff.size() < 5)) {
 				source.add(addeditem);
 				}
 			else {
 				discardItem(addeditem, source);
 			}
+				return true;
 		}
 	
 	public void discardItem(item inputitem, ArrayList<item> source) {
@@ -155,6 +168,15 @@ public class Partygoer {
 			}
 			moveOnRoute(GoalInterpLocation(currGoal));
 		}
+	}
+	
+	public Boolean fingerPrintCheck(Partygoer unsub) {
+		for (int i=0; i < fingerprints.size(); i++) {
+			if (fingerprints.get(i).instigator == unsub) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Boolean doGoal() {
@@ -388,6 +410,14 @@ public class Partygoer {
 				newFact.thetime = thehouse.getTime();
 				newFact.incriminating = false;
 				newFact.Room = currroom;
+				if(defender.Inventory.contains(item.SWORD)) {
+					defender.Inventory.remove(item.SWORD);
+					defender.Inventory.add(item.BLOODY_SWORD);
+				}
+				if(defender.Inventory.contains(item.KNIFE)) {
+					defender.Inventory.remove(item.KNIFE);
+					defender.Inventory.add(item.BLOODY_KNIFE);
+				}
 			}
 			else if (defenderstr <= attackerstr) {
 				defender.Dead = true;
@@ -402,6 +432,14 @@ public class Partygoer {
 				newFact.thetime = thehouse.getTime();
 				newFact.incriminating = false;
 				newFact.Room = currroom;
+				if(attacker.Inventory.contains(item.SWORD)) {
+					attacker.Inventory.remove(item.SWORD);
+					attacker.Inventory.add(item.BLOODY_SWORD);
+				}
+				if(attacker.Inventory.contains(item.KNIFE)) {
+					attacker.Inventory.remove(item.KNIFE);
+					attacker.Inventory.add(item.BLOODY_KNIFE);
+				}
 			}
 		}
 		
@@ -675,11 +713,15 @@ public class Partygoer {
 		ArrayList<Object> methodList = new ArrayList<Object>();
 		//Adds moves
 		int choicenum = 1;
+		System.out.print(choicenum + ". search the room for something useful.");
+		methodList.add(Ransack());
+		choicenum ++;
 		for (int i=0; i < currroom.adjacentRooms.size(); i++) {
 			methodList.add(Move(currroom.adjacentRooms.get(i)));
 			System.out.print(choicenum + ". move to the " + thehouse.RoomtoString(currroom.adjacentRooms.get(i)));
 			choicenum++;
 		}
+		//Adds the knifeset
 		if (currroom == thehouse.Kitchen|| thehouse.knifeset.size() != 0) {
 			choicenum++;
 			System.out.print(choicenum + ". Grab a knife.");
@@ -688,30 +730,78 @@ public class Partygoer {
 		if (currroom == thehouse.Kitchen|| thehouse.knifeset.size() == 0) {
 			System.out.print("No more knives!");
 		}
+		//Adds the clues.
 		for (int i = 0; i<currroom.clues.size(); i++) {
 			choicenum++;
 			System.out.print(choicenum + ". A clue!");
 			methodList.add(getClue(currroom.clues.get(i)));
 		}
-		//Writes options.
+		if (currroom == thehouse.Apothecary || currroom ==  thehouse.Outdoors_3 || currroom == thehouse.WineCellar) {
+			choicenum++;
+			methodList.add(thehouse.Brewing(this));
+			System.out.print(choicenum + " Brew a potion ");
+			if (currroom == thehouse.Apothecary) {
+				System.out.print("with the mortar and pestle.");
+			}
+			if (currroom == thehouse.Outdoors_3) {
+				System.out.print("in the witch's pot.");
+			}
+			if (currroom == thehouse.WineCellar) {
+				System.out.print("in the still.");
+			}
+			System.out.print("\n");
+		}
+		if (currroom == thehouse.Armory) {
+			if (Inventory.contains(item.FIXED_KEY)) {
+				choicenum++;
+				System.out.print(choicenum + " Get a rifle? You have the key!");
+				methodList.add(addItem(item.RIFLE, Inventory));
+			}
+		}
+		
+		//Adds the loose trash in the room.
+		for (int i=0; i<currroom.looseStuff.size(); i++) {
+			choicenum++;
+			System.out.print(choicenum + "somebody just left a " + currroom.looseStuff.get(i).toString() + " here...");
+			methodList.add(addItem(currroom.looseStuff.get(i), Inventory));
+		}
+		if (currroom == thehouse.TheCliff) {
+			for (int i=0; i < currroom.occupants.size(); i++) {
+				if (currroom.occupants.get(i) != this) {
+					choicenum++;
+					System.out.print(choicenum + ". Push " + currroom.occupants.get(i).identity + " off the cliff?");
+					methodList.add(cliffPush(currroom.occupants.get(i)));
+				}
+			}
+		}
+		if (currroom == thehouse.Workshop) {
+			methodList.add(thehouse.Crafting());
+			choicenum++;
+			System.out.print(choicenum + ". craft something at the workbench.");
+			methodList.add(Crafting());
+		}
+	
 	}
 	
-	public Fact physicalEvidence(Fact inputfact) {
-		Fact returnfact = inputfact;
-		if (thehouse.getTime() > inputfact.getTime()+10) {
-			returnfact.setTime(0);
-		}
-		returnfact.instigator = null;
-		return returnfact;
+	
+	
+	
+	public Boolean cliffPush(Partygoer victim) {
+		victim.Dead = true;
+		victim.currroom.occupants.remove(victim);
+		return victim.Dead;
 	}
 	
 	public Boolean search(Partygoer source) {
 		for (int i=0; i<knownFacts.size(); i++) {
-			if (knownFacts.get(i).theevent == "stabbing" && source.Inventory.contains(item.BLOODY_KNIFE)) {
+			if (knownFacts.get(i).theevent == "stabbing" && (source.Inventory.contains(item.BLOODY_KNIFE)) || source.Inventory.contains(item.BLOODY_SWORD)) {
 				System.out.print("Caught red handed!");
-				source.evidence.add(knownFacts.get(i));
+				for (int o=0; o<5; o++) {
+					source.evidence.add(knownFacts.get(i));
+				}
 			}
 		}
+		return true;
 	}
 	
 	public Boolean getClue(Fact inputfact) {

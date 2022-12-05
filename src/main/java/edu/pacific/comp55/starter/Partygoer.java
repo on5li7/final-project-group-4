@@ -696,10 +696,33 @@ public class Partygoer {
 		//Writes options.
 	}
 	
+	public Fact physicalEvidence(Fact inputfact) {
+		Fact returnfact = inputfact;
+		if (thehouse.getTime() > inputfact.getTime()+10) {
+			returnfact.setTime(0);
+		}
+		returnfact.instigator = null;
+		return returnfact;
+	}
+	
+	public Boolean search(Partygoer source) {
+		for (int i=0; i<knownFacts.size(); i++) {
+			if (knownFacts.get(i).theevent == "stabbing" && source.Inventory.contains(item.BLOODY_KNIFE)) {
+				System.out.print("Caught red handed!");
+				source.evidence.add(knownFacts.get(i));
+			}
+		}
+	}
+	
 	public Boolean getClue(Fact inputfact) {
 		busynum = 2;
-		knownFacts.add(inputfact);
-		return true;
+		for (int i=0; i<knownFacts.size(); i++) {
+			if (knownFacts.get(i).getID() == inputfact.getID()) {
+				knownFacts.get(i).addToKnownFact(inputfact);
+				return true;
+			}
+		}
+			return false;
 	}
 	
 	public void printFact(Fact inputfact) {

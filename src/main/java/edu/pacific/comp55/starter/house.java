@@ -780,20 +780,31 @@ public class house {
 				int checkNum3 = 0;
 				int randoInt = 0;
 				while (checkNum1==0||checkNum2==0||checkNum3==0) {
-					while (rando.nextInt(5) + 1==checkNum1||rando.nextInt(5) + 1==checkNum2||rando.nextInt(5)+1==checkNum3) {
-						
+					randoInt = rando.nextInt(5) + 1;
+					while (randoInt==checkNum1||randoInt==checkNum2||randoInt==checkNum3) {
+						if (checkNum1==randoInt) {
+							checkNum2=checkNum3=0;
+						}
+						else if (checkNum2==randoInt) {
+							checkNum1=checkNum3=0;
+						}
+						else if (checkNum3==randoInt) {
+							checkNum1=checkNum2=0;
+						}
 					}
 				}
 				if (checkNum1 != 0) {
 					Fact newFact = new Fact(checkNum1);
+					pg2.knownFacts.add(newFact);
 				}
 				else if (checkNum2 != 0) {
 					Fact newFact = new Fact(checkNum2);
+					pg2.knownFacts.add(newFact);
 				}
 				else if (checkNum3 != 0) {
 					Fact newFact = new Fact(checkNum3);
+					pg2.knownFacts.add(newFact);
 				}
-				//Fact inputFact = pg2.add
 				return true;
 			}
 			

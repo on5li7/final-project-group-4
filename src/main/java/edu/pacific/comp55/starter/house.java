@@ -618,9 +618,9 @@ public class house {
 			
 			public int Brewing(Partygoer user) {
 				
-				if (user.isPlayer()) {
+				if (user.isPlayer) {
 					System.out.print("Choose an option:");
-					if (user.checkItem(item.NOXIOUS_PLANT)) {
+					if (user.Inventory.contains(item.NOXIOUS_PLANT)) {
 				if (user.isPlayer) {
 					System.out.print("Choose an option");
 					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
@@ -677,7 +677,11 @@ public class house {
 					else {	
 				return 0;
 				}
-				}}}}
+				}
+				}
+				}
+				return deadpeople;
+				}
 				
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
 			public Boolean Knifeset(Partygoer user) {

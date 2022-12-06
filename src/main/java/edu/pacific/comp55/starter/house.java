@@ -815,36 +815,80 @@ public class house {
 				}
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 			public item fix_key(Partygoer user) {
-					if(user.Inventory.contains(item.BROKEN_KEY)) {
-						System.out.print("You have a broken key, let's fix it?");
-						return item.FIXED_KEY;
+				if (user.isPlayer){
+					System.out.print("Choose an option");
+					System.out.print("1) Fix Key: 1 turns");
+					userChoice = in.nextInt();
+					System.out.println("You entered " + userChoice);
+					if (userChoice == 1) {
+						if (user.Inventory.contains(item.BROKEN_KEY)) {
+							System.out.print("1) Fix Key: 1 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time=TheTime; 
+							inputfact.theevent="fixed_key";
+							inputfact.incriminating=false;
+							user.currroom.clues.add(inputfact);
+						}
+						else{
+							System.out.print("Fix Key: Did not fix key");
+						}
 					}
-					else {
-						System.out.print("Nothing for us to do here for now...");
-					}
-					return null;
 				}
+				return item.FIXED_KEY;
+			}
 			//riflecase, checks if you have a fixed_key then you can get the rifle
 			public item riflecase(Partygoer user) {
-				if (user.Inventory.contains(item.FIXED_KEY)) {
-					System.out.print("You have a fixed key for the riflecase, and picked up a rifle");
-					return item.RIFLE;
+				if (user.isPlayer) {
+					System.out.print("Choose an option");
+					System.out.print("1) Open Riflecase: 1 turns");
+					userChoice = in.nextInt();
+					System.out.println("You entered " + userChoice);
+					if (userChoice == 1) {
+						if (user.Inventory.contains(item.FIXED_KEY)) {
+							System.out.print("1) Open Riflecase: 1 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time=TheTime; 
+							inputfact.theevent="rifle";
+							inputfact.incriminating=false;
+							user.currroom.clues.add(inputfact);
+						}
+						else{
+							System.out.print("Open Riflecase: Did not open riflecase");
+						}
+					}
 				}
-				else {
-					System.out.print("You need a key to access the riflecase, there's a rifle inside");
-					return null;
-				}
-			}	
+				return item.RIFLE; //return the rifle to inventory if we have the key
+			}
 			//conversation interactions between partygoers, will be in partygoer.java, like pushing someone off a cliff when you click them
 			//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)
 			public void chandelier(Partygoer user) {
-				if (user.currGoal == Goal.LOOSEN_CHANDELIER)
-				if(user.Inventory.contains(item.SCREWDRIVER)) {
-					System.out.print("You loosen up the chandelier, hopefully it falls on someone xD");
-					this.chandelierLoose = true;
-				}
-				else { 
-					System.out.print("You want to loosen the chandelier but you need tools to do so...");
+				if (user.isPlayer) {
+					System.out.print("Choose an option");
+					System.out.print("1) Loosen Chandelier: 1 turns");
+					userChoice = in.nextInt();
+					System.out.println("You entered " + userChoice);
+					if (userChoice == 1) {
+						if (user.Inventory.contains(item.WRENCH)) {
+							System.out.print("1) Loosen Chandelier: 1 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time=TheTime; 
+							inputfact.theevent="chandelier";
+							inputfact.incriminating=true;
+							user.currroom.clues.add(inputfact);
+						}
+						else{
+							System.out.print("Loosen Chandelier: Did not loosen chandelier");
+						}
+					}
 				}
 			}
 			//THIS GOES INTO FACT.JAVA : function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
@@ -864,12 +908,9 @@ public class house {
 						System.out.print("6) Eat");
 						System.out.print("7) Craft on workbench");
 						System.out.print("8) Check chandelier");
-<<<<<<< HEAD
 						System.out.print("9) Gossip with " + pg2.identity);
 						System.out.print("10) Arrest " + pg2.identity);
 						System.out.print("11) Search pockets of " + pg2.identity);
-=======
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
 						if (userChoice==1) {
@@ -901,7 +942,7 @@ public class house {
 						if (userChoice==8) {
 							chandelier(pg1);
 						}
-<<<<<<< HEAD
+
 						if (userChoice==9) {
 							gossip(pg1,pg2);
 						}
@@ -911,8 +952,7 @@ public class house {
 						if (userChoice==11) {
 							searchPockets(pg2);
 						}
-=======
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
+
 					}
 					
 				return true;
@@ -970,13 +1010,14 @@ public class house {
 				}
 			}
 			
-<<<<<<< HEAD
+
 			public Boolean searchPockets(Partygoer partygoer) {
 				System.out.print("Searching " + partygoer.identity);
-=======
+			
+			}
 			public Boolean search(Partygoer partygoer) {
 				System.out.print("Searching " + partygoer.identity + "\n");
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
+
 				if (partygoer.Inventory.size()==0) {
 					System.out.print(partygoer.identity + "'s pockets are empty");
 				}

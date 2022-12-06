@@ -1,7 +1,5 @@
 package edu.pacific.comp55.starter;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -715,11 +713,10 @@ public class Partygoer {
 		int choicenum = 1;
 		System.out.print(choicenum + ". search the room for something useful.");
 		methodList.add(Ransack());
-		choicenum ++;
 		for (int i=0; i < currroom.adjacentRooms.size(); i++) {
+			choicenum++;
 			methodList.add(Move(currroom.adjacentRooms.get(i)));
 			System.out.print(choicenum + ". move to the " + thehouse.RoomtoString(currroom.adjacentRooms.get(i)));
-			choicenum++;
 		}
 		//Adds the knifeset
 		if (currroom == thehouse.Kitchen|| thehouse.knifeset.size() != 0) {
@@ -781,7 +778,22 @@ public class Partygoer {
 			System.out.print(choicenum + ". craft something at the workbench.");
 			methodList.add(thehouse.workbench(this));
 		}
-	
+		for (int i=0; i<currroom.occupants.size(); i++) {
+			if (currroom.occupants.get(i) != this) {
+				choicenum++;
+				System.out.print("Talk to " + currroom.occupants.get(i).identity);
+				methodList.add(converse(currroom.occupants.get(i)));
+			}
+		}
+		int choice = input.nextInt();
+		if (choice > methodList.size() || choice < 0) {
+			input.close();
+			playerTurn();
+		}
+		else {
+			methodList.get(choice);
+		}
+		input.close();
 	}
 	
 	
@@ -1026,7 +1038,6 @@ public Boolean moveOnRoute(Room destination) {
 }
 
 public void pickGoal() {
-	// TODO Auto-generated method stub
 	allPossibleGoals = new ArrayList<Goal>();
 	for (int i=0;i<newGoalSets.innocuous.size();i++) {
 		allPossibleGoals.add(newGoalSets.innocuous.get(i));

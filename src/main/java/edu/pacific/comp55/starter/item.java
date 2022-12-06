@@ -68,6 +68,10 @@ public enum item {
 			case FIXED_KEY: return "fixed_key";
 			case DAGGER: return "dagger";
 			case POISON: return "poison";
+			case BLOODY_KNIFE: return "a bloody knife!";
+			case BLOODY_SWORD: return "a bloody sword!!";
+		default:
+			break;
 		}
 		return "n/a";
 	}

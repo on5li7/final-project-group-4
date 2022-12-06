@@ -5,8 +5,6 @@ public class Room {
 	
 ArrayList<item> looseStuff;
 
-private Boolean inDoors;
-
 //ArrayList<Convos> Interactables;
 
 house theHouse;
@@ -48,12 +46,10 @@ Interactable.put("Antidote", "GreenHouse");
 //TODO:Finish adding interactables
 }
 
-public Room(ArrayList<item> looseStuff, house thehouse, Boolean inDoors, ArrayList<Room> adjacentRooms, ArrayList<Partygoer> occupants, int BusStop) {
+public Room(ArrayList<item> looseStuff, house thehouse, ArrayList<Room> adjacentRooms, ArrayList<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.theHouse = thehouse;
-	this.inDoors = inDoors;
 	this.clues = new ArrayList<Fact>();
-	//this.Interactables = Interactables;
 	//this.Ritual = Ritual;
 	this.adjacentRooms = adjacentRooms;
 	this.occupants = occupants;

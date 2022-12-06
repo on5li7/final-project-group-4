@@ -47,16 +47,14 @@ public class house {
 		//decides what endScreen is displayed.
 		int endType;
 		GoalSets goalsets;
-
 		
 		public void start() {
-			Random rando = new Random();
 			house thehouse = new house();
 			thehouse.allPartygoers.get(0).isPlayer = true;
 			thehouse.allPartygoers.get(0).isDetective = true;
 			int killernum = thehouse.rando.nextInt(9);
-			thehouse.allPartygoers.get(killernum).isKiller = true;
-			thehouse.allPartygoers.get(killernum).Inventory.add(item.KNIFE);
+			thehouse.allPartygoers.get(killernum+1).isKiller = true;
+			thehouse.allPartygoers.get(killernum+1).Inventory.add(item.KNIFE);
 			thehouse.characterSelect();
 			thehouse.RunGame();
 		}
@@ -314,9 +312,7 @@ public class house {
 		public Boolean getIsDark() {
 			return isDark;
 		}
-		public void setIsDark(Boolean isDark) {
-			this.isDark = isDark;
-		}
+
 		public int getDeadpeople() {
 			return deadpeople;
 		}
@@ -558,40 +554,39 @@ public class house {
 			//ArrayList<String> House = new ArrayList<String>();
 			this.time = 1;
 			this.factcounter = 0;
-			this.isDark = false;
 			this.rando = new Random();
 			this.goalsets = new GoalSets();
 			this.knifeset.add(item.KNIFE);
 			this.knifeset.add(item.KNIFE);
 			this.knifeset.add(item.KNIFE);
 			this.allPartygoers = new ArrayList<Partygoer>();
-			this.DiningHall = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Balcony = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Apothecary = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 1);
-			this.Kitchen = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 4);
-			this.WineCellar = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.GreenHouse = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.TheStudy = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Armory = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 3);
-			this.Workshop = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Dungeon = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Outdoors_1 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Outdoors_2 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Outdoors_3 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 5);
-			this.Outdoors_4 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-		    this.Bedroom_1 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_2 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_3 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_4 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_5 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_6 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_7 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_8 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_9 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_10 = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.TheCliff = new Room(new ArrayList<item>(), this, isDark, null, new ArrayList<Partygoer>(), 0);
-			this.Hallway = new Room(new ArrayList<item>(), this, isDark,null,new ArrayList<Partygoer>(),2);
-			this.Morgue = new Room(new ArrayList<item>(), this, isDark,null,new ArrayList<Partygoer>(),0);
+			this.DiningHall = new Room(new ArrayList<item>(), this, null, new ArrayList<Partygoer>(), 0);
+			this.Balcony = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Apothecary = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 1);
+			this.Kitchen = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 4);
+			this.WineCellar = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.GreenHouse = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.TheStudy = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Armory = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 3);
+			this.Workshop = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Dungeon = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Outdoors_1 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Outdoors_2 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Outdoors_3 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 5);
+			this.Outdoors_4 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+		    this.Bedroom_1 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_2 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_3 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_4 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_5 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_6 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_7 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_8 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_9 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Bedroom_10 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.TheCliff = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
+			this.Hallway = new Room(new ArrayList<item>(), this, null,new ArrayList<Partygoer>(),2);
+			this.Morgue = new Room(new ArrayList<item>(), this, null,new ArrayList<Partygoer>(),0);
 			adjacentRooms();
 			this.endType = 0;
 			this.deadpeople = 0;

@@ -693,20 +693,40 @@ public class house {
 			public Boolean Knifeset(Partygoer user) {
 				if(user.isPlayer) {
 					System.out.print("Choose an option");
-					if (user.Inventory.contains(item.KNIFE)) {
+					System.out.print("1) Grab Knife: 1 turns");
+					System.out.print("2) Stab: 3 turns");
+					userChoice = in.nextInt();
+					System.out.println("You entered " + userChoice);
+					if (userChoice == 1) {
+						if (user.currGoal == Goal.DEFENSIVE_KILL) {
 						System.out.print("1) Grab Knife: 1 turns");
+						Fact inputfact = new Fact(factcounter);
+						factcounter++;
+						inputfact.instigator = user;
+						inputfact.Room = user.currroom;
+						inputfact.time=TheTime; 
+						inputfact.theevent="knife";
+						inputfact.incriminating=false;
+						user.currroom.clues.add(inputfact);
 					}
 					else {
 						System.out.print("Knife: Did not grab knife");
 					}
 				}
-					else {
-						if(user.currGoal == Goal.GET_KNIFE) {
-							if(user.Inventory.contains(item.KNIFE)) {
-								System.out.print("1) Stab: 3 turns");
-							}
-						}		
-				}
+					if(userChoice == 2) {
+						if (user.Inventory.contains(item.KNIFE)) {
+							System.out.print("2) Stab: 3 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time = TheTime;
+							inputfact.theevent="knife";
+							inputfact.incriminating = true;
+							user.currroom.clues.add(inputfact);
+						}
+					}
+					}
 				return true;
 			}
 			//NOTE: DO NOT ADD A CHECK FOR LOCATION
@@ -715,19 +735,84 @@ public class house {
 			
 			//drinking, should give strength and charisma but reduce dexterity. For now just a boolean check, no effect on player
 			//eating, in dining hall, should change hungry from no to yes
-			public void eat(Partygoer user) {
-				if (user.currGoal == Goal.EATING)
-				if (user.Inventory.contains(item.BAD_FOOD)) {
-					System.out.print("Eat the food if hungry: 2 turns");
+				public void eat(Partygoer user) {
+					if (user.isPlayer){
+						System.out.print("Choose an option");
+						System.out.print("1) Drink: 1 turns");
+						System.out.print("2) Eat: 2 turns");
+						userChoice = in.nextInt();
+						System.out.println("You entered " + userChoice);
+						if (userChoice == 1) {
+							if (user.currGoal == Goal.DRINKING) {
+								System.out.print("1) Drink: 1 turns");
+								Fact inputfact = new Fact(factcounter);
+								factcounter++;
+								inputfact.instigator = user;
+								inputfact.Room = user.currroom;
+								inputfact.time=TheTime; 
+								inputfact.theevent="drinking";
+								inputfact.incriminating=false;
+								user.currroom.clues.add(inputfact);
+							}
+							else{
+								System.out.print("Drink: Did not drink");
+							}
+						}
+						if (userChoice == 2) {
+							if (user.currGoal == Goal.EATING) {
+								System.out.print("2) Eat: 2 turns");
+								Fact inputfact = new Fact(factcounter);
+								factcounter++;
+								inputfact.instigator = user;
+								inputfact.Room = user.currroom;
+								inputfact.time=TheTime; 
+								inputfact.theevent="eating";
+								inputfact.incriminating=false;
+								user.currroom.clues.add(inputfact);
+							}
+							else{
+								System.out.print("Eat: Did not eat");
+							}
+						}
+					}
 				}
-			}
 			//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 			//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
 			public void workbench(Partygoer user) {
-				if (user.currGoal == Goal.CRAFTING_PISTOL) {
-					System.out.print("You need a gun: 6 turns");
+				if (user.isPlayer){
+					System.out.print("Choose an option");
+					System.out.print("1) Build Pistol: 5 turns");
+					userChoice = in.nextInt();
+					System.out.println("You entered " + userChoice);
+					if (userChoice == 1) {
+						if (user.currGoal == Goal.KILL) {
+							System.out.print("1) Build Pistol: 5 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time=TheTime; 
+							inputfact.theevent="pistol";
+							inputfact.incriminating=true;
+							user.currroom.clues.add(inputfact);
+						}
+						else if(user.currGoal == Goal.CRAFTING_PISTOL) {
+							System.out.print("1) Build Pistol: 5 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time=TheTime; 
+							inputfact.theevent="pistol";
+							inputfact.incriminating=false;
+							user.currroom.clues.add(inputfact);
+						}
+						else{
+							System.out.print("Build Pistol: Did not build pistol");
+						}
+					}
 				}
-			}
+				}
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
 			public item fix_key(Partygoer user) {
 					if(user.Inventory.contains(item.BROKEN_KEY)) {

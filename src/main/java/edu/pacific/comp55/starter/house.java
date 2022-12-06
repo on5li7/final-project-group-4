@@ -864,6 +864,12 @@ public class house {
 						System.out.print("6) Eat");
 						System.out.print("7) Craft on workbench");
 						System.out.print("8) Check chandelier");
+<<<<<<< HEAD
+						System.out.print("9) Gossip with " + pg2.identity);
+						System.out.print("10) Arrest " + pg2.identity);
+						System.out.print("11) Search pockets of " + pg2.identity);
+=======
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
 						if (userChoice==1) {
@@ -895,6 +901,18 @@ public class house {
 						if (userChoice==8) {
 							chandelier(pg1);
 						}
+<<<<<<< HEAD
+						if (userChoice==9) {
+							gossip(pg1,pg2);
+						}
+						if (userChoice==10) {
+							arrest(pg2);
+						}
+						if (userChoice==11) {
+							searchPockets(pg2);
+						}
+=======
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 					}
 					
 				return true;
@@ -922,15 +940,19 @@ public class house {
 				if (checkNum1 != 0) {
 					Fact newFact = new Fact(checkNum1);
 					pg2.knownFacts.add(newFact);
+					pg2.printFact(newFact);
 				}
 				else if (checkNum2 != 0) {
 					Fact newFact = new Fact(checkNum2);
 					pg2.knownFacts.add(newFact);
+					pg2.printFact(newFact);
 				}
 				else if (checkNum3 != 0) {
 					Fact newFact = new Fact(checkNum3);
 					pg2.knownFacts.add(newFact);
+					pg2.printFact(newFact);
 				}
+				System.out.print("You learned a new fact about " + pg2.identity + "!");
 				return true;
 			}
 			
@@ -948,8 +970,13 @@ public class house {
 				}
 			}
 			
+<<<<<<< HEAD
+			public Boolean searchPockets(Partygoer partygoer) {
+				System.out.print("Searching " + partygoer.identity);
+=======
 			public Boolean search(Partygoer partygoer) {
 				System.out.print("Searching " + partygoer.identity + "\n");
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 				if (partygoer.Inventory.size()==0) {
 					System.out.print(partygoer.identity + "'s pockets are empty");
 				}

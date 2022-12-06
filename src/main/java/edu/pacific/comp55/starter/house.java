@@ -783,6 +783,9 @@ public class house {
 						System.out.print("6) Eat");
 						System.out.print("7) Craft on workbench");
 						System.out.print("8) Check chandelier");
+						System.out.print("9) Gossip with " + pg2.identity);
+						System.out.print("10) Arrest " + pg2.identity);
+						System.out.print("11) Search " + pg2.identity);
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
 						if (userChoice==1) {
@@ -813,6 +816,15 @@ public class house {
 						}
 						if (userChoice==8) {
 							chandelier(pg1);
+						}
+						if (userChoice==9) {
+							gossip(pg1,pg2);
+						}
+						if (userChoice==10) {
+							arrest(pg2);
+						}
+						if (userChoice==11) {
+							search(pg2);
 						}
 					}
 					
@@ -868,12 +880,12 @@ public class house {
 			}
 			
 			public Boolean search(Partygoer partygoer) {
-				System.out.print("Searching " + partygoer.identity + "\n");
+				System.out.print("Searching " + partygoer.identity);
 				if (partygoer.Inventory.size()==0) {
 					System.out.print(partygoer.identity + "'s pockets are empty");
 				}
 				else {
-					System.out.print(partygoer.identity + "'s pockets contain: \n");
+					System.out.print(partygoer.identity + "'s pockets contain: ");
 					for (int i=0;i<partygoer.Inventory.size();i++) {
 						System.out.print((i+1) + ": " + partygoer.Inventory.get(i).toString()+ "\n");
 					}

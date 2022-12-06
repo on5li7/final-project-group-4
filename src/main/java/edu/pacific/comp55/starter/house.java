@@ -656,7 +656,9 @@ public class house {
 						System.out.print("3) Perfume: 2 turns");
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
-				if (userChoice == 1) {
+				if (userChoice == 1 || user.currGoal == Goal.BREWING_POISON_WITCH 
+						|| user.currGoal == Goal.BREWING_POISON_CELLAR 
+						|| user.currGoal == Goal.BREWING_POISON_APOTH) {
 					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
 				
 						System.out.print("1) Poison: 6 turns");	
@@ -668,13 +670,15 @@ public class house {
 					inputfact.theevent="brewing";
 					inputfact.incriminating=true;
 					user.currroom.clues.add(inputfact);
+					user.busynum = 6;
 					
 					}
 					else{
 						System.out.print("Poison: Requires poisonous plants");
 					
 					}
-					if (userChoice==2) {
+					if (userChoice==2 || user.currGoal == Goal.BREWING_ANTIDOTE_APOTH || 
+						user.currGoal == Goal.BREWING_ANTIDOTE_WITCH || user.currGoal == Goal.BREWING_ANTIDOTE_CELLAR) {
 						if(user.Inventory.contains(item.MEDICINAL_PLANT)) {
 							System.out.print("2) Antidote: 4 turns");
 							Fact inputfact = new Fact(factcounter);
@@ -685,13 +689,14 @@ public class house {
 							inputfact.theevent="brewing";
 							inputfact.incriminating=false;
 							user.currroom.clues.add(inputfact);
+							user.busynum = 4;
 
 						}
 						else{
 							System.out.print("Antidote: Requires medicinal Plants");
 						}
 					}
-					if (userChoice==3) {
+					if (userChoice==3 || user.currGoal == Goal.BREWING_PERFUME_CELLAR || user.currGoal == Goal.BREWING_PERFUME_APOTH || user.currGoal ==Goal.BREWING_PERFUME_WITCH) {
 						if(user.Inventory.contains(item.FRAGRANT_PLANT)){
 							System.out.print("3) Perfume: 2 turns");
 							Fact inputfact = new Fact(factcounter);
@@ -702,6 +707,7 @@ public class house {
 							inputfact.theevent="brewing";
 							inputfact.incriminating=false;
 							user.currroom.clues.add(inputfact);
+							user.busynum = 2;
 						}
 						System.out.print("3) Perfume: 2 turns");
 
@@ -720,11 +726,11 @@ public class house {
 				if(user.isPlayer) {
 					System.out.print("Choose an option");
 					System.out.print("1) Grab Knife: 1 turns");
-					System.out.print("2) Stab: 3 turns");
+					System.out.print("2) Don't grab knife");
 					userChoice = in.nextInt();
 					System.out.println("You entered " + userChoice);
-					if (userChoice == 1) {
-						if (user.currGoal == Goal.DEFENSIVE_KILL) {
+				}
+					if (userChoice == 1 || user.currGoal == Goal.GET_KNIFE) {
 						System.out.print("1) Grab Knife: 1 turns");
 						Fact inputfact = new Fact(factcounter);
 						factcounter++;
@@ -737,21 +743,6 @@ public class house {
 					}
 					else {
 						System.out.print("Knife: Did not grab knife");
-					}
-				}
-					if(userChoice == 2) {
-						if (user.Inventory.contains(item.KNIFE)) {
-							System.out.print("2) Stab: 3 turns");
-							Fact inputfact = new Fact(factcounter);
-							factcounter++;
-							inputfact.instigator = user;
-							inputfact.Room = user.currroom;
-							inputfact.time = TheTime;
-							inputfact.theevent="knife";
-							inputfact.incriminating = true;
-							user.currroom.clues.add(inputfact);
-						}
-					}
 					}
 				return true;
 			}
@@ -768,9 +759,9 @@ public class house {
 						System.out.print("2) Eat: 2 turns");
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
-						if (userChoice == 1) {
-							if (user.currGoal == Goal.DRINKING) {
-								System.out.print("1) Drink: 1 turns");
+					}
+						if (userChoice == 1 || user.currGoal == Goal.DRINKING) {
+							if (user.isPlayer) {System.out.print("1) Drink: 1 turns")};
 								Fact inputfact = new Fact(factcounter);
 								factcounter++;
 								inputfact.instigator = user;
@@ -778,15 +769,21 @@ public class house {
 								inputfact.time=TheTime; 
 								inputfact.theevent="drinking";
 								inputfact.incriminating=false;
+								if (chandelierLoose) {
+									user.Dead = true;
+									if (user.isPlayer) {System.out.print("A deep creak, a sudden snap, an earth-shaking shatter, and you were dead.");}
+									inputfact.theevent = "chandelier smash";
+								}
+								else if (KitchenWinePoison) {
+								user.Dead = true;
+								if (user.isPlayer) {System.out.print("With a bloodcurdling wheeze, and a twist of your insides, you collapse, dead...");}
+								inputfact.victims.add(user);
+								inputfact.theevent = "poisoned wine";
+								}
 								user.currroom.clues.add(inputfact);
 							}
-							else{
-								System.out.print("Drink: Did not drink");
-							}
-						}
-						if (userChoice == 2) {
-							if (user.currGoal == Goal.EATING) {
-								System.out.print("2) Eat: 2 turns");
+						if (userChoice == 2 || user.currGoal == Goal.EATING) {
+							if (user.isPlayer) {System.out.print("2) Eat: 2 turns");}
 								Fact inputfact = new Fact(factcounter);
 								factcounter++;
 								inputfact.instigator = user;
@@ -794,25 +791,26 @@ public class house {
 								inputfact.time=TheTime; 
 								inputfact.theevent="eating";
 								inputfact.incriminating=false;
+								if (foodPoisoned) {
+									user.Dead = true;
+									inputfact.victims.add(user);
+									if (user.isPlayer) {System.out.print("With a disgusting cough, and a filling of your lungs, you collapse, dead.");}
+								}
 								user.currroom.clues.add(inputfact);
 							}
-							else{
-								System.out.print("Eat: Did not eat");
-							}
 						}
-					}
-				}
+				
 			//for drinking and eating give them a message that tells the user maybe you shouldn't eat or drink so much, there's a killer on the loose
 			//workbench, in workshop, where you can build a pistol should take a lot of turns and will be suspicious
-			public void workbench(Partygoer user) {
+			public Boolean workbench(Partygoer user) {
 				if (user.isPlayer){
 					System.out.print("Choose an option");
 					System.out.print("1) Build Pistol: 5 turns");
+					if (user.Inventory.contains(item.BROKEN_KEY)) {System.out.print("2. Fix Key: 3 turns.");}
 					userChoice = in.nextInt();
 					System.out.println("You entered " + userChoice);
-					if (userChoice == 1) {
-						if (user.currGoal == Goal.KILL) {
-							System.out.print("1) Build Pistol: 5 turns");
+				}
+					if (userChoice == 1 || user.currGoal == Goal.ASSAULT) {
 							Fact inputfact = new Fact(factcounter);
 							factcounter++;
 							inputfact.instigator = user;
@@ -823,7 +821,6 @@ public class house {
 							user.currroom.clues.add(inputfact);
 						}
 						else if(user.currGoal == Goal.CRAFTING_PISTOL) {
-							System.out.print("1) Build Pistol: 5 turns");
 							Fact inputfact = new Fact(factcounter);
 							factcounter++;
 							inputfact.instigator = user;
@@ -832,21 +829,17 @@ public class house {
 							inputfact.theevent="pistol";
 							inputfact.incriminating=false;
 							user.currroom.clues.add(inputfact);
+							user.busynum = 5;
 						}
-						else{
-							System.out.print("Build Pistol: Did not build pistol");
+						else if (userChoice == 2 || user.currGoal == Goal.FIX_KEY){
+							fix_key(user);
 						}
-					}
+					
 				}
-				}
+
+
 			//in workshop, broken_key you can fix to get to the armory, get in the gun case and get the rifle
-			public item fix_key(Partygoer user) {
-				if (user.isPlayer){
-					System.out.print("Choose an option");
-					System.out.print("1) Fix Key: 1 turns");
-					userChoice = in.nextInt();
-					System.out.println("You entered " + userChoice);
-					if (userChoice == 1) {
+			public Boolean fix_key(Partygoer user) {
 						if (user.Inventory.contains(item.BROKEN_KEY)) {
 							System.out.print("1) Fix Key: 1 turns");
 							Fact inputfact = new Fact(factcounter);
@@ -854,17 +847,16 @@ public class house {
 							inputfact.instigator = user;
 							inputfact.Room = user.currroom;
 							inputfact.time=TheTime; 
-							inputfact.theevent="fixed_key";
+							inputfact.theevent="fixed the key";
 							inputfact.incriminating=false;
 							user.currroom.clues.add(inputfact);
 						}
 						else{
-							System.out.print("Fix Key: Did not fix key");
+							if (user.isPlayer) {System.out.print("Fix Key: Did not fix key")};
 						}
+						return true;
 					}
-				}
-				return item.FIXED_KEY;
-			}
+
 			//riflecase, checks if you have a fixed_key then you can get the rifle
 			public item riflecase(Partygoer user) {
 				if (user.isPlayer) {
@@ -872,7 +864,7 @@ public class house {
 					System.out.print("1) Open Riflecase: 1 turns");
 					userChoice = in.nextInt();
 					System.out.println("You entered " + userChoice);
-					if (userChoice == 1) {
+					if (userChoice == 1 || user.currGoal == Goal.GET_RIFLE) {
 						if (user.Inventory.contains(item.FIXED_KEY)) {
 							System.out.print("1) Open Riflecase: 1 turns");
 							Fact inputfact = new Fact(factcounter);
@@ -889,7 +881,6 @@ public class house {
 						}
 					}
 				}
-				return item.RIFLE; //return the rifle to inventory if we have the key
 			}
 			//conversation interactions between partygoers, will be in partygoer.java, like pushing someone off a cliff when you click them
 			//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)
@@ -917,144 +908,29 @@ public class house {
 					}
 				}
 			}
+
+			public Boolean poisoning(Partygoer user) {
+				if (user.Inventory.contains(item.POISON) && user.currGoal == Goal.POISON_FOOD && user.currroom == Kitchen) {
+					if (user.isPlayer) {
+						System.out.print("1. Poison the food?");
+						System.out.print("2. Poison the wine?");
+						userChoice = in.nextInt();
+						if (userChoice == 1) {
+							foodPoisoned = true;
+						}
+						if (userChoice == 2) {
+							KitchenWinePoison = true;
+						}
+					}
+					else if(user.currGoal == Goal.POISON_FOOD) {
+						foodPoisoned = true;
+					}
+				}
+				return true;
+			}
 			//THIS GOES INTO FACT.JAVA : function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
 			
 			//change functions to return an int that increases the busyCounter
 			
-			public Boolean converse(Partygoer pg1, Partygoer pg2) {
-				pg1.isPlayer = true;
-				pg2.isPlayer = false;
-					if (pg1.isPlayer) {
-						System.out.print("Choose an action");
-						System.out.print("1) Check knifeset");
-						System.out.print("2) Check if key is broken");
-						System.out.print("3) Check riflecase");
-						System.out.print("4) Check " + pg2.identity + "'s fingerprints");
-						System.out.print("5) Brew a potion");
-						System.out.print("6) Eat");
-						System.out.print("7) Craft on workbench");
-						System.out.print("8) Check chandelier");
-						System.out.print("9) Gossip with " + pg2.identity);
-						System.out.print("10) Arrest " + pg2.identity);
-						System.out.print("11) Search pockets of " + pg2.identity);
-						userChoice = in.nextInt();
-						System.out.println("You entered " + userChoice);
-						if (userChoice==1) {
-							Knifeset(pg1);
-						}
-						if (userChoice==2) {
-							fix_key(pg1);
-						}
-						if (userChoice==3) {
-							riflecase(pg1);
-						}
-						if (userChoice==4) {
-							if (pg2.fingerPrintCheck(pg2)) {
-								System.out.print(pg2.identity + "'s fingerprints match the instigator's!");
-							}
-							else {
-								System.out.print(pg2.identity + "'s fingerprints do not match the instigator's.");
-							}
-						}
-						if (userChoice==5) {
-							Brewing(pg1);
-						}
-						if (userChoice==6) {
-							eat(pg1);
-						}
-						if (userChoice==7) {
-							workbench(pg1);
-						}
-						if (userChoice==8) {
-							chandelier(pg1);
-						}
-
-						if (userChoice==9) {
-							gossip(pg1,pg2);
-						}
-						if (userChoice==10) {
-							arrest(pg2);
-						}
-						if (userChoice==11) {
-							searchPockets(pg2);
-						}
-
-					}
-					
-				return true;
-			}
 			
-			public Boolean gossip(Partygoer pg1, Partygoer pg2) {
-				int checkNum1 = 0;
-				int checkNum2 = 0;
-				int checkNum3 = 0;
-				int randoInt = 0;
-				while (checkNum1==0||checkNum2==0||checkNum3==0) {
-					randoInt = rando.nextInt(5) + 1;
-					while (randoInt==checkNum1||randoInt==checkNum2||randoInt==checkNum3) {
-						if (checkNum1==randoInt) {
-							checkNum2=checkNum3=0;
-						}
-						else if (checkNum2==randoInt) {
-							checkNum1=checkNum3=0;
-						}
-						else if (checkNum3==randoInt) {
-							checkNum1=checkNum2=0;
-						}
-					}
-				}
-				if (checkNum1 != 0) {
-					Fact newFact = new Fact(checkNum1);
-					pg2.knownFacts.add(newFact);
-					pg2.printFact(newFact);
-				}
-				else if (checkNum2 != 0) {
-					Fact newFact = new Fact(checkNum2);
-					pg2.knownFacts.add(newFact);
-					pg2.printFact(newFact);
-				}
-				else if (checkNum3 != 0) {
-					Fact newFact = new Fact(checkNum3);
-					pg2.knownFacts.add(newFact);
-					pg2.printFact(newFact);
-				}
-				System.out.print("You learned a new fact about " + pg2.identity + "!");
-				return true;
-			}
 			
-			public Boolean arrest(Partygoer partygoer) {
-				if (partygoer.evidence.size()==5) {
-					System.out.print(partygoer.identity + " is arrested!");
-					partygoer.placeinRoom(partygoer, Dungeon);
-					partygoer.Dead = true;
-					return partygoer.Dead;
-				}
-				else {
-					System.out.print("Not enough evidence. Cannot arrest " + partygoer.identity + ".");
-					partygoer.Dead = false;
-					return partygoer.Dead;
-				}
-			}
-			
-
-			public Boolean searchPockets(Partygoer partygoer) {
-				System.out.print("Searching " + partygoer.identity);
-			
-			}
-			public Boolean search(Partygoer partygoer) {
-				System.out.print("Searching " + partygoer.identity + "\n");
-
-				if (partygoer.Inventory.size()==0) {
-					System.out.print(partygoer.identity + "'s pockets are empty");
-				}
-				else {
-					System.out.print(partygoer.identity + "'s pockets contain: \n");
-					for (int i=0;i<partygoer.Inventory.size();i++) {
-						System.out.print((i+1) + ": " + partygoer.Inventory.get(i).toString()+ "\n");
-					}
-				}
-				return true;
-			}
-			
-
-}

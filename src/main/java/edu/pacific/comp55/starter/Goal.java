@@ -34,7 +34,7 @@ public enum Goal {
 		//Sabotage. Cliff stalker has the character waiting at cliff for a victim so that they can be pushed off.
 		LOOSEN_CHANDELIER, CLIFF_STALKER, CRAFTING_BOMB, LOOSEN_BALCONY, 
 		BALCONY_STALKER, GET_WRENCH, GET_SCREWDRIVER, GET_HAMMER,
-		FIX_KEY, DRINKING, KILL,
+		FIX_KEY, DRINKING,
 		;
 		public String toString() {
 			switch(this) {

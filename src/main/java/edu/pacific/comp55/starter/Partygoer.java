@@ -52,7 +52,7 @@ public class Partygoer {
 	}
 
 	
-	public static void placeinRoom(Partygoer p, Room r) {
+	public void placeinRoom(Partygoer p, Room r) {
 		p.currroom = r;
 		r.occupants.add(p);
 	}
@@ -190,7 +190,7 @@ public class Partygoer {
 				currGoal == Goal.BREWING_POISON_APOTH || currGoal == Goal.BREWING_POISON_CELLAR || 
 				currGoal == Goal.BREWING_POISON_WITCH) {
 			if (currroom == thehouse.WineCellar || currroom == thehouse.Apothecary || currroom == thehouse.Outdoors_1) {
-				busynum = this.thehouse.Brewing(this);
+				this.thehouse.Brewing(this);
 				return true;
 			}
 			else {
@@ -209,7 +209,7 @@ public class Partygoer {
 		else if (currGoal == Goal.DRINKING_CELLAR || currGoal == Goal.DRINKING_HALL 
 				|| currGoal == Goal.DRINKING_KITCHEN) {
 			if (currroom == thehouse.WineCellar || currroom == thehouse.Kitchen || currroom == thehouse.DiningHall) {
-			thehouse.Drinking(this);
+			thehouse.eat(this);
 			return true;
 			}
 			else {
@@ -219,7 +219,7 @@ public class Partygoer {
 		else if (currGoal == Goal.CRAFTING_BOMB || currGoal == Goal.CRAFTING_LOCKPICK 
 				|| currGoal == Goal.CRAFTING_LOCKPICK || currGoal == Goal.FIX_KEY) {
 			if (currroom == thehouse.Workshop) {
-			thehouse.Crafting(this);
+			thehouse.workbench(this);
 			return true;
 				}
 			else {
@@ -753,6 +753,7 @@ public class Partygoer {
 			}
 			System.out.print("\n");
 		}
+		//Rifleset
 		if (currroom == thehouse.Armory) {
 			if (Inventory.contains(item.FIXED_KEY)) {
 				choicenum++;
@@ -776,17 +777,138 @@ public class Partygoer {
 				}
 			}
 		}
+		//Workbench
 		if (currroom == thehouse.Workshop) {
-			methodList.add(thehouse.Crafting());
 			choicenum++;
 			System.out.print(choicenum + ". craft something at the workbench.");
-			methodList.add(Crafting());
+			methodList.add(thehouse.workbench(this));
 		}
 	
 	}
 	
 	
-	
+	public Boolean converse(Partygoer pg2) {
+				System.out.print("Choose an action");
+				System.out.print("1) Check " + pg2.identity + "'s fingerprints");
+				System.out.print("2) Gossip with " + pg2.identity);
+				System.out.print("3) Search pockets of" + pg2.identity);
+				if (pg2.evidence.size() >= 5) {
+					System.out.print("4) Arrest " + pg2.identity);
+				}
+				try (Scanner inputChoice = new Scanner(System.in)) {
+					int userChoice = inputChoice.nextInt();
+					System.out.println("You entered " + userChoice);
+					if (userChoice==1) {
+						fingerPrintCheck(pg2);
+					}
+					else if (userChoice==2) {
+						gossip(pg2);
+					}
+					else if (userChoice==3) {
+						search(pg2);
+					}
+					else if (userChoice==4) {
+						if (fingerPrintCheck(pg2)) {
+							System.out.print(pg2.identity + "'s fingerprints match the instigator's!");
+							thehouse.factcounter++;
+							for(int i=0; i<5; i++) {
+							evidence.add(new Fact(thehouse.factcounter));	
+							}
+						}
+						else {
+							System.out.print(pg2.identity + "'s fingerprints do not match the instigator's.");
+						}
+					}
+					else {
+						System.out.print("Make another choice!");
+						converse(pg2);
+					}
+				}
+				return true;
+			}
+
+public Boolean gossip(Partygoer pg2) {
+	int checkNum1 = 0;
+	int checkNum2 = 0;
+	int checkNum3 = 0;
+	int randoInt = 0;
+	while (checkNum1==0||checkNum2==0||checkNum3==0) {
+		randoInt = rando.nextInt(5) + 1;
+		if (randoInt==checkNum1||randoInt==checkNum2||randoInt==checkNum3) {
+			if (checkNum1==0) {
+				checkNum1 = randoInt;
+			}
+			else if (checkNum2==0) {
+				checkNum2 = randoInt;
+			}
+			else if (checkNum3==0) {
+				checkNum3 = randoInt;
+			}
+		}
+	}
+	thehouse.factcounter++;
+	Fact newFact = new Fact(thehouse.factcounter);
+	int knowngossip = rando.nextInt(pg2.knownFacts.size());
+	if (checkNum1 == 1 || checkNum2 == 1|| checkNum3 == 1) {
+		newFact.setInstigator(knownFacts.get(knowngossip).getInstigator());
+	}
+	if (checkNum1 == 2 || checkNum2 == 2 || checkNum3 == 2) {
+		newFact.theevent = knownFacts.get(knowngossip).theevent;
+	}
+	if (checkNum1 == 3 || checkNum2 == 3 || checkNum3 == 3) {
+		newFact.thetime = knownFacts.get(knowngossip).thetime;
+	}
+	if (checkNum1 == 4 || checkNum2 == 4 || checkNum3 == 4) {
+		newFact.Room = knownFacts.get(knowngossip).Room;
+	}
+	if (checkNum1 == 5 || checkNum2 == 5 || checkNum3 == 5) {
+		newFact.Room = knownFacts.get(knowngossip).Room;
+	}
+	System.out.print("You learned a new fact about " + pg2.identity + "!");
+	return true;
+}
+
+public Boolean arrest(Partygoer partygoer) {
+	if (partygoer.evidence.size()==5) {
+		System.out.print(partygoer.identity + " is arrested!");
+		partygoer.placeinRoom(partygoer, thehouse.Dungeon);
+		partygoer.Dead = true;
+		return partygoer.Dead;
+	}
+	else {
+		System.out.print("Not enough evidence. Cannot arrest " + partygoer.identity + ".");
+		partygoer.Dead = false;
+		return partygoer.Dead;
+	}
+}
+
+
+public Boolean search(Partygoer partygoer) {
+	System.out.print("Searching " + partygoer.identity + "\n");
+
+	if (partygoer.Inventory.size()==0) {
+		System.out.print(partygoer.identity + "'s pockets are empty");
+		return false;
+	}
+	else {
+		System.out.print(partygoer.identity + "'s pockets contain: \n");
+		for (int i=0;i<partygoer.Inventory.size();i++) {
+			System.out.print((i+1) + ": " + partygoer.Inventory.get(i).toString()+ "\n");
+		}
+		for (int i=0; i<knownFacts.size(); i++) {
+			if (knownFacts.get(i).theevent == "stabbing" && (partygoer.Inventory.contains(item.BLOODY_KNIFE)) || partygoer
+					.Inventory.contains(item.BLOODY_SWORD)) {
+				System.out.print("Caught red handed!");
+				for (int o=0; o<5; o++) {
+					partygoer.evidence.add(knownFacts.get(i));
+				}
+				return true;
+			}
+		}
+	}
+	return true;
+}
+
 	
 	public Boolean cliffPush(Partygoer victim) {
 		victim.Dead = true;
@@ -794,17 +916,6 @@ public class Partygoer {
 		return victim.Dead;
 	}
 	
-	public Boolean search(Partygoer source) {
-		for (int i=0; i<knownFacts.size(); i++) {
-			if (knownFacts.get(i).theevent == "stabbing" && (source.Inventory.contains(item.BLOODY_KNIFE)) || source.Inventory.contains(item.BLOODY_SWORD)) {
-				System.out.print("Caught red handed!");
-				for (int o=0; o<5; o++) {
-					source.evidence.add(knownFacts.get(i));
-				}
-			}
-		}
-		return true;
-	}
 	
 	public Boolean getClue(Fact inputfact) {
 		busynum = 2;
@@ -979,7 +1090,7 @@ public Room GoalInterpLocation(Goal goal) {
 	else if (goal==Goal.GET_NOXIOUS_PLANT_OUTDOORS || goal==Goal.CAST_RITUAL_OD3) {
 		return thehouse.Outdoors_3;
 	}
-	else if (goal==Goal.GET_NOXIOUS_PLANT_OUTDOORS || goal==Goal.CAST_RITUAL_OD4) {
+	else if (goal==Goal.GET_POISONOUS_PLANT_OUTDOORS || goal==Goal.CAST_RITUAL_OD4) {
 		return thehouse.Outdoors_4;
 	}
 	else if (goal==Goal.POISON_WINE_KITCHEN||goal==Goal.DRINKING_KITCHEN||goal==Goal.POISON_FOOD) {
@@ -996,8 +1107,5 @@ public Room GoalInterpLocation(Goal goal) {
 	}
 	return null;
 }
-
-
-
 }
 

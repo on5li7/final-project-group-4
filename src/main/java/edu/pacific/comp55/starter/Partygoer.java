@@ -251,7 +251,7 @@ public class Partygoer {
 		else if (currGoal == Goal.POISON_FOOD) {
 			if (Inventory.contains(item.TREE_FROG_VENOM) || Inventory.contains(item.POISON)) {
 				if (currroom == thehouse.Kitchen) {
-					thehouse.poisonFood();
+					thehouse.poisoning(this);
 					return true;
 				}
 				else {
@@ -301,9 +301,7 @@ public class Partygoer {
 						currGoal = Goal.RANSACK;
 					};
 		}
-		else { 
-			return false;
-		}
+		return false;
 	}
 	
 	

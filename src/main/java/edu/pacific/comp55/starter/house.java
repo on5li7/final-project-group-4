@@ -1,9 +1,6 @@
 package edu.pacific.comp55.starter; 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -648,7 +645,7 @@ public class house {
 				this.House = House;
 			}*/
 			
-			public void Brewing(Partygoer user) {
+			public Boolean Brewing(Partygoer user) {
 				if (user.isPlayer) {
 					System.out.print("Choose an option:");
 						System.out.print("1) Poison: 6 turns");
@@ -717,6 +714,7 @@ public class house {
 					}
 				}
 			}
+				return true;
 			}
 				
 			
@@ -755,13 +753,12 @@ public class house {
 				public void eat(Partygoer user) {
 					if (user.isPlayer){
 						System.out.print("Choose an option");
-						System.out.print("1) Drink: 1 turns");
-						System.out.print("2) Eat: 2 turns");
+						if (user.currroom == Kitchen || user.currroom == WineCellar) System.out.print("1) Drink: 1 turns");
+						if (user.currroom == DiningHall) System.out.print("2) Eat: 2 turns");
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
 					}
 						if (userChoice == 1 || user.currGoal == Goal.DRINKING) {
-							if (user.isPlayer) {System.out.print("1) Drink: 1 turns")};
 								Fact inputfact = new Fact(factcounter);
 								factcounter++;
 								inputfact.instigator = user;
@@ -795,6 +792,7 @@ public class house {
 									user.Dead = true;
 									inputfact.victims.add(user);
 									if (user.isPlayer) {System.out.print("With a disgusting cough, and a filling of your lungs, you collapse, dead.");}
+									inputfact.theevent = "poisoned food";
 								}
 								user.currroom.clues.add(inputfact);
 							}
@@ -834,7 +832,7 @@ public class house {
 						else if (userChoice == 2 || user.currGoal == Goal.FIX_KEY){
 							fix_key(user);
 						}
-					
+					return true;
 				}
 
 
@@ -850,15 +848,17 @@ public class house {
 							inputfact.theevent="fixed the key";
 							inputfact.incriminating=false;
 							user.currroom.clues.add(inputfact);
+							user.Inventory.remove(item.BROKEN_KEY);
+							user.addItem(item.FIXED_KEY, user.Inventory);
 						}
 						else{
-							if (user.isPlayer) {System.out.print("Fix Key: Did not fix key")};
+							if (user.isPlayer) {System.out.print("Fix Key: Did not fix key");};
 						}
 						return true;
 					}
 
 			//riflecase, checks if you have a fixed_key then you can get the rifle
-			public item riflecase(Partygoer user) {
+			public Boolean riflecase(Partygoer user) {
 				if (user.isPlayer) {
 					System.out.print("Choose an option");
 					System.out.print("1) Open Riflecase: 1 turns");
@@ -875,12 +875,14 @@ public class house {
 							inputfact.theevent="rifle";
 							inputfact.incriminating=false;
 							user.currroom.clues.add(inputfact);
+							user.addItem(item.RIFLE, user.Inventory);
 						}
 						else{
 							System.out.print("Open Riflecase: Did not open riflecase");
 						}
 					}
 				}
+				return true;
 			}
 			//conversation interactions between partygoers, will be in partygoer.java, like pushing someone off a cliff when you click them
 			//Chandelier in dining hall, you can loosen, with either a wrench or a screwdriver(not both)
@@ -922,15 +924,10 @@ public class house {
 							KitchenWinePoison = true;
 						}
 					}
-					else if(user.currGoal == Goal.POISON_FOOD) {
+					else if(userChoice == 1 || user.currGoal == Goal.POISON_FOOD) {
 						foodPoisoned = true;
 					}
 				}
 				return true;
 			}
-			//THIS GOES INTO FACT.JAVA : function where a partygoer finds a body, and it displays the how the body was killed, the name of the body, and how long it has been dead.
-			
-			//change functions to return an int that increases the busyCounter
-			
-			
-			
+}

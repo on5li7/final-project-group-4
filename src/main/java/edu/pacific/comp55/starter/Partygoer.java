@@ -33,6 +33,8 @@ public class Partygoer {
 	public ArrayList<Goal> allPossibleGoals;
 	public ArrayList<item> Inventory; //need to set a cap of 4
 	//BusyCounter
+	public boolean isAlive;
+	public boolean isArrested;
 	
 	//add getClue() which takes addtoKnownFact from Partygoer to make the madlibs
 	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {

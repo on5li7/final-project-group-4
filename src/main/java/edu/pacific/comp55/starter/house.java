@@ -121,12 +121,38 @@ public class house {
 			while (gameEnd == false) { 
 			allPartygoers.get(i).takeTurn();
 			time++;
+			//if the killer is dead, endType = 1, and end is true
+			if (allPartygoers.get(i).isKiller == true && allPartygoers.get(i).isAlive == false) {
+				endType = 1;
+				gameEnd = true;
+			}
+			//if the killer is arrested, endType = 2, and end is true
+			if (allPartygoers.get(i).isKiller == true && allPartygoers.get(i).isArrested == true) {
+				endType = 2;
+				gameEnd = true;
+			}
+			//if the player is dead, endType = 3, and end is true
+			if (allPartygoers.get(i).isPlayer == true && allPartygoers.get(i).isAlive == false) {
+				endType = 3;
+				gameEnd = true;
+			}
+			int deadcount = 0;
+			for (int j = 0; j < allPartygoers.size(); j++) {
+				if (allPartygoers.get(j).isAlive == false) {
+					deadcount++;
+				}
+			}
+			if (deadcount == 5) {
+				endType = 4;
+				gameEnd = true;
+			}
 			if(i==9) {i=0;} 
 			else {
 				i++;
 			time++;	
 			} 
 			}
+	
 			endGame(endType);
 		}
 		

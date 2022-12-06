@@ -44,8 +44,9 @@ public class house {
 	public int factcounter;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
+	public int TheTime;
 	//sets the time of the house
-		private int time;
+		public int time;
 		//decides what endScreen is displayed.
 		int endType;
 		GoalSets goalsets;
@@ -116,10 +117,15 @@ public class house {
 			}
 		
 		public void RunGame() {
-			int i = 0;
-			while (gameEnd == false) {
+			int i = 0; 
+			while (gameEnd == false) { 
 			allPartygoers.get(i).takeTurn();
-			if(i==9) {i=0;}
+			time++;
+			if(i==9) {i=0;} 
+			else {
+				i++;
+			time++;	
+			} 
 			}
 			endGame(endType);
 		}
@@ -605,7 +611,6 @@ public class house {
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
 			Scanner in = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens //partygoer, room and fact also need scanner
 			int userChoice;
-
 			String input;
 			//Facts should be formatted like "_stabbing_" for madlibs
 			//also need to work on evidence
@@ -629,29 +634,49 @@ public class house {
 					if (user.Inventory.contains(item.HEMLOCK) || user.Inventory.contains(item.NIGHTSHADE)) {
 				
 						System.out.print("1) Poison: 6 turns");	
-					/*
-						new Fact(factcounter);
+					Fact inputfact = new Fact(factcounter);
 					factcounter++;
 					inputfact.instigator = user;
 					inputfact.Room = user.currroom;
-					inputfact.time=thetime;
+					inputfact.time=TheTime; 
 					inputfact.theevent="brewing";
 					inputfact.incriminating=true;
 					user.currroom.clues.add(inputfact);
-					*/
 					
 					}
 					else{
 						System.out.print("Poison: Requires poisonous plants");
+					
 					}
-					if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
-						System.out.print("2) Antidote: 4 turns");
+					if (userChoice==2) {
+						if(user.Inventory.contains(item.MEDICINAL_PLANT)) {
+							System.out.print("2) Antidote: 4 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time=TheTime; 
+							inputfact.theevent="brewing";
+							inputfact.incriminating=false;
+							user.currroom.clues.add(inputfact);
 
+						}
+						else{
+							System.out.print("Antidote: Requires medicinal Plants");
+						}
 					}
-					else{
-						System.out.print("Antidote: Requires medicinal Plants");
-					}
-					if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
+					if (userChoice==3) {
+						if(user.Inventory.contains(item.FRAGRANT_PLANT)){
+							System.out.print("3) Perfume: 2 turns");
+							Fact inputfact = new Fact(factcounter);
+							factcounter++;
+							inputfact.instigator = user;
+							inputfact.Room = user.currroom;
+							inputfact.time=TheTime; 
+							inputfact.theevent="brewing";
+							inputfact.incriminating=false;
+							user.currroom.clues.add(inputfact);
+						}
 						System.out.print("3) Perfume: 2 turns");
 
 					}
@@ -659,38 +684,9 @@ public class house {
 						System.out.print("Perfume: Requires Fragrant Plants");
 					}
 				}
-				else {
-					if (user.currGoal == Goal.BREWING_POISON_APOTH) {
-						if (user.Inventory.contains(item.NOXIOUS_PLANT)) {
-							System.out.print("1) Poison: 6 turns");
-
-						}
-						else{
-							System.out.print("Poison: Requires poisonous plants");
-						}
-					}
-					else if (user.currGoal == Goal.BREWING_ANTIDOTE_APOTH) {
-						if (user.Inventory.contains(item.MEDICINAL_PLANT)) {
-							System.out.print("2) Antidote: 4 turns");
-
-						}
-						else{
-							System.out.print("Antidote: Requires medicinal Plants");
-						}
-					}
-					else if (user.currGoal == Goal.BREWING_PERFUME_APOTH) {
-						if (user.Inventory.contains(item.FRAGRANT_PLANT)) {
-							System.out.print("Perfume: 2 turns");
-					
-						}
-						else{
-							System.out.print("Perfume: Requires Fragrant Plants");
-						}
-					}
-					
-				}
-				}
-				}
+			}
+			}
+				
 			
 				
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
@@ -783,9 +779,12 @@ public class house {
 						System.out.print("6) Eat");
 						System.out.print("7) Craft on workbench");
 						System.out.print("8) Check chandelier");
+<<<<<<< HEAD
 						System.out.print("9) Gossip with " + pg2.identity);
 						System.out.print("10) Arrest " + pg2.identity);
 						System.out.print("11) Search pockets of " + pg2.identity);
+=======
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
 						if (userChoice==1) {
@@ -817,6 +816,7 @@ public class house {
 						if (userChoice==8) {
 							chandelier(pg1);
 						}
+<<<<<<< HEAD
 						if (userChoice==9) {
 							gossip(pg1,pg2);
 						}
@@ -826,6 +826,8 @@ public class house {
 						if (userChoice==11) {
 							searchPockets(pg2);
 						}
+=======
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 					}
 					
 				return true;
@@ -883,13 +885,18 @@ public class house {
 				}
 			}
 			
+<<<<<<< HEAD
 			public Boolean searchPockets(Partygoer partygoer) {
 				System.out.print("Searching " + partygoer.identity);
+=======
+			public Boolean search(Partygoer partygoer) {
+				System.out.print("Searching " + partygoer.identity + "\n");
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 				if (partygoer.Inventory.size()==0) {
 					System.out.print(partygoer.identity + "'s pockets are empty");
 				}
 				else {
-					System.out.print(partygoer.identity + "'s pockets contain: ");
+					System.out.print(partygoer.identity + "'s pockets contain: \n");
 					for (int i=0;i<partygoer.Inventory.size();i++) {
 						System.out.print((i+1) + ": " + partygoer.Inventory.get(i).toString()+ "\n");
 					}

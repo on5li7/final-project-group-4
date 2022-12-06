@@ -39,6 +39,8 @@ public class Fact {
 
 		//Can be turned into EVIDENCE?
 		Boolean incriminating;
+
+		public int time;
 		
 		Fact(int ID) {
 			this.ID = ID;

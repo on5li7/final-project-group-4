@@ -44,8 +44,9 @@ public class house {
 	public int factcounter;
 	static int currentPG;
 	ArrayList<Partygoer> allPartygoers;
+	public int TheTime;
 	//sets the time of the house
-		private int time;
+		public int time;
 		//decides what endScreen is displayed.
 		int endType;
 		GoalSets goalsets;
@@ -116,10 +117,11 @@ public class house {
 			}
 		
 		public void RunGame() {
-			int i = 0;
-			while (gameEnd == false) {
-			allPartygoers.get(i).takeTurn();
-			if(i==9) {i=0;}
+			int i = 0; 
+			while (gameEnd == false) { 
+			allPartygoers.get(i).takeTurn(); 
+			if(i==9) {i=0;} 
+			else {i++;} 
 			}
 			endGame(endType);
 		}
@@ -605,7 +607,6 @@ public class house {
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
 			Scanner in = new Scanner(System.in); //for brewing and crafting, everything else will just click and it happens //partygoer, room and fact also need scanner
 			int userChoice;
-
 			String input;
 			//Facts should be formatted like "_stabbing_" for madlibs
 			//also need to work on evidence
@@ -639,8 +640,20 @@ public class house {
 					inputfact.incriminating=true;
 					user.currroom.clues.add(inputfact);
 					*/
-					
-					}
+						Fact inputfact = new Fact(factcounter);
+						factcounter++;
+						inputfact.instigator = user;
+						inputfact.Room = user.currroom;
+						inputfact.time=TheTime;
+						inputfact.theevent="brewing";
+						inputfact.incriminating=true;
+						user.currroom.clues.add(inputfact);
+						}
+						else{
+							System.out.print("Poison: Requires poisonous plants");
+						
+						}
+				}
 					else{
 						System.out.print("Poison: Requires poisonous plants");
 					}
@@ -690,7 +703,7 @@ public class house {
 					
 				}
 				}
-				}
+				
 			
 				
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game

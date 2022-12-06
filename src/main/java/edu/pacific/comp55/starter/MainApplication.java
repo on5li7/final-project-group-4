@@ -21,7 +21,7 @@ public class MainApplication extends GraphicsApplication {
 		House.start();
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
-		didningHall = new DiningHallPane(this);
+		didningHall = new DiningHallPane(this, House);
 		setupInteractions();
 		switchToMenu();
 	}

@@ -771,6 +771,9 @@ public class house {
 			//change functions to return an int that increases the busyCounter
 			
 			public Boolean converse(Partygoer pg1, Partygoer pg2) {
+				if (pg1.isPlayer) {
+					
+				}
 				return true;
 			}
 			
@@ -808,10 +811,28 @@ public class house {
 				return true;
 			}
 			
-			public Boolean arrest() {
+			public Boolean arrest(Partygoer partygoer) {
+				if (partygoer.evidence.size()==5) {
+					partygoer.placeinRoom(partygoer, Dungeon);
+					partygoer.Dead = true;
+					return partygoer.Dead;
+				}
 				return true;
 			}
 			
+			public Boolean search(Partygoer partygoer) {
+				System.out.print("Searching " + partygoer.identity + "\n");
+				if (partygoer.Inventory.size()==0) {
+					System.out.print(partygoer.identity + "'s pockets are empty");
+				}
+				else {
+					System.out.print(partygoer.identity + "'s pockets contain: \n");
+					for (int i=0;i<partygoer.Inventory.size();i++) {
+						System.out.print((i+1) + ": " + partygoer.Inventory.get(i).toString()+ "\n");
+					}
+				}
+				return true;
+			}
 			
 
 }

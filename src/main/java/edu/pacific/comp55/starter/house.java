@@ -784,9 +784,51 @@ public class house {
 			//change functions to return an int that increases the busyCounter
 			
 			public Boolean converse(Partygoer pg1, Partygoer pg2) {
-				if (pg1.isPlayer) {
+				pg1.isPlayer = true;
+				pg2.isPlayer = false;
+					if (pg1.isPlayer) {
+						System.out.print("Choose an action");
+						System.out.print("1) Check knifeset");
+						System.out.print("2) Check if key is broken");
+						System.out.print("3) Check riflecase");
+						System.out.print("4) Check " + pg2.identity + "'s fingerprints");
+						System.out.print("5) Brew a potion");
+						System.out.print("6) Eat");
+						System.out.print("7) Craft on workbench");
+						System.out.print("8) Check chandelier");
+						userChoice = in.nextInt();
+						System.out.println("You entered " + userChoice);
+						if (userChoice==1) {
+							Knifeset(pg1);
+						}
+						if (userChoice==2) {
+							fix_key(pg1);
+						}
+						if (userChoice==3) {
+							riflecase(pg1);
+						}
+						if (userChoice==4) {
+							if (pg2.fingerPrintCheck(pg2)) {
+								System.out.print(pg2.identity + "'s fingerprints match the instigator's!");
+							}
+							else {
+								System.out.print(pg2.identity + "'s fingerprints do not match the instigator's.");
+							}
+						}
+						if (userChoice==5) {
+							Brewing(pg1);
+						}
+						if (userChoice==6) {
+							eat(pg1);
+						}
+						if (userChoice==7) {
+							workbench(pg1);
+						}
+						if (userChoice==8) {
+							chandelier(pg1);
+						}
+					}
 					
-				}
 				return true;
 			}
 			
@@ -826,11 +868,16 @@ public class house {
 			
 			public Boolean arrest(Partygoer partygoer) {
 				if (partygoer.evidence.size()==5) {
+					System.out.print(partygoer.identity + " is arrested!");
 					partygoer.placeinRoom(partygoer, Dungeon);
 					partygoer.Dead = true;
 					return partygoer.Dead;
 				}
-				return true;
+				else {
+					System.out.print("Not enough evidence. Cannot arrest " + partygoer.identity + ".");
+					partygoer.Dead = false;
+					return partygoer.Dead;
+				}
 			}
 			
 			public Boolean search(Partygoer partygoer) {

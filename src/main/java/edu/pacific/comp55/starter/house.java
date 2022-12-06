@@ -785,7 +785,7 @@ public class house {
 						System.out.print("8) Check chandelier");
 						System.out.print("9) Gossip with " + pg2.identity);
 						System.out.print("10) Arrest " + pg2.identity);
-						System.out.print("11) Search " + pg2.identity);
+						System.out.print("11) Search pockets of " + pg2.identity);
 						userChoice = in.nextInt();
 						System.out.println("You entered " + userChoice);
 						if (userChoice==1) {
@@ -824,7 +824,7 @@ public class house {
 							arrest(pg2);
 						}
 						if (userChoice==11) {
-							search(pg2);
+							searchPockets(pg2);
 						}
 					}
 					
@@ -853,15 +853,19 @@ public class house {
 				if (checkNum1 != 0) {
 					Fact newFact = new Fact(checkNum1);
 					pg2.knownFacts.add(newFact);
+					pg2.printFact(newFact);
 				}
 				else if (checkNum2 != 0) {
 					Fact newFact = new Fact(checkNum2);
 					pg2.knownFacts.add(newFact);
+					pg2.printFact(newFact);
 				}
 				else if (checkNum3 != 0) {
 					Fact newFact = new Fact(checkNum3);
 					pg2.knownFacts.add(newFact);
+					pg2.printFact(newFact);
 				}
+				System.out.print("You learned a new fact about " + pg2.identity + "!");
 				return true;
 			}
 			
@@ -879,7 +883,7 @@ public class house {
 				}
 			}
 			
-			public Boolean search(Partygoer partygoer) {
+			public Boolean searchPockets(Partygoer partygoer) {
 				System.out.print("Searching " + partygoer.identity);
 				if (partygoer.Inventory.size()==0) {
 					System.out.print(partygoer.identity + "'s pockets are empty");

@@ -40,6 +40,7 @@ public class MainApplication extends GraphicsApplication {
 		playRandomSound();
 		switchToScreen(somePane);
 	}
+	
 
 	private void playRandomSound() {
 		AudioPlayer audio = AudioPlayer.getInstance();
@@ -50,3 +51,7 @@ public class MainApplication extends GraphicsApplication {
 		new MainApplication().start();
 	}
 }
+
+/*debug function
+create 3 fresh rooms, add them together as adjacent, need new house
+generate individual room, and connect */

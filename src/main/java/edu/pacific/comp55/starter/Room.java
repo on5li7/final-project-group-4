@@ -46,14 +46,15 @@ Interactable.put("Antidote", "GreenHouse");
 //TODO:Finish adding interactables
 }
 
-public Room(ArrayList<item> looseStuff, house thehouse, ArrayList<Room> adjacentRooms, ArrayList<Partygoer> occupants, int BusStop) {
+public Room(ArrayList<item> looseStuff, house thehouse, ArrayList<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.theHouse = thehouse;
 	this.clues = new ArrayList<Fact>();
 	//this.Ritual = Ritual;
-	this.adjacentRooms = adjacentRooms;
+	this.adjacentRooms = new ArrayList<Room>();
 	this.occupants = occupants;
 	this.BusStop = BusStop;
+	
 }
 }
 //TODO: Need to add interactables in rooms ie. knive set in kitchen, brewing pot in outdoors 1, in wine cellar, apothecary

@@ -31,18 +31,26 @@ public class Partygoer {
 	public ArrayList<Goal> allPossibleGoals;
 	public ArrayList<item> Inventory; //need to set a cap of 4
 	//BusyCounter
-	public boolean isAlive;
-	public boolean isArrested;
+	public Boolean isArrested;
 	
 	//add getClue() which takes addtoKnownFact from Partygoer to make the madlibs
 	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {
 		this.identity = identity;
 		this.isKiller = isKiller;
+		this.busynum = 0;
+		this.aggronum = 0;
+		this.Dead = false;
+		this.Bloodied = false;
 		this.rando = new Random();
+		this.isPlayer = false;
+		this.isArrested = false;
+		this.isKiller = false;
 		this.isDetective = isDetective;
 		this.knownRituals = new ArrayList<Rituals>();
+		this.newGoalSets = new GoalSets();
 		this.Inventory = new ArrayList<item>();
 		this.fingerprints = new ArrayList<Fact>();
+		this.evidence = new ArrayList<Fact>();
 		this.currroom = startingRoom;
 		this.thehouse = thehouse;
 		this.currentRoute = new ArrayList<Room>();
@@ -113,7 +121,7 @@ public class Partygoer {
 	
 	//This function calls moveonRoute, which will move the character and return true if there is a current route.
 	//If moveonRoute is false, the player AI will instead check the room for their goal.
-	public void takeTurn() {
+	public void f() {
 		if (Dead) {
 			return;
 		}

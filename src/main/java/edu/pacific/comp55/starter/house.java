@@ -61,23 +61,25 @@ public class house {
 		
 		public void characterSelect() {
 			int response = 0;
-			System.out.print("1. Gertrude Biblio - Genius Librarian");
-			System.out.print("2. Frank - Robust Sommelier");
-			System.out.print("3. Constable Smithy - Furtive Lawman");
-			System.out.print("4. Doctor Reiklen - Surgeon Extraordinaire");
-			System.out.print("5. Ariana Stocracy - Alluring Socialite");
-			System.out.print("6. bob");
-			System.out.print("7. Maximillian - Disarming Politician");
-			System.out.print("8. Jake of the West - Bounty Hunter");
-			System.out.print("9. Chad - Millio- no, Billionaire");
-			System.out.print("10. Todd - Local Teen");
-			try {
+			System.out.print("1. Gertrude Biblio - Genius Librarian\n");
+			System.out.print("2. Frank - Robust Sommelier\n");
+			System.out.print("3. Constable Smithy - Furtive Lawman\n");
+			System.out.print("4. Doctor Reiklen - Surgeon Extraordinaire\n");
+			System.out.print("5. Ariana Stocracy - Alluring Socialite\n");
+			System.out.print("6. bob\n");
+			System.out.print("7. Maximillian - Disarming Politician\n");
+			System.out.print("8. Jake of the West - Bounty Hunter\n");
+			System.out.print("9. Chad - Millio- no, Billionaire\n");
+			System.out.print("10. Todd - Local Teen\n");
+			response = in.nextInt();
+			System.out.print(response);
+			/*try {
 				response = reader.nextInt();
 			}
 			catch(Exception InputMismatchException) {
 				characterSelect();
 			}
-			finally {
+			/*finally {*/
 				if (response < 1 || response > 10) {
 				characterSelect();	
 				}
@@ -100,7 +102,7 @@ public class house {
 					while (allPartygoers.size() != 0) {
 						int checknum = rando.nextInt(allPartygoers.size());
 						allPartygoers.get(checknum).identity = identities.get(checknum);
-						partyholder.add(partyholder.get(checknum));
+						partyholder.add(allPartygoers.get(checknum));
 						allPartygoers.remove(checknum);
 						identities.remove(checknum);
 					}
@@ -109,7 +111,6 @@ public class house {
 			}
 			
 				
-			}
 		
 		public void RunGame() {
 			int i = 0; 
@@ -117,7 +118,7 @@ public class house {
 			allPartygoers.get(i).takeTurn();
 			time++;
 			//if the killer is dead, endType = 1, and end is true
-			if (allPartygoers.get(i).isKiller == true && allPartygoers.get(i).isAlive == false) {
+			if (allPartygoers.get(i).isKiller == true && allPartygoers.get(i).Dead == true) {
 				endType = 1;
 				gameEnd = true;
 			}
@@ -127,13 +128,13 @@ public class house {
 				gameEnd = true;
 			}
 			//if the player is dead, endType = 3, and end is true
-			if (allPartygoers.get(i).isPlayer == true && allPartygoers.get(i).isAlive == false) {
+			if (allPartygoers.get(i).isPlayer == true && allPartygoers.get(i).Dead == true) {
 				endType = 3;
 				gameEnd = true;
 			}
 			int deadcount = 0;
 			for (int j = 0; j < allPartygoers.size(); j++) {
-				if (allPartygoers.get(j).isAlive == false) {
+				if (allPartygoers.get(j).Dead == false) {
 					deadcount++;
 				}
 			}
@@ -141,14 +142,14 @@ public class house {
 				endType = 4;
 				gameEnd = true;
 			}
-			if(i==9) {i=0;} 
+			if (i==9) {i=0;}
 			else {
 				i++;
 			time++;	
 			} 
 			}
-	
 			endGame(endType);
+		}
 		}
 		
 		public void endGame(int choice) {
@@ -554,6 +555,7 @@ public class house {
 			//ArrayList<String> House = new ArrayList<String>();
 			this.time = 1;
 			this.factcounter = 0;
+			this.gameEnd = false;
 			this.rando = new Random();
 			this.goalsets = new GoalSets();
 			this.knifeset = new ArrayList<item>();

@@ -14,10 +14,6 @@ house theHouse;
 GImage background;
 
 ArrayList<Room> adjacentRooms;
-
-public int getAdjacentSetSize() {
-	return adjacentRooms.size();
-}
 //The bus stops are 1-5. If the room is not a bus stop, this is 0.
 //Apothecary is stop 1. Hallway is stop 2. Armory is stop 3. Kitchen is stop 4. Outdoors bottem left is stop 5.
 int BusStop;
@@ -25,9 +21,6 @@ int BusStop;
 ArrayList<Fact> clues;
 
 ArrayList<Partygoer> occupants;
-public int getBusStop() {
-	return BusStop;
-}
 
 public void interactables() {
 	HashMap<String, String> Interactable = new HashMap<>(); //Room, Interactable
@@ -46,12 +39,12 @@ Interactable.put("Antidote", "GreenHouse");
 //TODO:Finish adding interactables
 }
 
-public Room(ArrayList<item> looseStuff, house thehouse, ArrayList<Room> adjacentRooms, ArrayList<Partygoer> occupants, int BusStop) {
+public Room(ArrayList<item> looseStuff, house thehouse, ArrayList<Partygoer> occupants, int BusStop) {
 	this.looseStuff = looseStuff;
 	this.theHouse = thehouse;
 	this.clues = new ArrayList<Fact>();
 	//this.Ritual = Ritual;
-	this.adjacentRooms = adjacentRooms;
+	this.adjacentRooms = new ArrayList<Room>();
 	this.occupants = occupants;
 	this.BusStop = BusStop;
 }

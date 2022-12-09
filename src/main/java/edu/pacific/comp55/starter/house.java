@@ -19,7 +19,6 @@ public class house {
 	public Room Balcony;
 	public Room Outdoors_1;
 	public Room Outdoors_2;
-	Scanner reader = null;
 	public Room Outdoors_3;
 	public Room Outdoors_4;
 	public Room Hallway;
@@ -48,7 +47,11 @@ public class house {
 		int endType;
 		GoalSets goalsets;
 		
-		public void start() {
+		public static void main(String args[]) {
+			start();
+		}
+		
+		public static void start() {
 			house thehouse = new house();
 			thehouse.allPartygoers.get(0).isPlayer = true;
 			thehouse.allPartygoers.get(0).isDetective = true;
@@ -61,23 +64,17 @@ public class house {
 		
 		public void characterSelect() {
 			int response = 0;
-			System.out.print("1. Gertrude Biblio - Genius Librarian");
-			System.out.print("2. Frank - Robust Sommelier");
-			System.out.print("3. Constable Smithy - Furtive Lawman");
-			System.out.print("4. Doctor Reiklen - Surgeon Extraordinaire");
-			System.out.print("5. Ariana Stocracy - Alluring Socialite");
-			System.out.print("6. bob");
-			System.out.print("7. Maximillian - Disarming Politician");
-			System.out.print("8. Jake of the West - Bounty Hunter");
-			System.out.print("9. Chad - Millio- no, Billionaire");
-			System.out.print("10. Todd - Local Teen");
-			try {
-				response = reader.nextInt();
-			}
-			catch(Exception InputMismatchException) {
-				characterSelect();
-			}
-			finally {
+			System.out.print("1. Gertrude Biblio - Genius Librarian\n");
+			System.out.print("2. Frank - Robust Sommelier\n");
+			System.out.print("3. Constable Smithy - Furtive Lawman\n");
+			System.out.print("4. Doctor Reiklen - Surgeon Extraordinaire\n");
+			System.out.print("5. Ariana Stocracy - Alluring Socialite\n");
+			System.out.print("6. bob\n");
+			System.out.print("7. Maximillian - Disarming Politician\n");
+			System.out.print("8. Jake of the West - Bounty Hunter\n");
+			System.out.print("9. Chad - Millio- no, Billionaire\n");
+			System.out.print("10. Todd - Local Teen\n");
+			response = in.nextInt();
 				if (response < 1 || response > 10) {
 				characterSelect();	
 				}
@@ -95,21 +92,19 @@ public class house {
 					identities.add("Chad");
 					identities.add("Todd");
 					allPartygoers.get(0).identity = identities.get(response-1);
-					partyholder.add(allPartygoers.get(response-1));
-					allPartygoers.remove(response-1);
+					partyholder.add(allPartygoers.get(0));
+					allPartygoers.remove(0);
 					while (allPartygoers.size() != 0) {
 						int checknum = rando.nextInt(allPartygoers.size());
-						allPartygoers.get(checknum).identity = identities.get(checknum);
-						partyholder.add(partyholder.get(checknum));
-						allPartygoers.remove(checknum);
+						allPartygoers.get(0).identity = identities.get(checknum);
+						partyholder.add(allPartygoers.get(0));
+						allPartygoers.remove(allPartygoers.get(0));
 						identities.remove(checknum);
 					}
 					allPartygoers = partyholder;
 				}
 			}
 			
-				
-			}
 		
 		public void RunGame() {
 			int i = 0; 
@@ -117,7 +112,7 @@ public class house {
 			allPartygoers.get(i).takeTurn();
 			time++;
 			//if the killer is dead, endType = 1, and end is true
-			if (allPartygoers.get(i).isKiller == true && allPartygoers.get(i).isAlive == false) {
+			if (allPartygoers.get(i).isKiller == true && allPartygoers.get(i).Dead == true) {
 				endType = 1;
 				gameEnd = true;
 			}
@@ -127,13 +122,13 @@ public class house {
 				gameEnd = true;
 			}
 			//if the player is dead, endType = 3, and end is true
-			if (allPartygoers.get(i).isPlayer == true && allPartygoers.get(i).isAlive == false) {
+			if (allPartygoers.get(i).isPlayer == true && allPartygoers.get(i).Dead == true) {
 				endType = 3;
 				gameEnd = true;
 			}
 			int deadcount = 0;
 			for (int j = 0; j < allPartygoers.size(); j++) {
-				if (allPartygoers.get(j).isAlive == false) {
+				if (allPartygoers.get(j).Dead == true) {
 					deadcount++;
 				}
 			}
@@ -142,10 +137,7 @@ public class house {
 				gameEnd = true;
 			}
 			if(i==9) {i=0;} 
-			else {
-				i++;
-			time++;	
-			} 
+			else {i++;}
 			}
 	
 			endGame(endType);
@@ -289,13 +281,6 @@ public class house {
 		//checks when it's night or day 
 		private static Boolean isDark;
 		
-		public void nextPlayer() {
-			if(currentPG == 9) {
-				currentPG = 0;
-				allPartygoers.get(currentPG).takeTurn();
-			}
-		}
-		
 		//the number of dead people
 		public int deadpeople;
 		
@@ -343,90 +328,92 @@ public class house {
 			}
 		}
 		
-		public void adjacentRooms() {
-				this.DiningHall.adjacentRooms.add(Kitchen);
-				this.DiningHall.adjacentRooms.add(GreenHouse);
-				this.DiningHall.adjacentRooms.add(Hallway);
-				this.DiningHall.adjacentRooms.add(TheStudy);
-				this.DiningHall.adjacentRooms.add(Workshop);
+		public void adjacenrooms() {
+				this.DiningHall.adjacentRooms.add(this.Kitchen);
+				this.DiningHall.adjacentRooms.add(this.GreenHouse);
+				this.DiningHall.adjacentRooms.add(this.Hallway);
+				this.DiningHall.adjacentRooms.add(this.TheStudy);
+				this.DiningHall.adjacentRooms.add(this.Workshop);
+			for (int i=0; i<DiningHall.adjacentRooms.size(); i++) {
+				System.out.print(RoomtoString(DiningHall.adjacentRooms.get(i)));
+			}
 			
-			
-				this.Apothecary.adjacentRooms.add(TheStudy);
-				this.Apothecary.adjacentRooms.add(Balcony);
-				this.Apothecary.adjacentRooms.add(Morgue);
+				this.Apothecary.adjacentRooms.add(this.TheStudy);
+				this.Apothecary.adjacentRooms.add(this.Balcony);
+				this.Apothecary.adjacentRooms.add(this.Morgue);
 				
-				this.Morgue.adjacentRooms.add(Apothecary);
+				this.Morgue.adjacentRooms.add(this.Apothecary);
 				
-				this.Kitchen.adjacentRooms.add(DiningHall);
-				this.Kitchen.adjacentRooms.add(GreenHouse);
-				this.Kitchen.adjacentRooms.add(Outdoors_2);
-				this.Kitchen.adjacentRooms.add(WineCellar);
+				this.Kitchen.adjacentRooms.add(this.DiningHall);
+				this.Kitchen.adjacentRooms.add(this.GreenHouse);
+				this.Kitchen.adjacentRooms.add(this.Outdoors_2);
+				this.Kitchen.adjacentRooms.add(this.WineCellar);
 			
-				this.WineCellar.adjacentRooms.add(Kitchen);
+				this.WineCellar.adjacentRooms.add(this.Kitchen);
 				
-				this.GreenHouse.adjacentRooms.add(Kitchen);
-				this.GreenHouse.adjacentRooms.add(DiningHall);
-				this.GreenHouse.adjacentRooms.add(Outdoors_4);
+				this.GreenHouse.adjacentRooms.add(this.Kitchen);
+				this.GreenHouse.adjacentRooms.add(this.DiningHall);
+				this.GreenHouse.adjacentRooms.add(this.Outdoors_4);
 			
-				this.TheStudy.adjacentRooms.add(DiningHall);
-				this.TheStudy.adjacentRooms.add(Apothecary);
+				this.TheStudy.adjacentRooms.add(this.DiningHall);
+				this.TheStudy.adjacentRooms.add(this.Apothecary);
 			
-				this.Armory.adjacentRooms.add(Workshop);
-				this.Armory.adjacentRooms.add(Dungeon);
-				this.Armory.adjacentRooms.add(Balcony);
+				this.Armory.adjacentRooms.add(this.Workshop);
+				this.Armory.adjacentRooms.add(this.Dungeon);
+				this.Armory.adjacentRooms.add(this.Balcony);
 			
-				this.Workshop.adjacentRooms.add(Armory);
-				this.Workshop.adjacentRooms.add(DiningHall);
+				this.Workshop.adjacentRooms.add(this.Armory);
+				this.Workshop.adjacentRooms.add(this.DiningHall);
 	
-				this.Dungeon.adjacentRooms.add(Armory);
+				this.Dungeon.adjacentRooms.add(this.Armory);
 			
-				this.Outdoors_1.adjacentRooms.add(Outdoors_2);
-				this.Outdoors_1.adjacentRooms.add(Outdoors_3);
-				this.Outdoors_1.adjacentRooms.add(TheCliff);
+				this.Outdoors_1.adjacentRooms.add(this.Outdoors_2);
+				this.Outdoors_1.adjacentRooms.add(this.Outdoors_3);
+				this.Outdoors_1.adjacentRooms.add(this.TheCliff);
 
-				this.Outdoors_2.adjacentRooms.add(Outdoors_1);
-				this.Outdoors_2.adjacentRooms.add(Outdoors_4);
-				this.Outdoors_2.adjacentRooms.add(Kitchen);
+				this.Outdoors_2.adjacentRooms.add(this.Outdoors_1);
+				this.Outdoors_2.adjacentRooms.add(this.Outdoors_4);
+				this.Outdoors_2.adjacentRooms.add(this.Kitchen);
 			
-				this.Outdoors_3.adjacentRooms.add(TheCliff);
-				this.Outdoors_3.adjacentRooms.add(Outdoors_1);
-				this.Outdoors_3.adjacentRooms.add(Outdoors_4);
+				this.Outdoors_3.adjacentRooms.add(this.TheCliff);
+				this.Outdoors_3.adjacentRooms.add(this.Outdoors_1);
+				this.Outdoors_3.adjacentRooms.add(this.Outdoors_4);
 			
-				this.Outdoors_4.adjacentRooms.add(Outdoors_3);
-				this.Outdoors_4.adjacentRooms.add(Outdoors_2);
-				this.Outdoors_4.adjacentRooms.add(GreenHouse);
+				this.Outdoors_4.adjacentRooms.add(this.Outdoors_3);
+				this.Outdoors_4.adjacentRooms.add(this.Outdoors_2);
+				this.Outdoors_4.adjacentRooms.add(this.GreenHouse);
 		
-				this.Bedroom_1.adjacentRooms.add(Hallway);
-				this.Bedroom_2.adjacentRooms.add(Hallway);
-				this.Bedroom_3.adjacentRooms.add(Hallway);
-				this.Bedroom_4.adjacentRooms.add(Hallway);
-				this.Bedroom_5.adjacentRooms.add(Hallway);
-				this.Bedroom_6.adjacentRooms.add(Hallway);
-				this.Bedroom_7.adjacentRooms.add(Hallway);
-				this.Bedroom_8.adjacentRooms.add(Hallway);
-				this.Bedroom_9.adjacentRooms.add(Hallway);
-				this.Bedroom_10.adjacentRooms.add(Hallway);
+				this.Bedroom_1.adjacentRooms.add(this.Hallway);
+				this.Bedroom_2.adjacentRooms.add(this.Hallway);
+				this.Bedroom_3.adjacentRooms.add(this.Hallway);
+				this.Bedroom_4.adjacentRooms.add(this.Hallway);
+				this.Bedroom_5.adjacentRooms.add(this.Hallway);
+				this.Bedroom_6.adjacentRooms.add(this.Hallway);
+				this.Bedroom_7.adjacentRooms.add(this.Hallway);
+				this.Bedroom_8.adjacentRooms.add(this.Hallway);
+				this.Bedroom_9.adjacentRooms.add(this.Hallway);
+				this.Bedroom_10.adjacentRooms.add(this.Hallway);
 		
 			
-				this.TheCliff.adjacentRooms.add(Outdoors_1);
-				this.TheCliff.adjacentRooms.add(Outdoors_3);
+				this.TheCliff.adjacentRooms.add(this.Outdoors_1);
+				this.TheCliff.adjacentRooms.add(this.Outdoors_3);
 
-				this.Hallway.adjacentRooms.add(Bedroom_1);
-				this.Hallway.adjacentRooms.add(Bedroom_2);
-				this.Hallway.adjacentRooms.add(Bedroom_3);
-				this.Hallway.adjacentRooms.add(Bedroom_4);
-				this.Hallway.adjacentRooms.add(Bedroom_5);
-				this.Hallway.adjacentRooms.add(Bedroom_6);
-				this.Hallway.adjacentRooms.add(Bedroom_7);
-				this.Hallway.adjacentRooms.add(Bedroom_8);
-				this.Hallway.adjacentRooms.add(Bedroom_9);
-				this.Hallway.adjacentRooms.add(Bedroom_10);
-				this.Hallway.adjacentRooms.add(DiningHall);
-				this.Hallway.adjacentRooms.add(Balcony);
+				this.Hallway.adjacentRooms.add(this.Bedroom_1);
+				this.Hallway.adjacentRooms.add(this.Bedroom_2);
+				this.Hallway.adjacentRooms.add(this.Bedroom_3);
+				this.Hallway.adjacentRooms.add(this.Bedroom_4);
+				this.Hallway.adjacentRooms.add(this.Bedroom_5);
+				this.Hallway.adjacentRooms.add(this.Bedroom_6);
+				this.Hallway.adjacentRooms.add(this.Bedroom_7);
+				this.Hallway.adjacentRooms.add(this.Bedroom_8);
+				this.Hallway.adjacentRooms.add(this.Bedroom_9);
+				this.Hallway.adjacentRooms.add(this.Bedroom_10);
+				this.Hallway.adjacentRooms.add(this.DiningHall);
+				this.Hallway.adjacentRooms.add(this.Balcony);
 				
-				this.Balcony.adjacentRooms.add(Armory);
-				this.Balcony.adjacentRooms.add(Hallway);
-				this.Balcony.adjacentRooms.add(Apothecary);
+				this.Balcony.adjacentRooms.add(this.Armory);
+				this.Balcony.adjacentRooms.add(this.Hallway);
+				this.Balcony.adjacentRooms.add(this.Apothecary);
 
 		}
 		
@@ -556,74 +543,50 @@ public class house {
 			this.factcounter = 0;
 			this.rando = new Random();
 			this.goalsets = new GoalSets();
+			this.knifeset = new ArrayList<item>();
 			this.knifeset.add(item.KNIFE);
 			this.knifeset.add(item.KNIFE);
+			this.gameEnd = false;
 			this.knifeset.add(item.KNIFE);
 			this.allPartygoers = new ArrayList<Partygoer>();
-			this.DiningHall = new Room(new ArrayList<item>(), this, null, new ArrayList<Partygoer>(), 0);
-			this.Balcony = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Apothecary = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 1);
-			this.Kitchen = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 4);
-			this.WineCellar = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.GreenHouse = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.TheStudy = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Armory = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 3);
-			this.Workshop = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Dungeon = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Outdoors_1 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Outdoors_2 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Outdoors_3 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 5);
-			this.Outdoors_4 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-		    this.Bedroom_1 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_2 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_3 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_4 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_5 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_6 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_7 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_8 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_9 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Bedroom_10 = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.TheCliff = new Room(new ArrayList<item>(), this,  null, new ArrayList<Partygoer>(), 0);
-			this.Hallway = new Room(new ArrayList<item>(), this, null,new ArrayList<Partygoer>(),2);
-			this.Morgue = new Room(new ArrayList<item>(), this, null,new ArrayList<Partygoer>(),0);
-			adjacentRooms();
+			this.DiningHall = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 0);
+			this.Balcony = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Apothecary = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 1);
+			this.Kitchen = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 4);
+			this.WineCellar = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.GreenHouse = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.TheStudy = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Armory = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 3);
+			this.Workshop = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Dungeon = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Outdoors_1 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Outdoors_2 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Outdoors_3 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 5);
+			this.Outdoors_4 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+		    this.Bedroom_1 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_2 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_3 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_4 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_5 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_6 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_7 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_8 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_9 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Bedroom_10 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.TheCliff = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
+			this.Hallway = new Room(new ArrayList<item>(), this,new ArrayList<Partygoer>(),2);
+			this.Morgue = new Room(new ArrayList<item>(), this,new ArrayList<Partygoer>(),0);
+			adjacenrooms();
 			this.endType = 0;
 			this.deadpeople = 0;
 			this.foodPoisoned = false;
 			this.chandelierLoose = false;
 			this.factcounter = 0;
-			Partygoer partyholder;
-			partyholder = new Partygoer("Maximillian", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Bob", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Frank", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Chad", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Todd", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Constable Smithy", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Ariana Stocracy", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Doctor Reiklen", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Jake of the West", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
-			partyholder = new Partygoer("Gertrude Biblio", false, false, this.DiningHall, this);
-			this.allPartygoers.add(partyholder);
-			this.DiningHall.occupants.add(partyholder);
+			this.allPartygoers = new ArrayList<Partygoer>();
+			for (int i =0; i<10; i++) {
+				this.allPartygoers.add(new Partygoer(this.DiningHall, this));
+			}
+			
 		}
 		
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***
@@ -715,16 +678,16 @@ public class house {
 			
 				
 			//knife set, has four knives, each PLAYER can only take one. knife1 goes to killer, then we have knife2,3,4 available for the game
-			public Boolean Knifeset(Partygoer user) {
+			public void
+			Knifeset(Partygoer user) {
 				if(user.isPlayer) {
-					System.out.print("Choose an option");
-					System.out.print("1) Grab Knife: 1 turns");
-					System.out.print("2) Don't grab knife");
+					System.out.print("Choose an option\n");
+					System.out.print("1) Grab Knife: 1 turns\n");
+					System.out.print("2) Don't grab knife\n");
 					userChoice = in.nextInt();
-					System.out.println("You entered " + userChoice);
+					System.out.println("You entered " + userChoice + "\n");
 				}
 					if (userChoice == 1 || user.currGoal == Goal.GET_KNIFE) {
-						System.out.print("1) Grab Knife: 1 turns");
 						Fact inputfact = new Fact(factcounter);
 						factcounter++;
 						inputfact.instigator = user;
@@ -737,7 +700,6 @@ public class house {
 					else {
 						System.out.print("Knife: Did not grab knife");
 					}
-				return true;
 			}
 			//NOTE: DO NOT ADD A CHECK FOR LOCATION
 			//STICK EVERYTHING IN CONVOS INTO HOUSE
@@ -771,8 +733,9 @@ public class house {
 								if (user.isPlayer) {System.out.print("With a bloodcurdling wheeze, and a twist of your insides, you collapse, dead...");}
 								inputfact.victims.add(user);
 								inputfact.theevent = "poisoned wine";
-								}
 								user.currroom.clues.add(inputfact);
+								}
+								
 							}
 						if (userChoice == 2 || user.currGoal == Goal.EATING) {
 							if (user.isPlayer) {System.out.print("2) Eat: 2 turns");}
@@ -788,8 +751,9 @@ public class house {
 									inputfact.victims.add(user);
 									if (user.isPlayer) {System.out.print("With a disgusting cough, and a filling of your lungs, you collapse, dead.");}
 									inputfact.theevent = "poisoned food";
+									user.currroom.clues.add(inputfact);
 								}
-								user.currroom.clues.add(inputfact);
+				
 							}
 						}
 				
@@ -912,14 +876,18 @@ public class house {
 						System.out.print("1. Poison the food?");
 						System.out.print("2. Poison the wine?");
 						userChoice = in.nextInt();
+						factcounter++;
+						Fact poisonFact = new Fact(factcounter);
+						poisonFact.instigator = user;
 						if (userChoice == 1) {
 							foodPoisoned = true;
+							
 						}
 						if (userChoice == 2) {
 							KitchenWinePoison = true;
 						}
 					}
-					else if(userChoice == 1 || user.currGoal == Goal.POISON_FOOD) {
+					if(userChoice == 1 || user.currGoal == Goal.POISON_FOOD) {
 						foodPoisoned = true;
 					}
 				}

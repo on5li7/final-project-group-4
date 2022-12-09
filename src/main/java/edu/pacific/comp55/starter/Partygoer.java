@@ -2,6 +2,7 @@ package edu.pacific.comp55.starter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.function.Function;
 
 import edu.pacific.comp55.starter.Rituals.effect;
 
@@ -12,6 +13,7 @@ public class Partygoer {
 	public ArrayList<Room> currentRoute;
 	public ArrayList<Fact> knownFacts;
 	public ArrayList<Fact> evidence;
+	Scanner in =  new Scanner(System.in);
 	Goal currGoal;
 	Goal heldGoal;
 	int busynum;
@@ -35,15 +37,23 @@ public class Partygoer {
 	public boolean isArrested;
 	
 	//add getClue() which takes addtoKnownFact from Partygoer to make the madlibs
-	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {
-		this.identity = identity;
-		this.isKiller = isKiller;
+	public Partygoer(Room startingRoom, house thehouse) {
+		this.identity = null;
+		this.isKiller = false;
+		this.Dead = false;
+		this.Bloodied = false;
+		this.aggronum = 0;
+		this.currroom = startingRoom;
+		this.busynum = 0;
+		this.isPlayer = false; 
 		this.rando = new Random();
-		this.isDetective = isDetective;
+		this.isDetective = false;
 		this.knownRituals = new ArrayList<Rituals>();
+		this.knownFacts = new ArrayList<Fact>();
+		this.newGoalSets = new GoalSets();
 		this.Inventory = new ArrayList<item>();
 		this.fingerprints = new ArrayList<Fact>();
-		this.currroom = startingRoom;
+		this.evidence = new ArrayList<Fact>();
 		this.thehouse = thehouse;
 		this.currentRoute = new ArrayList<Room>();
 		this.allPossibleGoals = new ArrayList<Goal>();
@@ -122,7 +132,8 @@ public class Partygoer {
 			return;
 		}
 		if (isPlayer == true) {
-			this.playerTurn();
+			this.playerTurn(0);
+			return;
 		}
 		else {
 			//AI TURN FOLLOWS
@@ -132,7 +143,7 @@ public class Partygoer {
 					heldGoal = null;
 				}
 				else {
-					moveOnRoute(currentRoute.get(0));
+					moveOnRoute(GoalInterpLocation(currGoal));
 					return;
 				}
 			}
@@ -145,9 +156,11 @@ public class Partygoer {
 					if (currroom.occupants.size() == 2) {
 						if (currroom.occupants.get(0) == this) {
 							assault(this, currroom.occupants.get(1));
+							aggronum=0;
 						}
 						else {
 							assault(this, currroom.occupants.get(0));
+							aggronum=0;
 						}
 					}
 					else {
@@ -224,6 +237,16 @@ public class Partygoer {
 				return false;
 				}
 			}
+		else if (currGoal == Goal.GOSSIPING) {
+			if (currroom.occupants.size()>2) {
+				System.out.print("Top of the mornin to ya!");
+				return true;
+			}
+			else {
+				System.out.print("No friends to talk to...");
+				return false;
+			}
+		}
 		else if (currGoal == Goal.RANSACK) {
 			addItem(Ransack(), Inventory);
 			return true;
@@ -338,10 +361,10 @@ public class Partygoer {
 				thehouse.factcounter++;
 				ritualfact.theevent = (" cast a spell, ");
 				if(knownRituals.get(ritualnum).Spell == effect.KILL) {
-					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.add(thehouse.allPartygoers.get(PGcheck));
+					ritualfact.theevent = ritualfact.theevent + "killing " + ritualfact.victims.get(0).identity + "\n";
 				}
 				else if(knownRituals.get(ritualnum).Spell == effect.REVIVE) {
-					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.add(thehouse.allPartygoers.get(PGcheck));
+					ritualfact.theevent = ritualfact.theevent + "reviving " + ritualfact.victims.get(0).identity + "\n"; 
 				}
 				ritualfact.Room = currroom;
 				ritualfact.thetime = thehouse.getTime();
@@ -706,36 +729,35 @@ public class Partygoer {
 	
 	//This is the function that waits for the player to click on something to do something
 	//This will instead just take an integer to choose an action in the text version.
-	public void playerTurn() {
-		Scanner input = new Scanner(System.in);
-		ArrayList<Object> methodList = new ArrayList<Object>();
+	public void playerTurn(int choice) {
+		if (choice == 0) {System.out.print("Current room: " + thehouse.RoomtoString(currroom) + "\n");}
 		//Adds moves
 		int choicenum = 1;
-		System.out.print(choicenum + ". search the room for something useful.");
-		methodList.add(Ransack());
+		if (choice == 0) {System.out.print(choicenum + ". search the room for something useful.\n");}
+		if (choicenum == choice) {addItem(Ransack(), Inventory); return;}
 		for (int i=0; i < currroom.adjacentRooms.size(); i++) {
 			choicenum++;
-			methodList.add(Move(currroom.adjacentRooms.get(i)));
-			System.out.print(choicenum + ". move to the " + thehouse.RoomtoString(currroom.adjacentRooms.get(i)));
+			 if (choice == 0) {System.out.print(choicenum + ". move to the " + thehouse.RoomtoString(currroom.adjacentRooms.get(i)) + "\n");}
+			if (choicenum == choice) {Move(currroom.adjacentRooms.get(i)); return;}
 		}
 		//Adds the knifeset
-		if (currroom == thehouse.Kitchen|| thehouse.knifeset.size() != 0) {
+		if (currroom == thehouse.Kitchen && thehouse.knifeset.size() != 0) {
 			choicenum++;
-			System.out.print(choicenum + ". Grab a knife.");
-			methodList.add(thehouse.Knifeset(this));
+			if (choice == 0) {System.out.print(choicenum + ". Grab a knife.\n");}
+			if (choice == choicenum) {thehouse.Knifeset(this);}
 		}
-		if (currroom == thehouse.Kitchen|| thehouse.knifeset.size() == 0) {
-			System.out.print("No more knives!");
+		if (currroom == thehouse.Kitchen && thehouse.knifeset.size() == 0) {
+			 if (choice == 0) {System.out.print("No more knives!\n");}
 		}
 		//Adds the clues.
-		for (int i = 0; i<currroom.clues.size(); i++) {
+		for (int o = 0; o<currroom.clues.size(); o++) {
 			choicenum++;
-			System.out.print(choicenum + ". A clue!");
-			methodList.add(getClue(currroom.clues.get(i)));
+			if (choice == 0) {System.out.print(choicenum + ". A clue!\n");}
+			if (choice == choicenum) {getClue(currroom.clues.get(o)); return;}
 		}
 		if (currroom == thehouse.Apothecary || currroom ==  thehouse.Outdoors_3 || currroom == thehouse.WineCellar) {
 			choicenum++;
-			methodList.add(thehouse.Brewing(this));
+			if (choice == 0) {
 			System.out.print(choicenum + " Brew a potion ");
 			if (currroom == thehouse.Apothecary) {
 				System.out.print("with the mortar and pestle.");
@@ -747,90 +769,109 @@ public class Partygoer {
 				System.out.print("in the still.");
 			}
 			System.out.print("\n");
+			}
+			if (choice == choicenum) {thehouse.Brewing(this); return;}
 		}
 		//Rifleset
 		if (currroom == thehouse.Armory) {
 			if (Inventory.contains(item.FIXED_KEY)) {
 				choicenum++;
-				System.out.print(choicenum + " Get a rifle? You have the key!");
-				methodList.add(addItem(item.RIFLE, Inventory));
+				if (choice == 0)System.out.print(choicenum + " Get a rifle? You have the key!\n");
+				if (choicenum == choice) {thehouse.riflecase(this); return;}
+			}
+			else if (choice == 0){
+				System.out.print("Can't get a rifle. Where's the key?\n");
 			}
 		}
 		
 		//Adds the loose trash in the room.
-		for (int i=0; i<currroom.looseStuff.size(); i++) {
+		for (int t=0; t<currroom.looseStuff.size(); t++) {
 			choicenum++;
-			System.out.print(choicenum + "somebody just left a " + currroom.looseStuff.get(i).toString() + " here...");
-			methodList.add(addItem(currroom.looseStuff.get(i), Inventory));
+			if (choice == 0) {System.out.print(choicenum + "somebody just left a " + currroom.looseStuff.get(t).toString() + " here...\n");}
+			if (choice == choicenum) {addItem(currroom.looseStuff.get(t), Inventory); return;}
 		}
 		if (currroom == thehouse.TheCliff) {
-			for (int i=0; i < currroom.occupants.size(); i++) {
-				if (currroom.occupants.get(i) != this) {
+			for (int p=0; p < currroom.occupants.size(); p++) {
+				if (currroom.occupants.get(p) != this) {
 					choicenum++;
-					System.out.print(choicenum + ". Push " + currroom.occupants.get(i).identity + " off the cliff?");
-					methodList.add(cliffPush(currroom.occupants.get(i)));
+					if (choice == 0) {System.out.print(choicenum + ". Push " + currroom.occupants.get(p).identity + " off the cliff?\n");}
+					if (choicenum == choice) {cliffPush(currroom.occupants.get(p)); return;}
 				}
 			}
 		}
 		//Workbench
 		if (currroom == thehouse.Workshop) {
 			choicenum++;
-			System.out.print(choicenum + ". craft something at the workbench.");
-			methodList.add(thehouse.workbench(this));
+			if (choice == 0) {System.out.print(choicenum + ". craft something at the workbench.\n");}
+			if (choicenum == choice) {thehouse.workbench(this); return;}
 		}
-		for (int i=0; i<currroom.occupants.size(); i++) {
-			if (currroom.occupants.get(i) != this) {
+		for (int l=0; l<currroom.occupants.size(); l++) {
+			if (currroom.occupants.get(l) != this) {
 				choicenum++;
-				System.out.print("Talk to " + currroom.occupants.get(i).identity);
-				methodList.add(converse(currroom.occupants.get(i)));
+				if (choice == 0) {System.out.print(choicenum + ". Talk to " + currroom.occupants.get(l).identity + "\n");}
+				if (choicenum == choice) {converse(currroom.occupants.get(l)); return;}
 			}
 		}
-		int choice = input.nextInt();
-		if (choice > methodList.size() || choice < 0) {
-			input.close();
-			playerTurn();
+		int choicerecurse = in.nextInt();
+		if (choicerecurse > choicenum || choicerecurse < 1) {
+			System.out.print("Invalid input!");
+			playerTurn(0);
 		}
 		else {
-			methodList.get(choice);
+			playerTurn(choicerecurse);
 		}
-		input.close();
 	}
 	
 	
 	public Boolean converse(Partygoer pg2) {
-				System.out.print("Choose an action");
-				System.out.print("1) Check " + pg2.identity + "'s fingerprints");
-				System.out.print("2) Gossip with " + pg2.identity);
-				System.out.print("3) Search pockets of" + pg2.identity);
+				System.out.print("Choose an action\n");
+				if (this.fingerprints.size() != 0) {System.out.print("1) Check " + pg2.identity + "'s fingerprints\n");}
+				else {System.out.print("You have no fingerprints.");}
+				System.out.print("2) Gossip with " + pg2.identity + "\n");
+				System.out.print("3) Search pockets of" + pg2.identity + "\n");
 				if (pg2.evidence.size() >= 5) {
-					System.out.print("4) Arrest " + pg2.identity);
+					System.out.print("4) Arrest " + pg2.identity + "\n");
 				}
+				System.out.print("5) Good day!");
 				try (Scanner inputChoice = new Scanner(System.in)) {
 					int userChoice = inputChoice.nextInt();
-					System.out.println("You entered " + userChoice);
+					System.out.println("You entered " + userChoice + "\n");
 					if (userChoice==1) {
+						if (this.fingerprints.size() > 0) {
 						fingerPrintCheck(pg2);
 					}
+					else {
+						converse(pg2);
+					}
+				}
 					else if (userChoice==2) {
 						gossip(pg2);
 					}
 					else if (userChoice==3) {
+						if (pg2.Inventory.size() > 0) {
 						search(pg2);
+						}
+						else {
+						System.out.print("Their pockets are empty!");	
+						}
 					}
 					else if (userChoice==4) {
 						if (fingerPrintCheck(pg2)) {
-							System.out.print(pg2.identity + "'s fingerprints match the instigator's!");
+							System.out.print(pg2.identity + "'s fingerprints match the instigator's!\n");
 							thehouse.factcounter++;
 							for(int i=0; i<5; i++) {
 							evidence.add(new Fact(thehouse.factcounter));	
 							}
 						}
 						else {
-							System.out.print(pg2.identity + "'s fingerprints do not match the instigator's.");
+							System.out.print(pg2.identity + "'s fingerprints do not match the instigator's.\n");
 						}
 					}
+					else if (userChoice == 5) {
+						return true;
+					}
 					else {
-						System.out.print("Make another choice!");
+						System.out.print("Make another choice!\n");
 						converse(pg2);
 					}
 				}
@@ -838,6 +879,7 @@ public class Partygoer {
 			}
 
 public Boolean gossip(Partygoer pg2) {
+	if (pg2.knownFacts.size() == 0) {System.out.print("I don't know anything"); return false;}
 	int checkNum1 = 0;
 	int checkNum2 = 0;
 	int checkNum3 = 0;
@@ -874,19 +916,19 @@ public Boolean gossip(Partygoer pg2) {
 	if (checkNum1 == 5 || checkNum2 == 5 || checkNum3 == 5) {
 		newFact.Room = knownFacts.get(knowngossip).Room;
 	}
-	System.out.print("You learned a new fact about " + pg2.identity + "!");
+	System.out.print("You learned a new fact about " + pg2.identity + "! \n");
 	return true;
 }
 
 public Boolean arrest(Partygoer partygoer) {
 	if (partygoer.evidence.size()==5) {
-		System.out.print(partygoer.identity + " is arrested!");
+		System.out.print(partygoer.identity + " is arrested!\n");
 		partygoer.placeinRoom(partygoer, thehouse.Dungeon);
 		partygoer.Dead = true;
 		return partygoer.Dead;
 	}
 	else {
-		System.out.print("Not enough evidence. Cannot arrest " + partygoer.identity + ".");
+		System.out.print("Not enough evidence. Cannot arrest " + partygoer.identity + ".\n");
 		partygoer.Dead = false;
 		return partygoer.Dead;
 	}
@@ -897,7 +939,7 @@ public Boolean search(Partygoer partygoer) {
 	System.out.print("Searching " + partygoer.identity + "\n");
 
 	if (partygoer.Inventory.size()==0) {
-		System.out.print(partygoer.identity + "'s pockets are empty");
+		System.out.print(partygoer.identity + "'s pockets are empty\n");
 		return false;
 	}
 	else {
@@ -908,7 +950,7 @@ public Boolean search(Partygoer partygoer) {
 		for (int i=0; i<knownFacts.size(); i++) {
 			if (knownFacts.get(i).theevent == "stabbing" && (partygoer.Inventory.contains(item.BLOODY_KNIFE)) || partygoer
 					.Inventory.contains(item.BLOODY_SWORD)) {
-				System.out.print("Caught red handed!");
+				System.out.print("Caught red handed!\n");
 				for (int o=0; o<5; o++) {
 					partygoer.evidence.add(knownFacts.get(i));
 				}
@@ -935,6 +977,7 @@ public Boolean search(Partygoer partygoer) {
 				return true;
 			}
 		}
+		printFact(inputfact);
 			return false;
 	}
 	
@@ -970,7 +1013,7 @@ public Boolean search(Partygoer partygoer) {
 			for (int i=0; i<inputfact.victims.size(); i++) {
 				System.out.print(" to poor " + inputfact.victims.get(i) + "! And");
 			}
-			System.out.print(" they won't get away with it!");
+			System.out.print(" they won't get away with it!\n");
 		}
 	}
 
@@ -989,16 +1032,16 @@ public void Route(Room destination) {
 	currentRoute = new ArrayList<Room>(); 
 	//Checks to see if they are standing in the room
 	if (currroom == destination) {
-		System.out.print("Already there!");
+		System.out.print("Already there!\n");
 		return;
 	}
 	else if (currroom.adjacentRooms.contains(destination)){
-		System.out.print("It's nearby!");
+		System.out.print("It's nearby!\n");
 		currentRoute.add(destination);
 		return;
 		}
 	else {
-		System.out.print("Need to take the bus...");
+		System.out.print("Need to take the bus...\n");
 		int int1 = thehouse.getBusStop(currroom);
 		int int2 = thehouse.getBusStop(destination);
 	//Checks the nearest bus stop, and adds the bus route plus the destination to the route.	
@@ -1013,14 +1056,18 @@ public void Route(Room destination) {
 }
 
 public Boolean moveOnRoute(Room destination) {
+	if (currentRoute.size() == 0) {
+		System.out.print("No current route.");
+		return false;
+	}
 	if (currentRoute.get(0) == null) {
-		System.out.print("Null destination. Wandering.");
+		System.out.print("Null destination. Wandering.\n");
 		Move(currroom.adjacentRooms.get(rando.nextInt(currroom.adjacentRooms.size())));
 		currentRoute.remove(currentRoute.get(0));
 		return true;
 	}
 	else if (currroom.adjacentRooms.contains(destination)) {
-		System.out.print("It's right here!");
+		System.out.print("It's right here!\n");
 		currentRoute.remove(destination);
 		Move(destination);
 		return true;
@@ -1061,9 +1108,12 @@ public void pickGoal() {
 		allPossibleGoals.add(newGoalSets.murderous.get(e));
 		}
 	}
+	if (isKiller) {
 	for (int f=0;f<newGoalSets.rituals.size();f++) {
 		allPossibleGoals.add(newGoalSets.rituals.get(f));
 	}
+	}
+	
 	currGoal = allPossibleGoals.get(rando.nextInt(allPossibleGoals.size()));
 }
 
@@ -1102,18 +1152,28 @@ public Room GoalInterpLocation(Goal goal) {
 	else if (goal==Goal.GET_POISONOUS_PLANT_OUTDOORS || goal==Goal.CAST_RITUAL_OD4) {
 		return thehouse.Outdoors_4;
 	}
-	else if (goal==Goal.POISON_WINE_KITCHEN||goal==Goal.DRINKING_KITCHEN||goal==Goal.POISON_FOOD) {
+	else if (goal==Goal.POISON_WINE_KITCHEN||goal==Goal.DRINKING_KITCHEN||goal==Goal.POISON_FOOD||goal == Goal.GET_KNIFE) {
 		return thehouse.Kitchen;
 	}
-	else if (goal==Goal.DRINKING_HALL||goal==Goal.LOOSEN_CHANDELIER) {
+	else if (goal==Goal.DRINKING_HALL||goal==Goal.LOOSEN_CHANDELIER||goal == Goal.EATING) {
 		return thehouse.DiningHall;
 	}
 	else if (goal==Goal.BALCONY_STALKER||goal==Goal.LOOSEN_BALCONY ||goal==Goal.CAST_RITUAL_BALCONY) {
 		return thehouse.Balcony;
 	}
+	else if (goal == Goal.RANSACK || goal == Goal.OOHSHINY) {
+		return currroom;
+	}
+	else if (goal == Goal.GOSSIPING || goal == Goal.ASSAULT) {
+		return currroom.adjacentRooms.get(rando.nextInt(currroom.adjacentRooms.size()));
+	}
 	else if (goal==Goal.CLIFF_STALKER) {
 		return thehouse.TheCliff;
 	}
+	else if (goal == Goal.GET_SWORD || goal == Goal.GET_RIFLE ) {
+		return thehouse.Armory;
+	}
+	System.out.print("This goal does not have a location!\n");
 	return null;
 }
 }

@@ -77,8 +77,7 @@ public class house {
 			System.out.print("9. Chad - Millio- no, Billionaire\n");
 			System.out.print("10. Todd - Local Teen\n");
 			response = in.nextInt();
-<<<<<<< HEAD
-=======
+
 			System.out.print(response);
 			/*try {
 				response = reader.nextInt();
@@ -87,7 +86,7 @@ public class house {
 				characterSelect();
 			}
 			/*finally {*/
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
+
 				if (response < 1 || response > 10) {
 				characterSelect();	
 				}
@@ -109,25 +108,20 @@ public class house {
 					allPartygoers.remove(0);
 					while (allPartygoers.size() != 0) {
 						int checknum = rando.nextInt(allPartygoers.size());
-<<<<<<< HEAD
+
 						allPartygoers.get(0).identity = identities.get(checknum);
 						partyholder.add(allPartygoers.get(0));
 						allPartygoers.remove(allPartygoers.get(0));
-=======
+
 						allPartygoers.get(checknum).identity = identities.get(checknum);
 						partyholder.add(allPartygoers.get(checknum));
 						allPartygoers.remove(checknum);
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
+
 						identities.remove(checknum);
 					}
 					allPartygoers = partyholder;
 				}
 			}
-			
-<<<<<<< HEAD
-=======
-				
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 		
 		public void RunGame() {
 			int i = 0; 
@@ -151,11 +145,11 @@ public class house {
 			}
 			int deadcount = 0;
 			for (int j = 0; j < allPartygoers.size(); j++) {
-<<<<<<< HEAD
+
 				if (allPartygoers.get(j).Dead == true) {
-=======
+
 				if (allPartygoers.get(j).Dead == false) {
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
+
 					deadcount++;
 				}
 			}
@@ -163,18 +157,19 @@ public class house {
 				endType = 4;
 				gameEnd = true;
 			}
-<<<<<<< HEAD
+
 			if(i==9) {i=0;} 
 			else {i++;}
-=======
+
 			if (i==9) {i=0;}
 			else {
 				i++;
 			time++;	
 			} 
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
+
 			}
 			endGame(endType);
+			}
 		}
 		
 		
@@ -586,7 +581,7 @@ public class house {
 			this.knifeset.add(item.KNIFE);
 			this.allPartygoers = new ArrayList<Partygoer>();
 			this.DiningHall = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 0);
-<<<<<<< HEAD
+
 			this.Balcony = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
 			this.Apothecary = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 1);
 			this.Kitchen = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 4);
@@ -614,7 +609,6 @@ public class house {
 			this.Hallway = new Room(new ArrayList<item>(), this,new ArrayList<Partygoer>(),2);
 			this.Morgue = new Room(new ArrayList<item>(), this,new ArrayList<Partygoer>(),0);
 			adjacenrooms();
-=======
 			this.Balcony = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 0);
 			this.Apothecary = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 1);
 			this.Kitchen = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 4);
@@ -641,8 +635,8 @@ public class house {
 			this.TheCliff = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 0);
 			this.Hallway = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(),2);
 			this.Morgue = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(),0);
-			adjacentRooms();
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
+			adjacenrooms();
+
 			this.endType = 0;
 			this.deadpeople = 0;
 			this.foodPoisoned = false;

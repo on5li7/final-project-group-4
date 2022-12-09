@@ -1124,5 +1124,11 @@ public Room GoalInterpLocation(Goal goal) {
 	}
 	return null;
 }
+
+
+public void takeTurn() {
+	// TODO Auto-generated method stub
+	
+}
 }
 

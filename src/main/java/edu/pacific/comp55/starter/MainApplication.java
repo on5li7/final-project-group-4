@@ -17,8 +17,8 @@ public class MainApplication extends GraphicsApplication {
 
 	public void run() {
 		System.out.println("Hello, world!");
-		//House = new house();
-		//House.start();
+		House = new house();
+		House.start();
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		didningHall = new DiningHallPane(this, House);
@@ -26,6 +26,7 @@ public class MainApplication extends GraphicsApplication {
 		setupInteractions();
 		switchToMenu();
 	}
+	
 	
 	public void switchTODiningHall() {
 		switchToScreen(didningHall);

@@ -1,8 +1,10 @@
 package edu.pacific.comp55.starter; 
 
 import java.util.ArrayList;
+
 import java.util.Random;
 import java.util.Scanner;
+
 
 
 public class house {
@@ -150,7 +152,7 @@ public class house {
 			}
 			endGame(endType);
 		}
-		}
+		
 		
 		public void endGame(int choice) {
 			//TO DO ENDSCREENS

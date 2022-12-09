@@ -827,8 +827,12 @@ public class Partygoer {
 				System.out.print("Choose an action\n");
 				if (this.fingerprints.size() != 0) {System.out.print("1) Check " + pg2.identity + "'s fingerprints\n");}
 				else {System.out.print("You have no fingerprints.");}
+				if (pg2.knownFacts.size() != 0) {
 				System.out.print("2) Gossip with " + pg2.identity + "\n");
-				System.out.print("3) Search pockets of" + pg2.identity + "\n");
+				}
+				else {System.out.print("They dont have any hot gossip.");
+				if (pg2.Inventory.size() != 0) {System.out.print("3) Search pockets of" + pg2.identity + "\n");}
+				else {System.out.print("They dont have any items");}
 				if (pg2.evidence.size() >= 5) {
 					System.out.print("4) Arrest " + pg2.identity + "\n");
 				}
@@ -845,28 +849,30 @@ public class Partygoer {
 					}
 				}
 					else if (userChoice==2) {
+					if (pg2.knownFacts.isEmpty() == false) {
 						gossip(pg2);
+					}
+					else {
+						converse(pg2);
+					}
 					}
 					else if (userChoice==3) {
 						if (pg2.Inventory.size() > 0) {
 						search(pg2);
 						}
 						else {
-						System.out.print("Their pockets are empty!");	
+						System.out.print("Their pockets are empty!");
+						converse(pg2);
 						}
 					}
 					else if (userChoice==4) {
-						if (fingerPrintCheck(pg2)) {
-							System.out.print(pg2.identity + "'s fingerprints match the instigator's!\n");
-							thehouse.factcounter++;
-							for(int i=0; i<5; i++) {
-							evidence.add(new Fact(thehouse.factcounter));	
+							if (pg2.evidence.size() >= 5) {
+								arrest(pg2);
+							}
+							else {
+								converse(pg2);
 							}
 						}
-						else {
-							System.out.print(pg2.identity + "'s fingerprints do not match the instigator's.\n");
-						}
-					}
 					else if (userChoice == 5) {
 						return true;
 					}
@@ -875,8 +881,9 @@ public class Partygoer {
 						converse(pg2);
 					}
 				}
+				}
 				return true;
-			}
+	}
 
 public Boolean gossip(Partygoer pg2) {
 	if (pg2.knownFacts.size() == 0) {System.out.print("I don't know anything"); return false;}

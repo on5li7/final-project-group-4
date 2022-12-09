@@ -176,8 +176,8 @@ public class Partygoer {
 			}
 			if(currentRoute.size() == 0) {
 			Route(GoalInterpLocation(currGoal));
-			}
 			moveOnRoute(GoalInterpLocation(currGoal));
+		}
 		}
 	}
 	

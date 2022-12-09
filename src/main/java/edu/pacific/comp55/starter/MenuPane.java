@@ -3,13 +3,14 @@ package edu.pacific.comp55.starter;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 
+import acm.graphics.GImage;
 import acm.graphics.GObject;
 
 public class MenuPane extends GraphicsPane {
 	private MainApplication program; // you will use program to get access to
 										// all of the GraphicsProgram calls
 	private GButton rect;
-
+	private GImage Background;
 	public MenuPane(MainApplication app) {
 		super();
 		program = app;

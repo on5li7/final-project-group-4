@@ -47,6 +47,7 @@ public Room(ArrayList<item> looseStuff, house thehouse, ArrayList<Partygoer> occ
 	this.adjacentRooms = new ArrayList<Room>();
 	this.occupants = occupants;
 	this.BusStop = BusStop;
+	
 }
 }
 //TODO: Need to add interactables in rooms ie. knive set in kitchen, brewing pot in outdoors 1, in wine cellar, apothecary

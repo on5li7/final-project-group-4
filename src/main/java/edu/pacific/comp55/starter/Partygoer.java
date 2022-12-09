@@ -33,10 +33,10 @@ public class Partygoer {
 	public ArrayList<Goal> allPossibleGoals;
 	public ArrayList<item> Inventory; //need to set a cap of 4
 	//BusyCounter
-	public boolean isAlive;
-	public boolean isArrested;
+	public Boolean isArrested;
 	
 	//add getClue() which takes addtoKnownFact from Partygoer to make the madlibs
+<<<<<<< HEAD
 	public Partygoer(Room startingRoom, house thehouse) {
 		this.identity = null;
 		this.isKiller = false;
@@ -46,14 +46,37 @@ public class Partygoer {
 		this.currroom = startingRoom;
 		this.busynum = 0;
 		this.isPlayer = false; 
+=======
+	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {
+		this.identity = identity;
+		this.isKiller = isKiller;
+		this.busynum = 0;
+		this.aggronum = 0;
+		this.Dead = false;
+		this.Bloodied = false;
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 		this.rando = new Random();
+<<<<<<< HEAD
 		this.isDetective = false;
+=======
+		this.isPlayer = false;
+		this.isArrested = false;
+		this.isKiller = false;
+		this.isDetective = isDetective;
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 		this.knownRituals = new ArrayList<Rituals>();
+<<<<<<< HEAD
 		this.knownFacts = new ArrayList<Fact>();
+=======
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 		this.newGoalSets = new GoalSets();
 		this.Inventory = new ArrayList<item>();
 		this.fingerprints = new ArrayList<Fact>();
 		this.evidence = new ArrayList<Fact>();
+<<<<<<< HEAD
+=======
+		this.currroom = startingRoom;
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group-4.git
 		this.thehouse = thehouse;
 		this.currentRoute = new ArrayList<Room>();
 		this.allPossibleGoals = new ArrayList<Goal>();
@@ -123,7 +146,7 @@ public class Partygoer {
 	
 	//This function calls moveonRoute, which will move the character and return true if there is a current route.
 	//If moveonRoute is false, the player AI will instead check the room for their goal.
-	public void takeTurn() {
+	public void f() {
 		if (Dead) {
 			return;
 		}
@@ -1182,6 +1205,12 @@ public Room GoalInterpLocation(Goal goal) {
 	}
 	System.out.print("This goal does not have a location!\n");
 	return null;
+}
+
+
+public void takeTurn() {
+	// TODO Auto-generated method stub
+	
 }
 }
 

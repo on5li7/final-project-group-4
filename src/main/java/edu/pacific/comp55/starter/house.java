@@ -77,16 +77,7 @@ public class house {
 			System.out.print("9. Chad - Millio- no, Billionaire\n");
 			System.out.print("10. Todd - Local Teen\n");
 			response = in.nextInt();
-
 			System.out.print(response);
-			/*try {
-				response = reader.nextInt();
-			}
-			catch(Exception InputMismatchException) {
-				characterSelect();
-			}
-			/*finally {*/
-
 				if (response < 1 || response > 10) {
 				characterSelect();	
 				}
@@ -105,27 +96,24 @@ public class house {
 					identities.add("Todd");
 					allPartygoers.get(0).identity = identities.get(response-1);
 					partyholder.add(allPartygoers.get(0));
-					allPartygoers.remove(0);
+					System.out.print(identities.get(response-1));
+					allPartygoers.remove(allPartygoers.get(0));
 					while (allPartygoers.size() != 0) {
 						int checknum = rando.nextInt(allPartygoers.size());
-
+						System.out.print("And this one is: " + identities.get(checknum) + "\n");
 						allPartygoers.get(0).identity = identities.get(checknum);
 						partyholder.add(allPartygoers.get(0));
 						allPartygoers.remove(allPartygoers.get(0));
-
-						allPartygoers.get(checknum).identity = identities.get(checknum);
-						partyholder.add(allPartygoers.get(checknum));
-						allPartygoers.remove(checknum);
-
-						identities.remove(checknum);
+						identities.remove(identities.get(checknum));
 					}
 					allPartygoers = partyholder;
+					printScoreBoard();
 				}
 			}
+
 		
 		public void RunGame() {
-			int i = 0; 
-			while (gameEnd == false) { 
+			for (int i=0;gameEnd == false;i++) { 
 			allPartygoers.get(i).takeTurn();
 			time++;
 			//if the killer is dead, endType = 1, and end is true
@@ -147,9 +135,6 @@ public class house {
 			for (int j = 0; j < allPartygoers.size(); j++) {
 
 				if (allPartygoers.get(j).Dead == true) {
-
-				if (allPartygoers.get(j).Dead == false) {
-
 					deadcount++;
 				}
 			}
@@ -158,18 +143,9 @@ public class house {
 				gameEnd = true;
 			}
 
-			if(i==9) {i=0;} 
-			else {i++;}
-
-			if (i==9) {i=0;}
-			else {
-				i++;
-			time++;	
-			} 
-
+			if (i==9) {i=0; time++;}
 			}
 			endGame(endType);
-			}
 		}
 		
 		
@@ -348,9 +324,15 @@ public class house {
 			for (int o=0; o<allPartygoers.get(i).Inventory.size(); o++) {
 				System.out.print(allPartygoers.get(i).Inventory.get(o).toString() + ", ");
 			}
-			System.out.print("\n");
+			System.out.print("\n Goals:");
 			if (allPartygoers.get(i).Dead) {
 			System.out.print("Current Goal: Being dead \n");
+			}
+			else if (allPartygoers.get(i).isPlayer) {
+				System.out.print("This is the player\n");
+			}
+			else if (allPartygoers.get(i).currGoal == null) {
+				System.out.print("I have no goals and am a figure of ridicule within the community. ");
 			}
 			else {
 				System.out.print("Current Goal: " + allPartygoers.get(i).currGoal.toString() + "\n");
@@ -358,7 +340,7 @@ public class house {
 			}
 		}
 		
-		public void adjacenrooms() {
+		public void adjacentrooms() {
 				this.DiningHall.adjacentRooms.add(this.Kitchen);
 				this.DiningHall.adjacentRooms.add(this.GreenHouse);
 				this.DiningHall.adjacentRooms.add(this.Hallway);
@@ -581,34 +563,6 @@ public class house {
 			this.knifeset.add(item.KNIFE);
 			this.allPartygoers = new ArrayList<Partygoer>();
 			this.DiningHall = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 0);
-
-			this.Balcony = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Apothecary = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 1);
-			this.Kitchen = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 4);
-			this.WineCellar = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.GreenHouse = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.TheStudy = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Armory = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 3);
-			this.Workshop = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Dungeon = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Outdoors_1 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Outdoors_2 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Outdoors_3 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 5);
-			this.Outdoors_4 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-		    this.Bedroom_1 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_2 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_3 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_4 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_5 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_6 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_7 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_8 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_9 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Bedroom_10 = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.TheCliff = new Room(new ArrayList<item>(), this,  new ArrayList<Partygoer>(), 0);
-			this.Hallway = new Room(new ArrayList<item>(), this,new ArrayList<Partygoer>(),2);
-			this.Morgue = new Room(new ArrayList<item>(), this,new ArrayList<Partygoer>(),0);
-			adjacenrooms();
 			this.Balcony = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 0);
 			this.Apothecary = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 1);
 			this.Kitchen = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 4);
@@ -635,8 +589,7 @@ public class house {
 			this.TheCliff = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(), 0);
 			this.Hallway = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(),2);
 			this.Morgue = new Room(new ArrayList<item>(), this, new ArrayList<Partygoer>(),0);
-			adjacenrooms();
-
+			adjacentrooms();
 			this.endType = 0;
 			this.deadpeople = 0;
 			this.foodPoisoned = false;
@@ -646,7 +599,6 @@ public class house {
 			for (int i =0; i<10; i++) {
 				this.allPartygoers.add(new Partygoer(this.DiningHall, this));
 			}
-			
 		}
 		
 		//***COPIED ALL THE FUNCTIONS FROM CONVOS.JAVA TO HOUSE.JAVA PASTED BELOW THIS COMMENT***

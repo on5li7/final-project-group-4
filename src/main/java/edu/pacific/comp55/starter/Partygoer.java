@@ -2,7 +2,6 @@ package edu.pacific.comp55.starter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.function.Function;
 
 import edu.pacific.comp55.starter.Rituals.effect;
 
@@ -36,33 +35,27 @@ public class Partygoer {
 	public Boolean isArrested;
 	
 	//add getClue() which takes addtoKnownFact from Partygoer to make the madlibs
-
-	public Partygoer(String identity, Boolean isKiller, Boolean isDetective, Room startingRoom, house thehouse) {
-		this.identity = identity;
-		this.isKiller = isKiller;
-		this.busynum = 0;
-		this.aggronum = 0;
+	public Partygoer(Room startingRoom, house thehouse) {
+		this.identity = null;
+		this.isKiller = false;
 		this.Dead = false;
-		this.Bloodied = false;
-
 		this.rando = new Random();
-
+		this.Bloodied = false;
+		this.aggronum = 0;
+		this.currroom = startingRoom;
+		this.busynum = 0;
+		this.isPlayer = false; 
 		this.isDetective = false;
-
 		this.isPlayer = false;
 		this.isArrested = false;
 		this.isKiller = false;
-		this.isDetective = isDetective;
-
+		this.isDetective = false;
 		this.knownRituals = new ArrayList<Rituals>();
-
 		this.knownFacts = new ArrayList<Fact>();
-
 		this.newGoalSets = new GoalSets();
 		this.Inventory = new ArrayList<item>();
 		this.fingerprints = new ArrayList<Fact>();
 		this.evidence = new ArrayList<Fact>();
-		this.currroom = startingRoom;
 		this.thehouse = thehouse;
 		this.currentRoute = new ArrayList<Room>();
 		this.allPossibleGoals = new ArrayList<Goal>();
@@ -132,7 +125,7 @@ public class Partygoer {
 	
 	//This function calls moveonRoute, which will move the character and return true if there is a current route.
 	//If moveonRoute is false, the player AI will instead check the room for their goal.
-	public void f() {
+	public void takeTurn() {
 		if (Dead) {
 			return;
 		}
@@ -150,10 +143,6 @@ public class Partygoer {
 				if(currentRoute.size() == 0) {
 					currGoal = heldGoal;
 					heldGoal = null;
-				}
-				else {
-					moveOnRoute(GoalInterpLocation(currGoal));
-					return;
 				}
 			}
 			if (aggronum != 0) {
@@ -753,7 +742,7 @@ public class Partygoer {
 		if (currroom == thehouse.Kitchen && thehouse.knifeset.size() != 0) {
 			choicenum++;
 			if (choice == 0) {System.out.print(choicenum + ". Grab a knife.\n");}
-			if (choice == choicenum) {thehouse.Knifeset(this);}
+			if (choice == choicenum) {thehouse.Knifeset(this); return;}
 		}
 		if (currroom == thehouse.Kitchen && thehouse.knifeset.size() == 0) {
 			 if (choice == 0) {System.out.print("No more knives!\n");}
@@ -1131,6 +1120,7 @@ public void pickGoal() {
 	}
 	
 	currGoal = allPossibleGoals.get(rando.nextInt(allPossibleGoals.size()));
+	System.out.print(currGoal.toString());
 }
 
 public Room GoalInterpLocation(Goal goal) {
@@ -1193,10 +1183,5 @@ public Room GoalInterpLocation(Goal goal) {
 	return null;
 }
 
-
-public void takeTurn() {
-	// TODO Auto-generated method stub
-	
-}
 }
 

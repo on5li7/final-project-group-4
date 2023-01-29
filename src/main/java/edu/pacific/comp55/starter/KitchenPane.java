@@ -1,5 +1,3 @@
-
-
 package edu.pacific.comp55.starter;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -7,14 +5,14 @@ import java.util.ArrayList;
 
 import acm.graphics.GImage;
 import acm.graphics.GObject;
-import acm.graphics.GRect;
+import acm.graphics.GOval;
 
-public class DiningHallPane extends GraphicsPane {
+public class KitchenPane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
-	GButton door;
+	GOval door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -48,12 +46,14 @@ public class DiningHallPane extends GraphicsPane {
 	}
 	
 										
-	public DiningHallPane(MainApplication app, house House) {
+	public KitchenPane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("DiningHall.jpg", 0, 0);
+		background = new GImage("Kitchen.jpg", 0, 0);
 		background.scale(0.4);
-		door = new GButton("To Kitchen",50,50,100,100);
+		door = new GOval(100,100,150,150);
+		door.setFilled(true);
+		door.setFillColor(Color.blue);
 		populateRoom();
 	}
 
@@ -69,7 +69,7 @@ public class DiningHallPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(door);
+		//screen.add(door);
 
 	}
 
@@ -85,7 +85,7 @@ public class DiningHallPane extends GraphicsPane {
 		screen.remove(GertrudeDining);
 		screen.remove(JakeDining);
 		screen.remove(MaxDining);
-		screen.remove(door);
+		//screen.remove(door);
 	}
 
 	@Override
@@ -93,8 +93,7 @@ public class DiningHallPane extends GraphicsPane {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
 		if (obj == door) {
 			
-			screen.switchToKitchen();
+			screen.switchToMenu();
 		}
 	}
 }
-

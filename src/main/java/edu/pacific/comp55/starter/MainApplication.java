@@ -8,6 +8,7 @@ public class MainApplication extends GraphicsApplication {
 	private SomePane somePane;
 	private MenuPane menu;
 	private DiningHallPane didningHall;
+	private KitchenPane kitchen;
 	private house House;
 	private int count;
 
@@ -16,11 +17,12 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void run() {
-		System.out.println("Hello, world!");
+		//System.out.println("Hello, world!");
 		House = new house();
-		House.start();
+		//House.start();
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
+		kitchen = new KitchenPane(this, House);
 		didningHall = new DiningHallPane(this, House);
 		didningHall.populateRoom();
 		setupInteractions();
@@ -30,6 +32,10 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchTODiningHall() {
 		switchToScreen(didningHall);
+	}
+	
+	public void switchToKitchen() {
+		switchToScreen(kitchen);
 	}
 
 	public void switchToMenu() {

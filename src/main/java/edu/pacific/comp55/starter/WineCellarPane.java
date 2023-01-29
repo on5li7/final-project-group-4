@@ -7,7 +7,7 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GOval;
 
-public class KitchenPane extends GraphicsPane {
+public class WineCellarPane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
@@ -46,12 +46,14 @@ public class KitchenPane extends GraphicsPane {
 	}
 	
 										
-	public KitchenPane(MainApplication app, house House) {
+	public WineCellarPane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("Kitchen.jpg", 0, 0);
+		background = new GImage("WineCellar.jpg", 0, 0);
 		background.scale(0.4);
-		door = new GButton("To Wine Cellar",50,300,100,100);
+		//door = new GOval(100,100,150,150);
+		//door.setFilled(true);
+		//door.setFillColor(Color.blue);
 		populateRoom();
 	}
 
@@ -67,7 +69,7 @@ public class KitchenPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(door);
+		//screen.add(door);
 
 	}
 
@@ -83,7 +85,7 @@ public class KitchenPane extends GraphicsPane {
 		screen.remove(GertrudeDining);
 		screen.remove(JakeDining);
 		screen.remove(MaxDining);
-		screen.remove(door);
+		//screen.remove(door);
 	}
 
 	@Override
@@ -91,7 +93,7 @@ public class KitchenPane extends GraphicsPane {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
 		if (obj == door) {
 			
-			screen.switchToWineCellar();
+			screen.switchToMenu();
 		}
 	}
 }

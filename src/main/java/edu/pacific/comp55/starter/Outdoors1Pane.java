@@ -5,15 +5,13 @@ import java.util.ArrayList;
 
 import acm.graphics.GImage;
 import acm.graphics.GObject;
-import acm.graphics.GOval;
+import acm.graphics.GRect;
 
-public class KitchenPane extends GraphicsPane {
+public class Outdoors1Pane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
-	GButton wineCellardoor;
-	GButton diningHallDoor;
 	GButton outdoors2Door;
 	GImage ArianaDining;
 	GImage BobDining;
@@ -48,14 +46,12 @@ public class KitchenPane extends GraphicsPane {
 	}
 	
 										
-	public KitchenPane(MainApplication app, house House) {
+	public Outdoors1Pane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("Kitchen.jpg", 0, 0);
+		background = new GImage("Outdoors1.jpg", 0, 0);
 		background.scale(0.4);
-		wineCellardoor = new GButton("To Wine Cellar",50,300,100,100);
-		diningHallDoor = new GButton("To Dining Hall",650,300,100,100);
-		outdoors2Door = new GButton("To Outdoors 2",50,50,100,100);
+		outdoors2Door = new GButton("To Outdoors 2",650,50,100,100);
 		populateRoom();
 	}
 
@@ -71,8 +67,6 @@ public class KitchenPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(wineCellardoor);
-		screen.add(diningHallDoor);
 		screen.add(outdoors2Door);
 	}
 
@@ -84,15 +78,9 @@ public class KitchenPane extends GraphicsPane {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == wineCellardoor) {
-			
-			screen.switchToWineCellar();
-		}
-		if (obj == diningHallDoor) {
-			screen.switchTODiningHall();
-		}
-		if (obj==outdoors2Door) {
+		if (obj == outdoors2Door) {
 			screen.switchToOutdoors2();
 		}
 	}
 }
+

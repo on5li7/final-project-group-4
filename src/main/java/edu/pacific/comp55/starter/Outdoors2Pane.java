@@ -14,6 +14,7 @@ public class Outdoors2Pane extends GraphicsPane {
 	GImage background;
 	GButton Kitchendoor;
 	GButton outdoors3Door;
+	GButton outdoors1Door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -54,6 +55,7 @@ public class Outdoors2Pane extends GraphicsPane {
 		background.scale(0.4);
 		Kitchendoor = new GButton("To Kitchen",650,50,100,100);
 		outdoors3Door = new GButton("To Outdoors 3",650,300,100,100);
+		outdoors1Door = new GButton("To Outdoors 1",650,170,100,100);
 		populateRoom();
 	}
 
@@ -71,6 +73,7 @@ public class Outdoors2Pane extends GraphicsPane {
 		screen.add(MaxDining);
 		screen.add(Kitchendoor);
 		screen.add(outdoors3Door);
+		screen.add(outdoors1Door);
 	}
 
 	@Override
@@ -87,6 +90,9 @@ public class Outdoors2Pane extends GraphicsPane {
 		}
 		if (obj==outdoors3Door) {
 			screen.switchToOutdoors3();
+		}
+		if (obj==outdoors1Door) {
+			screen.switchToOutdoors1();
 		}
 	}
 }

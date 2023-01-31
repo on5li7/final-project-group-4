@@ -7,13 +7,14 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 
-public class ApothecaryPane extends GraphicsPane {
+public class BalconyPane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
-	GButton Studydoor;
-	GButton balconyDoor;
+	GButton Hallwaydoor;
+	GButton apothecaryDoor;
+	GButton armoryDoor;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -47,13 +48,14 @@ public class ApothecaryPane extends GraphicsPane {
 	}
 	
 										
-	public ApothecaryPane(MainApplication app, house House) {
+	public BalconyPane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("Apothecary.jpg", 0, 0);
+		background = new GImage("Balcony.jpg", 0, 0);
 		background.scale(0.4);
-		Studydoor = new GButton("To Study",50,200,100,100);
-		balconyDoor = new GButton("To Balcony",650,200,100,100);
+		apothecaryDoor = new GButton("To Apothecary",50,50,100,100);
+		Hallwaydoor = new GButton("To Hallway",50,170,100,100);
+		armoryDoor = new GButton("To Armory",50,300,100,100);
 		populateRoom();
 	}
 
@@ -69,8 +71,9 @@ public class ApothecaryPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(Studydoor);
-		screen.add(balconyDoor);
+		screen.add(Hallwaydoor);
+		screen.add(apothecaryDoor);
+		screen.add(armoryDoor);
 	}
 
 	@Override
@@ -81,12 +84,15 @@ public class ApothecaryPane extends GraphicsPane {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == Studydoor) {
+		if (obj == Hallwaydoor) {
 			
-			screen.switchToStudy();
+			screen.switchToHallway();
 		}
-		if (obj==balconyDoor) {
-			screen.switchToBalcony();
+		if (obj==apothecaryDoor) {
+			screen.switchToApothecary();
+		}
+		if (obj==armoryDoor) {
+			screen.switchToArmory();
 		}
 	}
 }

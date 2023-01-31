@@ -14,6 +14,7 @@ public class ArmoryPane extends GraphicsPane {
 	GImage background;
 	GButton Workshopdoor;
 	GButton dungeonDoor;
+	GButton balconyDoor;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -54,6 +55,7 @@ public class ArmoryPane extends GraphicsPane {
 		background.scale(0.4);
 		Workshopdoor = new GButton("To Workshop",50,200,100,100);
 		dungeonDoor = new GButton("To Dungeon",650,300,100,100);
+		balconyDoor = new GButton("To Balcony",650,50,100,100);
 		populateRoom();
 	}
 
@@ -71,6 +73,7 @@ public class ArmoryPane extends GraphicsPane {
 		screen.add(MaxDining);
 		screen.add(Workshopdoor);
 		screen.add(dungeonDoor);
+		screen.add(balconyDoor);
 	}
 
 	@Override
@@ -87,6 +90,9 @@ public class ArmoryPane extends GraphicsPane {
 		}
 		if (obj==dungeonDoor) {
 			screen.switchToDungeon();
+		}
+		if (obj==balconyDoor) {
+			screen.switchToBalcony();
 		}
 	}
 }

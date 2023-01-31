@@ -17,6 +17,7 @@ public class MainApplication extends GraphicsApplication {
 	private ApothecaryPane apothecary;
 	private ArmoryPane armory;
 	private DungeonPane dungeon;
+	private BalconyPane balcony;
 	private house House;
 	private int count;
 
@@ -40,6 +41,7 @@ public class MainApplication extends GraphicsApplication {
 		apothecary = new ApothecaryPane(this,House);
 		armory = new ArmoryPane(this,House);
 		dungeon = new DungeonPane(this,House);
+		balcony = new BalconyPane(this,House);
 		didningHall.populateRoom();
 		setupInteractions();
 		switchToMenu();
@@ -83,6 +85,10 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchToDungeon() {
 		switchToScreen(dungeon);
+	}
+	
+	public void switchToBalcony() {
+		switchToScreen(balcony);
 	}
 
 	public void switchToMenu() {

@@ -11,6 +11,7 @@ public class MainApplication extends GraphicsApplication {
 	private KitchenPane kitchen;
 	private WineCellarPane wineCellar;
 	private GreenHousePane greenHouse;
+	private HallwayPane hallWay;
 	private house House;
 	private int count;
 
@@ -28,6 +29,7 @@ public class MainApplication extends GraphicsApplication {
 		didningHall = new DiningHallPane(this, House);
 		wineCellar = new WineCellarPane(this, House);
 		greenHouse = new GreenHousePane(this,House);
+		hallWay = new HallwayPane(this,House);
 		didningHall.populateRoom();
 		setupInteractions();
 		switchToMenu();
@@ -47,6 +49,10 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchToGreenHouse() {
 		switchToScreen(greenHouse);
+	}
+	
+	public void switchToHallway() {
+		switchToScreen(hallWay);
 	}
 
 	public void switchToMenu() {

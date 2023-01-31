@@ -7,13 +7,12 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 
-public class WorkshopPane extends GraphicsPane {
+public class ArmoryPane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
-	GButton diningHalldoor;
-	GButton armoryDoor;
+	GButton door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -47,13 +46,12 @@ public class WorkshopPane extends GraphicsPane {
 	}
 	
 										
-	public WorkshopPane(MainApplication app, house House) {
+	public ArmoryPane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("Workshop.jpg", 0, 0);
+		background = new GImage("Armory.jpg", 0, 0);
 		background.scale(0.4);
-		diningHalldoor = new GButton("To Dining Hall",50,200,100,100);
-		armoryDoor = new GButton("To Armory",650,200,100,100);
+		door = new GButton("To Workshop",50,200,100,100);
 		populateRoom();
 	}
 
@@ -69,8 +67,8 @@ public class WorkshopPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(diningHalldoor);
-		screen.add(armoryDoor);
+		screen.add(door);
+
 	}
 
 	@Override
@@ -85,19 +83,15 @@ public class WorkshopPane extends GraphicsPane {
 		screen.remove(GertrudeDining);
 		screen.remove(JakeDining);
 		screen.remove(MaxDining);
-		screen.remove(diningHalldoor);
-		screen.remove(armoryDoor);
+		screen.remove(door);
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == diningHalldoor) {
+		if (obj == door) {
 			
-			screen.switchTODiningHall();
-		}
-		if (obj==armoryDoor) {
-			screen.switchToArmory();
+			screen.switchToWorkshop();
 		}
 	}
 }

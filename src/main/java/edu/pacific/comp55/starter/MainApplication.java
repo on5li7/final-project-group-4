@@ -15,6 +15,7 @@ public class MainApplication extends GraphicsApplication {
 	private StudyPane Study;
 	private WorkshopPane workShop;
 	private ApothecaryPane apothecary;
+	private ArmoryPane armory;
 	private house House;
 	private int count;
 
@@ -36,6 +37,7 @@ public class MainApplication extends GraphicsApplication {
 		Study = new StudyPane(this,House);
 		workShop = new WorkshopPane(this,House);
 		apothecary = new ApothecaryPane(this,House);
+		armory = new ArmoryPane(this,House);
 		didningHall.populateRoom();
 		setupInteractions();
 		switchToMenu();
@@ -71,6 +73,10 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchToApothecary() {
 		switchToScreen(apothecary);
+	}
+	
+	public void switchToArmory() {
+		switchToScreen(armory);
 	}
 
 	public void switchToMenu() {

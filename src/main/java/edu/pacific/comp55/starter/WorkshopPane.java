@@ -1,5 +1,3 @@
-
-
 package edu.pacific.comp55.starter;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -9,16 +7,12 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 
-public class DiningHallPane extends GraphicsPane {
+public class WorkshopPane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
-	GButton Kitchendoor;
-	GButton GreenHousedoor;
-	GButton hallWaydoor;
-	GButton studyDoor;
-	GButton workShopdoor;
+	GButton door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -52,16 +46,12 @@ public class DiningHallPane extends GraphicsPane {
 	}
 	
 										
-	public DiningHallPane(MainApplication app, house House) {
+	public WorkshopPane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("DiningHall.jpg", 0, 0);
+		background = new GImage("Workshop.jpg", 0, 0);
 		background.scale(0.4);
-		Kitchendoor = new GButton("To Kitchen",50,50,100,100);
-		GreenHousedoor = new GButton("To Greenhouse",50,300,100,100);
-		hallWaydoor = new GButton("To Hallway",650,170,100,100);
-		studyDoor = new GButton("To Study",650,50,100,100);
-		workShopdoor = new GButton("To Workshop",650,300,100,100);
+		door = new GButton("To Dining Hall",50,200,100,100);
 		populateRoom();
 	}
 
@@ -77,11 +67,8 @@ public class DiningHallPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(Kitchendoor);
-		screen.add(GreenHousedoor);
-		screen.add(hallWaydoor);
-		screen.add(studyDoor);
-		screen.add(workShopdoor);
+		screen.add(door);
+
 	}
 
 	@Override
@@ -96,32 +83,15 @@ public class DiningHallPane extends GraphicsPane {
 		screen.remove(GertrudeDining);
 		screen.remove(JakeDining);
 		screen.remove(MaxDining);
-		screen.remove(Kitchendoor);
-		screen.remove(GreenHousedoor);
-		screen.remove(hallWaydoor);
-		screen.remove(studyDoor);
-		screen.remove(workShopdoor);
+		screen.remove(door);
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == Kitchendoor) {
+		if (obj == door) {
 			
-			screen.switchToKitchen();
-		}
-		if (obj == GreenHousedoor) {
-			screen.switchToGreenHouse();
-		}
-		if (obj == hallWaydoor) {
-			screen.switchToHallway();
-		}
-		if (obj == studyDoor) {
-			screen.switchToStudy();
-		}
-		if (obj==workShopdoor) {
-			screen.switchToWorkshop();
+			screen.switchTODiningHall();
 		}
 	}
 }
-

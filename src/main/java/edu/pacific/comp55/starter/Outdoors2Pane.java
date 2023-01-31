@@ -55,7 +55,7 @@ public class Outdoors2Pane extends GraphicsPane {
 		background.scale(0.4);
 		Kitchendoor = new GButton("To Kitchen",650,50,100,100);
 		outdoors3Door = new GButton("To Outdoors 3",650,300,100,100);
-		outdoors1Door = new GButton("To Outdoors 1",650,170,100,100);
+		outdoors1Door = new GButton("To Outdoors 1",50,170,100,100);
 		populateRoom();
 	}
 

@@ -52,7 +52,6 @@ public class CliffPane extends GraphicsPane {
 		this.House = House;
 		background = new GImage("Cliff.jpg", 0, 0);
 		background.scale(0.4);
-		//GreenHousedoor = new GButton("To Greenhouse",50,300,100,100);
 		outdoors1Door = new GButton("To Outdoors 1",650,50,100,100);
 		outdoors4door = new GButton("To Outdoors 4",650,300,100,100);
 		populateRoom();

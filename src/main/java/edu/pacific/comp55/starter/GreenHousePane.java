@@ -12,7 +12,8 @@ public class GreenHousePane extends GraphicsPane {
 	private house  House;
 	
 	GImage background;
-	GButton door;
+	GButton diningHalldoor;
+	GButton outdoors3Door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -51,7 +52,8 @@ public class GreenHousePane extends GraphicsPane {
 		this.House = House;
 		background = new GImage("Greenhouse.jpg", 0, 0);
 		background.scale(0.4);
-		door = new GButton("To Dining Hall",650,200,100,100);
+		diningHalldoor = new GButton("To Dining Hall",650,200,100,100);
+		outdoors3Door = new GButton("To Outdoors 3",50,200,100,100);
 		populateRoom();
 	}
 
@@ -67,31 +69,24 @@ public class GreenHousePane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(door);
-
+		screen.add(diningHalldoor);
+		screen.add(outdoors3Door);
 	}
 
 	@Override
 	public void hideContents() {
-		screen.remove(background);
-		screen.remove(ArianaDining);
-		screen.remove(BobDining);
-		screen.remove(ChadDining);
-		screen.remove(SmithyDining);
-		screen.remove(RieklenDining);
-		screen.remove(FrankDining);
-		screen.remove(GertrudeDining);
-		screen.remove(JakeDining);
-		screen.remove(MaxDining);
-		screen.remove(door);
+		screen.removeAll();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == door) {
+		if (obj == diningHalldoor) {
 			
 			screen.switchTODiningHall();
+		}
+		if (obj==outdoors3Door) {
+			screen.switchToOutdoors3();
 		}
 	}
 }

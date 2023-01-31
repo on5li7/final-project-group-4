@@ -7,13 +7,13 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 
-public class Outdoors4Pane extends GraphicsPane {
+public class CliffPane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
 	GButton outdoors1Door;
-	GButton outdoors3door;
+	GButton outdoors4door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -47,14 +47,14 @@ public class Outdoors4Pane extends GraphicsPane {
 	}
 	
 										
-	public Outdoors4Pane(MainApplication app, house House) {
+	public CliffPane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("Outdoors4.jpg", 0, 0);
+		background = new GImage("Cliff.jpg", 0, 0);
 		background.scale(0.4);
 		//GreenHousedoor = new GButton("To Greenhouse",50,300,100,100);
 		outdoors1Door = new GButton("To Outdoors 1",650,50,100,100);
-		outdoors3door = new GButton("To Outdoors 3",650,300,100,100);
+		outdoors4door = new GButton("To Outdoors 4",650,300,100,100);
 		populateRoom();
 	}
 
@@ -71,7 +71,7 @@ public class Outdoors4Pane extends GraphicsPane {
 		screen.add(JakeDining);
 		screen.add(MaxDining);
 		screen.add(outdoors1Door);
-		screen.add(outdoors3door);
+		screen.add(outdoors4door);
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class Outdoors4Pane extends GraphicsPane {
 		if (obj == outdoors1Door) {
 			screen.switchToOutdoors1();
 		}
-		if (obj==outdoors3door) {
-			screen.switchToOutdoors3();
+		if (obj==outdoors4door) {
+			screen.switchToOutdoors4();
 		}
 	}
 }

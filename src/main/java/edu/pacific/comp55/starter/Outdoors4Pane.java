@@ -7,14 +7,13 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 
-public class Outdoors3Pane extends GraphicsPane {
+public class Outdoors4Pane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
-	GButton GreenHousedoor;
-	GButton Outdoors2door;
-	GButton Outdoors4door;
+	GButton outdoors1Door;
+	GButton outdoors3door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -48,14 +47,14 @@ public class Outdoors3Pane extends GraphicsPane {
 	}
 	
 										
-	public Outdoors3Pane(MainApplication app, house House) {
+	public Outdoors4Pane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("Outdoors3.jpg", 0, 0);
+		background = new GImage("Outdoors4.jpg", 0, 0);
 		background.scale(0.4);
-		GreenHousedoor = new GButton("To Greenhouse",650,300,100,100);
-		Outdoors2door = new GButton("To Outdoors 2",650,50,100,100);
-		Outdoors4door = new GButton("To Outdoors 4",50,300,100,100);
+		//GreenHousedoor = new GButton("To Greenhouse",50,300,100,100);
+		outdoors1Door = new GButton("To Outdoors 1",650,50,100,100);
+		outdoors3door = new GButton("To Outdoors 3",650,300,100,100);
 		populateRoom();
 	}
 
@@ -71,9 +70,8 @@ public class Outdoors3Pane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(GreenHousedoor);
-		screen.add(Outdoors2door);
-		screen.add(Outdoors4door);
+		screen.add(outdoors1Door);
+		screen.add(outdoors3door);
 	}
 
 	@Override
@@ -84,14 +82,11 @@ public class Outdoors3Pane extends GraphicsPane {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == GreenHousedoor) {
-			screen.switchToGreenHouse();
+		if (obj == outdoors1Door) {
+			screen.switchToOutdoors1();
 		}
-		if (obj==Outdoors2door) {
-			screen.switchToOutdoors2();
-		}
-		if (obj==Outdoors4door) {
-			screen.switchToOutdoors4();
+		if (obj==outdoors3door) {
+			screen.switchToOutdoors3();
 		}
 	}
 }

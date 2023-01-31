@@ -1,5 +1,3 @@
-
-
 package edu.pacific.comp55.starter;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -9,13 +7,12 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 
-public class DiningHallPane extends GraphicsPane {
+public class GreenHousePane extends GraphicsPane {
 	private MainApplication screen;
 	private house  House;
 	
 	GImage background;
-	GButton Kitchendoor;
-	GButton GreenHousedoor;
+	GButton door;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -49,13 +46,12 @@ public class DiningHallPane extends GraphicsPane {
 	}
 	
 										
-	public DiningHallPane(MainApplication app, house House) {
+	public GreenHousePane(MainApplication app, house House) {
 		this.screen = app;
 		this.House = House;
-		background = new GImage("DiningHall.jpg", 0, 0);
+		background = new GImage("Greenhouse.jpg", 0, 0);
 		background.scale(0.4);
-		Kitchendoor = new GButton("To Kitchen",50,50,100,100);
-		GreenHousedoor = new GButton("To Greenhouse",50,300,100,100);
+		door = new GButton("To Dining Hall",650,200,100,100);
 		populateRoom();
 	}
 
@@ -71,8 +67,7 @@ public class DiningHallPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(Kitchendoor);
-		screen.add(GreenHousedoor);
+		screen.add(door);
 
 	}
 
@@ -88,19 +83,15 @@ public class DiningHallPane extends GraphicsPane {
 		screen.remove(GertrudeDining);
 		screen.remove(JakeDining);
 		screen.remove(MaxDining);
-		screen.remove(Kitchendoor);
-		screen.remove(GreenHousedoor);
+		screen.remove(door);
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == Kitchendoor) {
+		if (obj == door) {
 			
-			screen.switchToKitchen();
-		}
-		if (obj == GreenHousedoor) {
-			screen.switchToGreenHouse();
+			screen.switchTODiningHall();
 		}
 	}
 }

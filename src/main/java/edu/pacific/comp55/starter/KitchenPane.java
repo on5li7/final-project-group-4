@@ -12,7 +12,8 @@ public class KitchenPane extends GraphicsPane {
 	private house  House;
 	
 	GImage background;
-	GButton door;
+	GButton wineCellardoor;
+	GButton diningHallDoor;
 	GImage ArianaDining;
 	GImage BobDining;
 	GImage ChadDining;
@@ -51,7 +52,8 @@ public class KitchenPane extends GraphicsPane {
 		this.House = House;
 		background = new GImage("Kitchen.jpg", 0, 0);
 		background.scale(0.4);
-		door = new GButton("To Wine Cellar",50,300,100,100);
+		wineCellardoor = new GButton("To Wine Cellar",50,300,100,100);
+		diningHallDoor = new GButton("To Dining Hall",650,300,100,100);
 		populateRoom();
 	}
 
@@ -67,7 +69,8 @@ public class KitchenPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		screen.add(door);
+		screen.add(wineCellardoor);
+		screen.add(diningHallDoor);
 
 	}
 
@@ -83,15 +86,19 @@ public class KitchenPane extends GraphicsPane {
 		screen.remove(GertrudeDining);
 		screen.remove(JakeDining);
 		screen.remove(MaxDining);
-		screen.remove(door);
+		screen.remove(wineCellardoor);
+		screen.remove(diningHallDoor);
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
-		if (obj == door) {
+		if (obj == wineCellardoor) {
 			
 			screen.switchToWineCellar();
+		}
+		if (obj == diningHallDoor) {
+			screen.switchTODiningHall();
 		}
 	}
 }

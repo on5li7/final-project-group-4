@@ -51,9 +51,7 @@ public class WineCellarPane extends GraphicsPane {
 		this.House = House;
 		background = new GImage("WineCellar.jpg", 0, 0);
 		background.scale(0.4);
-		//door = new GOval(100,100,150,150);
-		//door.setFilled(true);
-		//door.setFillColor(Color.blue);
+		door = new GButton("To Kitchen",50,300,100,100);
 		populateRoom();
 	}
 
@@ -69,7 +67,7 @@ public class WineCellarPane extends GraphicsPane {
 		screen.add(GertrudeDining);
 		screen.add(JakeDining);
 		screen.add(MaxDining);
-		//screen.add(door);
+		screen.add(door);
 
 	}
 
@@ -85,7 +83,7 @@ public class WineCellarPane extends GraphicsPane {
 		screen.remove(GertrudeDining);
 		screen.remove(JakeDining);
 		screen.remove(MaxDining);
-		//screen.remove(door);
+		screen.remove(door);
 	}
 
 	@Override
@@ -93,7 +91,7 @@ public class WineCellarPane extends GraphicsPane {
 		GObject obj = screen.getElementAt(e.getX(), e.getY());
 		if (obj == door) {
 			
-			screen.switchToMenu();
+			screen.switchToKitchen();
 		}
 	}
 }
